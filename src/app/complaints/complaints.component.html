@@ -1,0 +1,322 @@
+<div class="loader" *ngIf="loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+
+<div class="main-container">
+  <div class="fixed">
+    <div class="tab-header">
+      <div class="tabs-list gift-tab-list pl6">
+        <ul>
+          <li (click)="filter = {};filter.status = ''; getComplaintsList(data.type)"
+          [ngClass]="{'active': filter.status == ''}">
+          <a>
+            <p>All</p>
+            <span>{{ com_all }}</span>
+          </a>
+        </li>
+        <li (click)="filter = {};filter.status = 'Pending'; getComplaintsList(data.type)"
+        [ngClass]="{'active': filter.status == 'Pending'}">
+        <a>
+          <p>Pending</p>
+          <span class="request-bg">{{ com_pending }}</span>
+        </a>
+      </li>
+      <li (click)="filter = {};filter.status = 'Assign'; getComplaintsList(data.type)"
+      [ngClass]="{'active': filter.status == 'Assign'}">
+      <a>
+        <p>Plumber Assign</p>
+        <span class="approved-bg">{{ com_assign }}</span>
+      </a>
+    </li>
+    <li (click)="filter = {};filter.status = 'Closed'; getComplaintsList(data.type)"
+    [ngClass]="{'active': filter.status == 'Closed'}">
+    <a>
+      <p>Closed</p>
+      <span class="reject-bg">{{ com_closed }}</span>
+    </a>
+  </li>
+  
+  <li (click)="filter = {};filter.status = 'Cancel'; getComplaintsList(data.type)"
+  [ngClass]="{'active': filter.status == 'Cancel'}">
+  <a>
+    <p>Cancel</p>
+    <span class="suspect-bg">{{ com_cancel }}</span>
+  </a>
+</li>
+</ul>
+
+<div class="input-field"
+*ngIf="(filter.status == '' && com_all ) || (filter.status == 'Pending' && com_pending ) || (filter.status == 'Assign' && com_assign ) || (filter.status == 'Closed' && com_closed ) || (filter.status == 'Cancel' && com_cancel )  ">
+<input type="text" placeholder="Search" [(ngModel)]="filter.search"
+(keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+<i class="material-icons">
+  search
+</i>
+</div>
+
+</div>
+
+<div class="top-pagination">
+  <div class="master-btn pr30">
+    <button *ngIf="data.type=='service' || data.type=='Service'" mat-button
+    routerLink="/complaints-add/main/{{data.type}}" routerLinkActive="active">Add Service</button>
+    <button *ngIf="data.type=='installation' || data.type=='Installation'" mat-button
+    routerLink="/complaints-add/main/{{data.type}}" routerLinkActive="active">Add Installation</button>
+    
+  </div>
+  <p (click)="filter={};filter.status='';getComplaintsList(data.type)"><i class="material-icons">refresh</i>
+    Refresh</p>
+    <ul
+    *ngIf="(filter.status == '' && com_all ) || (filter.status == 'Pending' && com_pending ) || (filter.status == 'Assign' && com_assign ) || (filter.status == 'Closed' && com_closed ) || (filter.status == 'Cancel' && com_cancel )  ">
+    <!-- <li><p ><i class="material-icons"  (click)="getComplaintsList()">refresh</i> Refresh</p></li> -->
+    <!-- <li><p (click)="filter={};filter.status='';getComplaintsList()">Reset Filter</p></li> -->
+    <li>
+      <p>Pages {{ current_page }} of {{ last_page }}</p>
+    </li>
+    <li><button mat-button class="left-btn" (click)='redirect_previous()'><i
+      class="material-icons">keyboard_arrow_left</i></button></li>
+      <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
+        (keyup.enter)="getComplaintsList(data.type)"></li>
+        <li><button mat-button class="right-btn" (click)='redirect_next()'><i
+          class="material-icons">keyboard_arrow_right</i></button></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="css-table"
+    *ngIf="(filter.status == '' && com_all ) || (filter.status == 'Pending' && com_pending ) || (filter.status == 'Assign' && com_assign ) || (filter.status == 'Closed' && com_closed ) || (filter.status == 'Cancel' && com_cancel )  ">
+    <div class="sticky-header">
+      <div class="header">
+        <table>
+          
+          <tr>
+            <th class="w100">CMP No.</th>
+            <th class="w150">Date / Created By </th>
+            <th class="w170">Customer Name</th>
+            <th class="w130">Mobile</th>
+            <th>Address</th>
+            <th>Nature Problem</th>
+            <th class="w100">Days</th>
+            <th class="w100">OTP</th>
+            <th class="w170">Plumber Name</th>
+            <th class="w100">Points Status</th>
+            <th class="w100">Status</th>
+            <th class="w100">Remark</th>
+            <th class="w80">Remark Updated On</th>
+          </tr>
+          
+        </table>
+      </div>
+      
+      <div class="header border-bott">
+        <table>
+          <tr>
+            
+            <th class="w100">
+              <div class="search-form">
+                <input type="text" placeholder="Comp. id" [(ngModel)]="filter.complaint_id"
+                (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                <i class="material-icons">search</i>
+              </div>
+            </th>
+            
+            <th class="w150">
+              <div class="date-form">
+                <i *ngIf="filter.date" class="material-icons"
+                (click)="filter.date = '';getComplaintsList(data.type) ">clear</i>
+                
+                <mat-form-field>
+                  <input placeholder="Search" [(ngModel)]="filter.date" name="date" (click)="openDatePicker(picker)"
+                  matInput (dateChange)="getComplaintsList(data.type)" [matDatepicker]="picker" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                
+              </div>
+            </th>
+            
+            <th class="w170">
+              <div class="search-form">
+                <input type="text" placeholder="Search" [(ngModel)]="filter.customer_name"
+                (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                <i class="material-icons">search</i>
+              </div>
+            </th>
+            
+            <th class="w130">
+              <div class="search-form">
+                <input type="text" placeholder="Search" [(ngModel)]="filter.mobile"
+                (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                <i class="material-icons">search</i>
+              </div>
+            </th>
+            
+            <th>
+              <div class="search-form">
+                <input type="text" placeholder="Search" [(ngModel)]="filter.address"
+                (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                <i class="material-icons">search</i>
+              </div>
+            </th>
+            
+            <th>
+              <div class="search-form">
+                <input type="text" placeholder="Search" [(ngModel)]="filter.nature_problem"
+                (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                <i class="material-icons">search</i>
+              </div>
+            </th>
+            <th class="w100">
+              <div class="search-form">
+                <input type="text" placeholder="Search" [(ngModel)]="filter.days"
+                (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                <i class="material-icons">search</i>
+              </div>
+            </th>
+            <th class="w100">
+              <div class="search-form">
+                <input type="text" placeholder="Search" [(ngModel)]="filter.otp"
+                (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                <i class="material-icons">search</i>
+              </div>
+            </th>
+            <th class="w170">
+              <div class="search-form">
+                <input type="text" placeholder="Search" [(ngModel)]="filter.plumber_name"
+                (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                <i class="material-icons">search</i>
+              </div>
+            </th>
+            
+            <!-- Points Status -->
+            <th class="w100">
+              <div class="form-area wp-21">
+                <div class="slect">
+                  <!-- <input type="text" placeholder="Search" [(ngModel)]="filter.coupon_code"  (keyup.enter)="current_page = 1;getAvailableCoupanList()"> -->
+                  <!-- <i class="material-icons">search</i> -->
+                  <mat-form-field>
+                    <!-- <mat-label style="font-size: 10px; letter-spacing: 2px;">Select</mat-label> -->
+                    <mat-select [(ngModel)]="filter.points_status" name="points_status" #points_status="ngModel"
+                    (selectionChange)="getComplaintsList(data.type)">
+                    <mat-option value="All">All</mat-option>
+                    <mat-option value="Paid">Paid</mat-option>
+                    <mat-option value="Unpaid">Unpaid</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </th>
+          
+          <th class="w100">
+          </th>
+          <th class="w100">
+          </th>
+          <th class="w80"></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  
+</div>
+</div>
+
+
+<div class="css-table" *ngIf="karigars.length">
+  <div class="table-container">
+    <div class="table-body">
+      <table>
+        <tr *ngFor="let val of karigars; let i = index">
+          <td class="w100"><a class="blue" routerLink="/complaints-detail/{{val.id | crypt}}"
+            routerLinkActive="active">Com#{{val.id}}</a></td>
+            <td class="w150">
+              <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' "> {{val.date_created | date: 'dd MMM
+                yyyy'}} / {{val.created_name}} </ng-container>
+              </td>
+              <td class="w170"><a class="blue" routerLink="/customer-detail/{{val.customer_id | crypt}}"
+                routerLinkActive="active">{{val.customer_name | titlecase }}</a></td>
+                <td class="w130 text-center">{{val.mobile_no}}</td>
+                <td>{{val.address | titlecase }} {{val.city | titlecase }} {{val.district | titlecase }} {{val.state |
+                  titlecase }} {{val.pincode }}</td>
+                  <td>{{val.nature_problem}}</td>
+                  <td class="w100 text-center">{{ toInt( val.days_count ) + 1}} Days</td>
+                  <td class="w100 text-center">{{val.otp}}</td>
+                  <td class="w170">
+                    <!-- <div class="over-sec lar-h12" *ngIf="val.status == 'Pending'" >
+                      <p (click)="assignPlumber(i ,val.id, val.assigned_plumber)">Assign plumber</p>
+                    </div>  -->
+                    <div class="">
+                      <a class="blue" routerLink="/karigar-detail/{{val.assigned_plumber | crypt}}"
+                      routerLinkActive="active">{{val.plumber_name | titlecase }}</a>
+                      <br>
+                      <a  style="cursor: pointer;" class="blue"  (click)="assignPlumber(i ,val.id, val.assigned_plumber)">
+                        {{val.plumber_name ? 'Change' :'Assign'}}
+                        Plumber</a>
+                      </div>
+                    </td>
+                    
+                    <!-- Points Status -->
+                    <td class="w100">
+                      <span style="color: green;" *ngIf="val.plumber_payment > 0">Paid</span>
+                      <span style="color: red;" *ngIf="val.plumber_payment == 0">Unpaid</span>
+                    </td>
+                    
+                    <td class="w100 {{val.status}} ">
+                      
+                      <a *ngIf="val.status == 'Pending'" (click)="changeStatus(i, val.id, val.status )">{{val.status}}</a>
+                      <a *ngIf="val.status ==  'Cancel' || val.status == 'Closed' ">{{val.status}}</a>
+                      
+                      <div class="over-sec-edit lar-h12" *ngIf="val.status == 'Pending'">
+                        <i class="material-icons" (click)="changeNatureProblem( i, val.id, val.nature_problem )">edit</i>
+                      </div>
+                      
+                    </td>
+                    <td class="w100" style="word-break: break-all;">
+                      {{val.status_remark}}
+                      <div class="over-sec-edit lar-h12" >
+                        <i class="material-icons" *ngIf="val.status == 'Pending'" (click)="changeRemark(val.id,val.status_remark)">edit</i>
+                      </div>
+                      
+                    </td>
+                    <td class="w80">
+                      {{val.status_remark ? (val.remark_update_on | date: 'd MMM, y, hh:mm a') : ''}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+          <div class="container-outer">
+            <div class="container">
+              <div class="row">
+              </div>
+            </div>
+            
+            <div class="date-not"
+            *ngIf="!loading_list && !karigars.length && ( (filter.status == '' && com_all ) || (filter.status == 'Pending' && com_pending ) || (filter.status == 'Closed' && com_closed ) || (filter.status == 'Cancel' && com_cancel ) || (filter.status == 'Assign' && com_assign )   )">
+            <div class="no-img">
+              <img src="assets/result-not-found.png">
+            </div>
+          </div>
+          
+          <div class="date-not"
+          *ngIf="!loading_list && ( (filter.status == '' && !com_all ) || (filter.status == 'Pending' && !com_pending ) || (filter.status == 'Closed' && !com_closed ) || (filter.status == 'Cancel' && !com_cancel ) || (filter.status == 'Assign' && !com_assign )  ) ">
+          <div class="no-img">
+            <img src="assets/not-available.jpg">
+          </div>
+          
+        </div>
+        
+        <div class="excel-btn" (click)="exportComplaint(data.type)" *ngIf="karigars.length">
+          <div class="image-area">
+            <a>
+              <img src="assets/excel.svg">
+            </a>
+          </div>
+        </div>
+        
+      </div>

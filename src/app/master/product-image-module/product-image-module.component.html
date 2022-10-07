@@ -1,0 +1,81 @@
+<div class="all-modules">
+    
+    
+    <mat-dialog-content class="mat-typography">
+        
+        <div class="gift-box product-img " *ngIf="part_data.mode == 'test1'">  
+            <div class="form-area">
+                <img [src]="part_data.id">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test2'">  
+            <div class="form-area">
+                <img [src]="part_data.id">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test3'">  
+            <div class="form-area">
+                <img [src]="news.image">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test4'">  
+            <div class="form-area">
+                <img [src]="gift.image">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test5'">  
+            <div class="form-area">
+                <img [src]="karigarImage.profile">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test6'">  
+            <div class="form-area">
+                <img [src]="documentImage.document_image">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test7'">  
+            <div class="form-area">
+                <img [src]="offerImage.offer_banner">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test8'">  
+            <div class="form-area">
+                <img [src]="db.myurl+'app/uploads/'+part_data.id">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test15'">  
+            <div class="form-area">
+                <img [src]="redeemGiftImage.image">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+
+
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'test16'" >  
+            <div class="form-area" >
+                <img [ngClass]="{'rotate-90': x == 90,'rotate-180': x == 180,'rotate-270': x == 270 }" [src]="db.myurl+'app/uploads/'+complaintsImage.file_name">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+            <ul>
+                <li (click)="rotateImage('left')" ><i class="material-icons" title="Right">rotate_right</i></li>
+                <li (click)="rotateImage('right')" ><i class="material-icons" title="Left">rotate_left</i></li>
+            </ul>
+        </div>
+    </mat-dialog-content>
+</div>

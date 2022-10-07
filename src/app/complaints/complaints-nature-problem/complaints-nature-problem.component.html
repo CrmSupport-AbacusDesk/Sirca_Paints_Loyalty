@@ -1,0 +1,156 @@
+<div class="gift-box" *ngIf="from == 'nature_problem'">
+  <div class="zift-hadding">
+    <p>Update Nature Problem {{from}}</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans">
+    <form name="complaint" (ngSubmit)="f.form.valid && addCompalintStatus(f) " #f="ngForm" novalidate autocomplete="off">
+      
+      <div class="option-field">
+        <div class="control-field">
+          <mat-form-field  class="cs-input">
+            <textarea matInput placeholder="Nature Problem" class="h106" name="nature_problem" [(ngModel)] = "complaint.nature_problem" #nature_problem="ngModel" ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="save mt10" [ngClass]="{loading: savingData}">
+        <button mat-button class="mb0"  [disabled]="savingData" >UPDATE</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="gift-box" *ngIf="from == 'coupon-code-list page'">
+  <div class="zift-hadding">
+    <p>Assign Coupon to Plumber</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans">
+    <form name="complaint" (ngSubmit)="f.form.valid && assign_coupon_to_plumber() " #f="ngForm" novalidate autocomplete="off">
+      
+      <div class="option-field">
+        <div class="control-field">
+          <!-- <mat-form-field  class="cs-input">
+            <textarea matInput placeholder="Nature Problem" class="h106" name="nature_problem" [(ngModel)] = "complaint.nature_problem" #nature_problem="ngModel" ></textarea>
+          </mat-form-field> -->
+          
+          <mat-form-field class="search-select wp100" appearance="outline">
+            <mat-select name="discount_type"  [(ngModel)]="selected_plumber" required>
+              <div class="search-block">
+                <!-- <input type="text" placeholder="Search.." (input)="filter_dr(dr_name)" #dr_namee="ngModel" [(ngModel)]="plumber_name"> -->
+                <input type="text" placeholder="Search.." name="master_search" (input)="get_verified_plumbers()" #master_searchh="ngModel" [(ngModel)]="master_search" >
+                
+              </div>
+              <mat-option *ngFor="let plumber_data of plumber_list" value="{{plumber_data.id}}">{{plumber_data.first_name}} {{plumber_data.mobile_no && plumber_data.mobile_no!=''?'-'+plumber_data.mobile_no : ''}}</mat-option>
+              <mat-option disabled="" *ngIf="plumber_list.length == 0 || plumber_list.length == undefined">No data Found</mat-option>
+            </mat-select>
+            
+          </mat-form-field>
+          
+          
+        </div>
+      </div>
+      
+      <div class="save mt10" [ngClass]="{loading: savingData}">
+        <button mat-button class="mb0"  [disabled]="savingData" >UPDATE</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="gift-box" *ngIf="from == 'plumber_meet_list_page'">
+  <div class="zift-hadding">
+    <p>Plumber Data</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans">
+    <div class="row">
+      <div class="css-table left-right-15">
+        <div class="sticky-header">
+          <div class="header">
+            <table>
+              <tr>
+                <th class="w50">S. No.</th>
+                <th>Plumber Name</th>
+                <th class="w140">Plumber Mobile No.</th>
+                <th class="w100">Status</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+        
+        <div class="table-container">
+          <div class="table-body">
+            <table>
+              <tr *ngFor="let plumber_data of plumber_meet_plumbers_list; let i = index">
+                
+                <td class="w50">{{i+1}}</td>
+                <td>{{plumber_data.participent_name && plumber_data.participent_name!='' ? plumber_data.participent_name : '--'}}</td>
+                <td class="w140">{{plumber_data.participent_mobile && plumber_data.participent_mobile!='' ? plumber_data.participent_mobile : '--'}} </td>
+                <td class="w100">
+                  
+                  <span class="material-icons Received" *ngIf="plumber_data.registered_plumber_flag == 1"> verified</span>
+                  <span  class="material-icons Not-verified" *ngIf="plumber_data.registered_plumber_flag == 0">cancel</span>
+                  
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gift-box" *ngIf="from == 'coupon-code-list page for view master'">
+  <div class="zift-hadding">
+    <p>Master Cart</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans">
+    <div class="row">
+      <div class="css-table left-right-15">
+        <div class="sticky-header">
+          <div class="header">
+            <table>
+              <tr>
+                <th class="w50">S No</th>
+                <!-- <th class="w200 text-center">Secondary Code</th> -->
+                <th>Item Name</th>
+                <th class="w150 text-center">Total Item</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+        
+        <div class="table-container" style="max-height: 65vh; overflow: auto;">
+          <div class="table-body">
+            <table>
+              <tr *ngFor="let scanned_data of dispatch_item_data_of_masterQR; let i=index">
+                <td class="w50">{{i+1}}</td>
+                <!-- <td class="w200 text-center">{{scanned_data.secondary_qr_code}}</td> -->
+                <td>{{scanned_data.product_name}}</td>
+                <td class="w150 text-center">{{scanned_data.item_qty}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

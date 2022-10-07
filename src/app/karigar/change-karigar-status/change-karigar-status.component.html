@@ -1,0 +1,104 @@
+
+<div class="gift-box" *ngIf="modalType != 'remark'">
+  <div class="zift-hadding">
+    <p>Change Status</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans pt15">
+    <form name="complaint" (ngSubmit)="f.form.valid && addCompalintStatus(f) " #f="ngForm" novalidate autocomplete="off">
+      <div class="form-area">
+        <div class="slect none-bo">
+          <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select class="complaint.status" placeholder="Status" [(ngModel)] = "complaint.status" #status="ngModel" name="status" required>
+              <mat-option value ="Verified" class="Verified">Verified</mat-option>
+              <mat-option value ="Reject" class="Reject">Reject</mat-option>
+              <mat-option value ="Pending" class="Pending">Pending</mat-option>
+              <mat-option value ="Suspect" class="Suspect">Suspect</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="option-field" *ngIf="complaint.status == 'Suspect' || complaint.status == 'Reject'">
+        <div class="control-field">
+          <mat-form-field  class="cs-input">
+            <textarea matInput placeholder="Reason" class="h106" name="reason" [(ngModel)] = "complaint.reason" #reason="ngModel" ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      <div class="option-field" *ngIf="complaint.status == 'Verified' ">
+        <div class="control-field">
+          <mat-form-field class="cs-input" >
+            <mat-select placeholder="Channel Partner"   name="dr_id" [(ngModel)]="complaint.dr_id">
+              <mat-option >
+                <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search..." (keyup)="getDistributorList($event.target.value)"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option value="0"><small>N/A</small></mat-option>
+              
+              <mat-option [value]="row1.id"  *ngFor="let row1 of all_distributor.all_distributor"><small> {{row1.company_name}}</small>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      
+      <div class="option-field" >
+        <div class="control-field">
+          <mat-form-field  class="cs-input">
+            <textarea matInput placeholder="Remark" class="h100"  name="status_remark" [(ngModel)] = "complaint.status_remark" #status_remark="ngModel" required></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      
+      <div class="option-field" *ngIf="complaint.status == 'Verified' && complaint.dr_id == '0'">
+        <div class="control-field">
+          <mat-form-field  class="cs-input">
+            <textarea matInput placeholder="Reason" class="h106" name="why_no_channel_partner_select_reason" [(ngModel)] = "complaint.why_no_channel_partner_select_reason" #why_no_channel_partner_select_reason="ngModel" ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      
+      <div class="save mt10" [ngClass]="{loading: savingData}">
+        <button mat-button class="mb0"  [disabled]="savingData" >SAVE</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<div class="gift-box" *ngIf="modalType == 'remark'">
+  <div class="zift-hadding">
+    <p>Update Remark</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans pt15">
+    <form name="complaint" (ngSubmit)="f.form.valid && updateStatus(f) " #f="ngForm" novalidate autocomplete="off">
+      <div class="option-field">
+        <div class="control-field">
+          <mat-form-field  class="cs-input">
+            <textarea matInput placeholder="Remark" class="h100"  name="status_remark" [(ngModel)] = "complaint.status_remark" #status_remark="ngModel" required></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="save mt10" [ngClass]="{loading: savingData}">
+        <button mat-button class="mb0"  [disabled]="savingData" >Update</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,424 @@
+<div class="loader" *ngIf = "loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="main-container">
+  <div class="offer-container">
+    <div class="container">
+      <form name="coupon" (ngSubmit)="coupon.coupon_type == 'Primary' ? v.form.valid && saveCouponfrom(v) : v.form.valid && generate_secondary_or_master_coupon(v,coupon.coupon_type) " #v="ngForm" novalidate autocomplete="off">
+        <div class="row " >
+          <div class="col s12 ">
+            <div class="sprate-box ">
+              <div class="full-offer">
+                <div class="top-heading">
+                  <h2>COUPON GENERATE</h2>
+                  <p>Indicates required fields ( * )</p>
+                </div>
+              </div>
+              <div class="row mb0">
+                <div class="col s12 mb0 ">
+                  <div class="col s11">
+                    
+                    
+                    
+                    <div class="option-field">
+                      <div class="row mb0">
+                        <div class="col s12">
+                          
+                          <div class="control-field col s2">
+                            <div>
+                              <mat-form-field class=" cs-input cs-multi-select">
+                                <mat-select placeholder="Select Coupon Type" name="type" [(ngModel)]="coupon.coupon_type" #type="ngModel" (ngModelChange)="coupon.coupon_type == 'Secondary' ? get_product_list_for_secondary_packing() : ''" required>
+                                  <mat-option value="Primary"> Plumber Coupon </mat-option>
+                                  <mat-option value="Secondary"> Secondary Coupon </mat-option>
+                                  <mat-option value="Master"> Master Coupon </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                          </div>
+
+                          
+                          <!-- <div class="control-field col s2" *ngIf ="coupon.coupon_type =='Primary'">  -->
+                          <div class="control-field col s2" *ngIf ="coupon.coupon_type =='Primary' || coupon.coupon_type =='Secondary' || coupon.coupon_type =='Master'"> 
+                            <div *ngIf="db.datauser.id !='143' && db.datauser.id !='144'">
+                              <mat-form-field class=" cs-input cs-multi-select">
+                                <mat-select placeholder="Select Group Type" name="coupon_group_type" [(ngModel)]="coupon.coupon_group_type" #type="ngModel" required >
+                                  <mat-option value="PTMT"> PTMT </mat-option>
+                                  <mat-option value="Other"> Other </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div *ngIf="db.datauser.id =='143'">
+                              <mat-form-field class=" cs-input cs-multi-select">
+                                <mat-select placeholder="Select Group Type" name="coupon_group_type" [(ngModel)]="coupon.coupon_group_type" #type="ngModel" required >
+                                  <mat-option value="PTMT"> PTMT </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div *ngIf="db.datauser.id =='144'">
+                              <mat-form-field class=" cs-input cs-multi-select">
+                                <mat-select placeholder="Select Group Type" name="coupon_group_type" [(ngModel)]="coupon.coupon_group_type" #type="ngModel" required >
+                                  <mat-option value="Other"> Other </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+
+                          </div>
+                          
+                          <div class="control-field col s2" *ngIf="coupon.coupon_type == 'Secondary'">
+                            <div>
+                              <mat-form-field class=" cs-input cs-multi-select">
+                                <mat-select placeholder="Select Product" name="product_id" [(ngModel)]="coupon.product_id" #product_id="ngModel" required>
+                                  <div class="search-block">
+                                    <input type="text" placeholder="Search.." name="product_name" (keydown)="$event.stopPropagation()" (keyup.enter)="get_product_list_for_secondary_packing(product_name)" #product_namee="ngModel" [(ngModel)]="product_name">
+                                  </div>
+                                  <mat-option *ngFor = "let product_data of product_list_for_coupon_generate" [value]="product_data.id"> {{product_data.category && product_data.category!= '' ? product_data.category : ''}} {{product_data.sub_category && product_data.sub_category!= '' ? ' - '+ product_data.sub_category : ''}} {{product_data.product_name && product_data.product_name!= '' ? ' - '+ product_data.product_name : ''}} </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          
+                          <div class="control-field col s2" *ngIf="coupon.coupon_type && coupon.coupon_type != ''">
+                            <mat-form-field class="cs-input">
+                              <input matInput placeholder="Coupon Code" (keypress)="numeric_Number($event)" name="coupon_code" [(ngModel)] = "coupon.total_coupon"  #coupon_code="ngModel" required >
+                            </mat-form-field>  
+                          </div>
+                          
+                          <div class="control-field col s2" *ngIf="coupon.coupon_type && coupon.coupon_type != '' && coupon.coupon_type == 'Secondary'">
+                            <mat-form-field class="cs-input">
+                              <input matInput placeholder="Batch Code" name="batch_no" [(ngModel)]="coupon.batch_no"  #batch_no="ngModel" required >
+                            </mat-form-field>  
+                          </div>
+
+                          <div class="control-field col s2" *ngIf="coupon.coupon_type && coupon.coupon_type != '' && coupon.coupon_type == 'Secondary'">
+                            <mat-form-field class="cs-input">
+                              <input matInput placeholder="Mfg. Date" [(ngModel)]="coupon.manufacturing_date" (click)="picker1.open();" name="date" matInput [matDatepicker]="picker1" (ngModelChange)=" coupon.manufacturing_date = this.db.pickerFormat(coupon.manufacturing_date) " readonly required>
+                              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                              <mat-datepicker #picker1></mat-datepicker>
+                          </mat-form-field>
+                          </div>
+
+
+                          <div class="control-field col s2" *ngIf="coupon.coupon_type == 'Primary'">
+                            <mat-form-field class="cs-input">
+                              <input matInput placeholder="Coupon Value" (keypress)="numeric_Number($event)" name="coupon_value" [(ngModel)] = "coupon.coupon_value"  #coupon_value="ngModel" required >
+                            </mat-form-field>  
+                          </div>
+                          
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s1 mb17">
+                    <div class="save mt15" [ngClass]="{loading: savingData}" >
+                      <button class="mb0" mat-button [disabled]="(!coupon.coupon_type || coupon.coupon_type=='')">GENERATE</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+      <div class="tabs-list gift-tab-list pl15">
+        <ul>
+          <li (click)="active_tab= 'show_primary'" [ngClass]="{'active': active_tab== 'show_primary'}">
+            <a>
+              <p>Plumber</p>
+            </a>
+          </li>
+          
+          <li (click)="active_tab= 'show_secondary';start = 0 ;filter = {} ;get_secondary_coupon()" [ngClass]="{'active': active_tab== 'show_secondary'}">
+            <a>
+              <p>Secondary</p>
+            </a>
+          </li>
+          
+          <li (click)="active_tab= 'show_master';start = 0 ;filter = {} ;get_master_coupon()" [ngClass]="{'active': active_tab== 'show_master'}">
+            <a>
+              <p>Master</p>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+      <span *ngIf="active_tab == 'show_primary'">
+        
+        <div class="top-pagination" >
+          <p    (click)="getCouponDetail()"><i class="material-icons">refresh</i> Refresh</p>
+          <ul>
+            <li><p (click)="getCouponDetail()">Pages {{ history.current_page }} of {{ history.last_page }}</p></li>
+            <li><button mat-button class="left-btn" (click)= 'redirect_previous()'><i class="material-icons">keyboard_arrow_left</i></button></li>
+            <li><input type="text" placeholder="GO TO" [(ngModel)]="history.current_page"  (keyup.enter)="getCouponDetail()"></li>
+            <li><button mat-button class="right-btn" (click) = 'redirect_next()'><i class="material-icons">keyboard_arrow_right</i></button></li>
+          </ul>
+        </div>
+        
+        <div class="css-table" >
+          <div class="sticky-header">
+            <div class="header">
+              <table >
+                <tr>
+                  <th class="w50 border-right text-center">S.No.</th>
+                  <th class="w120">Date</th>
+                  <th class="w150"> Created by</th>
+                  <th class="w100">Total Coupon Code</th>
+                  <th class="w200 text-center">Coupon Value</th>
+                  <th class="w100">Coupon Group Type</th>
+
+                  <th class="w200 text-center">Action</th>
+                </tr>
+                
+              </table>
+            </div>
+            <div class="header border-bott">
+              <table>
+                <tr>
+                  <th class="w50 border-right ">&nbsp;</th>
+                  <th class="w120">
+                    <div class="vaild-into">
+                      <div class="date-form wp-21 mr10">
+                        <i *ngIf="filter.date" class="material-icons" (click)="filter.date = '';getCouponDetail() ">clear</i>
+                        
+                        <mat-form-field>
+                          <input matInput placeholder=" Date" [(ngModel)]="filter.date" (click)="openDatePicker(picker1)" name="date" matInput (dateChange)="getCouponDetail()" [matDatepicker]="picker1" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </th>  
+                  <th class="w150">
+                    
+                  </th>
+                  
+                  <th class="w100">
+                    
+                  </th>
+                
+                  <th class="w200">
+                    
+                  </th>
+                  <th class="w100" >
+                    
+                  </th>
+                  <th class="w200">
+                    
+                  </th>
+                </tr>
+              </table>
+            </div>
+          </div>
+          
+        </div> 
+        
+        <div class="css-table"  >
+          <div class="table-container">
+            <div class="table-body">
+              <table>
+                <tr class="arject" *ngFor="let val of history.data; let i = index">
+                  <td class="w50 text-center">{{ i + 1 }}</td>
+                  <td class="w120"><ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' "> {{val.date_created | date: 'dd MMM yyyy'}} </ng-container></td>
+                  <td class="w150">{{val.created_name}}</td>
+                  <td class="w100"> {{val.total_coupon}}</td>
+                  <td class="w200 text-center"><span class="back-bg">{{val.coupon_value}}</span></td>  
+                  <td class="w100">{{val.coupon_group_type}}</td>
+
+                  <td class="w200 text-center">
+                    <a (click)="downloadCoupon(val.id)"><i class="material-icons Verified">cloud_download</i></a> 
+                    <a (click)="deleteCoupon(val.id)"><i class="material-icons deactive cursor_pointer">delete_sweep</i></a> 
+                  </td>   
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </span>
+      
+      <span *ngIf="active_tab== 'show_secondary'">
+        
+        <div class="top-pagination" >
+          <p    (click)="filter = {} ; secondary_qr_code_list.current_page = 1 ; get_secondary_coupon()"><i class="material-icons">refresh</i> Refresh</p>
+          <ul>
+            <li><p (click)="getCouponDetail()">Pages {{ secondary_qr_code_list.current_page }} of {{ secondary_qr_code_list.last_page }}</p></li>
+            <li><button mat-button class="left-btn" (click)='secondary_qr_code_list.current_page = secondary_qr_code_list.current_page-1 ; get_secondary_coupon()' [disabled]="secondary_qr_code_list.current_page == 1"><i class="material-icons">keyboard_arrow_left</i></button></li>
+            <li><input type="text" placeholder="GO TO" [(ngModel)]="secondary_qr_code_list.current_page"  (keyup.enter)="get_secondary_coupon()"></li>
+            <li><button mat-button class="right-btn" (click)='secondary_qr_code_list.current_page = secondary_qr_code_list.current_page+1 ; get_secondary_coupon()' [disabled]="secondary_qr_code_list.current_page == secondary_qr_code_list.last_page"><i class="material-icons">keyboard_arrow_right</i></button></li>
+          </ul>
+        </div>
+        
+        <div class="css-table" >
+          <div class="sticky-header">
+            <div class="header">
+              <table >
+                <tr>
+                  <th class="w50 border-right text-center">S.No.</th>
+                  <th class="w180">Date</th>
+                  <th class="w120"> Created by</th>
+                  <th class="w150">Product Name</th>
+                  <th class="w150">Total Coupon Code</th>
+                  <th class="w100">Coupon Group Type</th>
+
+                  <th class="w200 text-center">Action</th>
+                </tr>
+                
+              </table>
+            </div>
+            <div class="header border-bott">
+              <table>
+                <tr>
+                  <th class="w50 border-right ">&nbsp;</th>
+                  <th class="w180">
+                    <div class="vaild-into">
+                      <div class="date-form wp-21 mr10">
+                        <i *ngIf="filter.date_created" class="material-icons" (click)="filter.date_created = '';get_secondary_coupon() ">clear</i>
+                        <mat-form-field>
+                          <input matInput placeholder=" Date" [(ngModel)]="filter.date_created" (click)="picker1.open();" name="date" matInput (dateChange)="get_secondary_coupon()" [matDatepicker]="picker1" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </th>  
+                  <th class="w120">
+                    <div class="form-area wp-21">
+                      <div class="search-form">
+                        <input type="text" placeholder="Search" [(ngModel)]="filter.created_by"  (keyup.enter)="get_secondary_coupon()">
+                        <i class="material-icons">search</i>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="w150">
+                    <div class="form-area wp-21">
+                      <div class="search-form">
+                        <input type="text" placeholder="Search" [(ngModel)]="filter.product_name"  (keyup.enter)="get_secondary_coupon()">
+                        <i class="material-icons">search</i>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="w150"></th>
+                  <th class="w100"></th>
+
+                  <th class="w200"></th>
+                </tr>
+              </table>
+            </div>
+          </div>
+          
+        </div> 
+        
+        <div class="css-table"  >
+          <div class="table-container">
+            <div class="table-body">
+              <table>
+                <tr class="arject" *ngFor="let code_data of secondary_qr_code_list.data; let i = index">
+                  <td class="w50 text-center">{{ secondary_qr_code_list.from+i }}</td>
+                  <td class="w180">{{code_data.date_created | date : 'd MMM, y hh:mm a'}}</td>
+                  <td class="w120">{{code_data.created_by_name | titlecase}}</td>
+                  <td class="w150">{{(code_data.product_name | titlecase)+' - '+(code_data.material_code)}}</td>
+                  <td class="w150">{{code_data.total_coupon}}</td>
+                  <td class="w100">{{code_data.coupon_group_type}}</td>
+
+                  <td class="w200 text-center">
+                    <a (click)="download_qr_code_data(code_data.id,'secondary')"><i class="material-icons Verified">cloud_download</i></a> 
+                    <a (click)="delete_qr_code_list(code_data.id,'secondary')"><i class="material-icons deactive cursor_pointer">delete_sweep</i></a> 
+                  </td>   
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </span>
+      
+      <span *ngIf="active_tab== 'show_master'">
+        
+        <div class="top-pagination" >
+          <p    (click)="filter = {} ; master_qr_code_list.current_page = 1 ;get_master_coupon()"><i class="material-icons">refresh</i> Refresh</p>
+          <ul>
+            <li><p (click)="getCouponDetail()">Pages {{ master_qr_code_list.current_page }} of {{ master_qr_code_list.last_page }}</p></li>
+            <li><button mat-button class="left-btn" (click)='master_qr_code_list.current_page = master_qr_code_list.current_page-1 ; get_master_coupon()' [disabled]="master_qr_code_list.current_page == 1"><i class="material-icons">keyboard_arrow_left</i></button></li>
+            <li><input type="text" placeholder="GO TO" [(ngModel)]="master_qr_code_list.current_page"  (keyup.enter)="get_master_coupon()"></li>
+            <li><button mat-button class="right-btn" (click)='master_qr_code_list.current_page = master_qr_code_list.current_page+1 ; get_master_coupon()' [disabled]="master_qr_code_list.current_page == master_qr_code_list.last_page"><i class="material-icons">keyboard_arrow_right</i></button></li>
+          </ul>
+        </div>
+        
+        <div class="css-table" >
+          <div class="sticky-header">
+            <div class="header">
+              <table >
+                <tr>
+                  <th class="w50 border-right text-center">S.No.</th>
+                  <th class="w180">Date</th>
+                  <th class="w100"> Created by</th>
+                  <th class="w150">Total Coupon Code</th>
+                  <th class="w100">Coupon Group Type</th>
+                  <th class="w200 text-center">Action</th>
+                </tr>
+              </table>
+            </div>
+            <div class="header border-bott">
+              <table>
+                <tr>
+                  <th class="w50 border-right ">&nbsp;</th>
+                  <th class="w180">
+                    <div class="vaild-into">
+                      <div class="date-form wp-21 mr10">
+                        <i *ngIf="filter.date_created" class="material-icons" (click)="filter.date_created = '';get_master_coupon() ">clear</i>
+                        <mat-form-field>
+                          <input matInput placeholder=" Date" [(ngModel)]="filter.date_created" (click)="picker1.open();" name="date" matInput (dateChange)="get_master_coupon()" [matDatepicker]="picker1" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </th>  
+                  <th class="w100">
+                    <div class="form-area wp-21">
+                      <div class="search-form">
+                        <input type="text" placeholder="Search" [(ngModel)]="filter.created_by"  (keyup.enter)="get_master_coupon()">
+                        <i class="material-icons">search</i>
+                      </div>
+                    </div>
+                  </th>
+                  <!-- <th class="w170"></th> -->
+                  <th class="w150"></th>
+                  <th class="w100"></th>
+                  <th class="w200"></th>
+                </tr>
+              </table>
+            </div>
+          </div>
+          
+        </div> 
+        
+        <div class="css-table"  >
+          <div class="table-container">
+            <div class="table-body">
+              <table>
+                <tr class="arject" *ngFor="let code_data of master_qr_code_list.data; let i = index">
+                  <td class="w50 text-center">{{ master_qr_code_list.from+i }}</td>
+                  <td class="w180">{{code_data.date_created | date : 'd MMM, y hh:mm a'}}</td>
+                  <td class="w100">{{code_data.created_by_name | titlecase}}</td>
+                  <td class="w150">{{code_data.total_coupon}}</td>
+                  <td class="w100">{{code_data.coupon_group_type}}</td>
+                  <td class="w200 text-center">
+                    <a (click)="download_qr_code_data(code_data.id,'master')"><i class="material-icons Verified">cloud_download</i></a> 
+                    <a (click)="delete_qr_code_list(code_data.id,'master')"><i class="material-icons deactive">delete_sweep</i></a> 
+                  </td>   
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </span>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="gift-box" *ngIf="data.type=='status'">
+    <div class="zift-hadding">
+      <p>Change Status</p>
+      <div class="close-icon">
+        <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+      </div>
+    </div>
+    
+    <div class="trans pt15">
+      <form name="complaint" (ngSubmit)="f.form.valid && addCompalintStatus(f) " #f="ngForm" novalidate autocomplete="off">
+        <div class="form-area">
+          <div class="slect none-bo">
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select class="complaint.complaint_status" placeholder="Status" [(ngModel)] = "complaint.complaint_status" #complaint_status="ngModel" name="complaint_status" required>
+                  <mat-option value ="Pending" class="Pending">Pending</mat-option>
+                  <mat-option value ="Closed" class="Closed">Closed</mat-option>
+                  <mat-option value ="Cancel" class="Cancel">Cancel</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        <div class="option-field" >
+          <div class="control-field">
+            <mat-form-field  class="cs-input">
+              <textarea matInput placeholder="Reason" class="h106" name="reason_cancel" [(ngModel)] = "complaint.reason_cancel" #reason_cancel="ngModel" ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        <div class="save mt10" [ngClass]="{loading: savingData}">
+          <button mat-button class="mb0"  [disabled]="savingData" >SAVE</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="gift-box" *ngIf="data.type=='payment'">
+    <div class="zift-hadding">
+      <p>Add Payment</p>
+      <div class="close-icon">
+        <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+      </div>
+    </div>
+    
+    <div class="trans pt15">
+      <form name="complaint" (ngSubmit)="f.form.valid && appComplaintPayment(f) " #f="ngForm" novalidate autocomplete="off">
+        <!-- <div class="form-area">
+          <div class="slect none-bo">
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select class="complaint.paymentType" placeholder="Type" [(ngModel)] = "complaint.paymentType" #paymentType="ngModel" name="paymentType" required>
+                  <mat-option value ="Points" class="Points">Points</mat-option>
+                  <mat-option value ="Cash" class="Cash">Cash</mat-option>
+          
+                </mat-select>
+            </mat-form-field>
+          </div>
+        </div> -->
+        
+        <div class="option-field" >
+          <div class="control-field">
+            <mat-form-field  class="cs-input">
+              <input matInput placeholder = "Amount" [(ngModel)] = "complaint.amount" #amount="ngModel" name="amount" required>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        <div class="save mt10" [ngClass]="{loading: savingData}">
+          <button mat-button class="mb0"  [disabled]="savingData" >SAVE</button>
+        </div>
+      </form>
+    </div>
+  </div>

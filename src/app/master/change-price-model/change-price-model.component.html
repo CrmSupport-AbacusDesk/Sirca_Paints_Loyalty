@@ -1,0 +1,56 @@
+<div class="loader" *ngIf = "loading_list">
+    <div class="loding-logo">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>
+
+<div class="gift-box" >
+    <div class="zift-hadding">
+        <p>Change Price</p>
+        <div class="close-icon">
+            <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+        </div>
+    </div>
+    
+    <div class="trans">
+        <form name="form" #f="ngForm" (ngSubmit)="f.valid && save_price()">
+            <div class="option-field" >
+                <!-- <div class="control-field">
+                    <mat-form-field class="cs-input">
+                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" (click)="picker.open()"  >
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div> -->
+                
+                
+                <div class="control-field">
+                    <mat-form-field class="cs-input">
+                        <mat-select class="" placeholder="Category" name="category" [(ngModel)]="form.category" multiple required>
+                            <mat-option *ngFor="let row of category_list" [value]="row.main_category">{{row.main_category}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="control-field">
+                    <mat-form-field class="cs-input">
+                        <mat-label>Status</mat-label>
+                        <mat-select name="type" [(ngModel)]="form.type" required>
+                            <mat-option value ="increase">Increase</mat-option>
+                            <mat-option value ="decrease">Decrease</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="control-field">
+                    <mat-form-field  class="cs-input">
+                        <mat-label>Price (%)</mat-label>
+                        <input matInput type="number" name="percent" maxlength="2" [(ngModel)]="form.percent" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            
+            <div class="save mt10" >
+                <button mat-button class="mb0">SAVE</button>
+            </div>
+        </form>
+    </div>
+</div>

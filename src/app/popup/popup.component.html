@@ -1,0 +1,27 @@
+
+<div class="gift-box">
+  <div class="zift-hadding">
+    <p>Change Status</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans">
+      <div class="form-area">
+        <div class="slect none-bo mt15 mr0">
+          <mat-form-field class="cs-input" >
+            <mat-select placeholder="Channel Partner List"  name="dr_id" [(ngModel)]="status.dr_id">
+              <mat-option [value]="row1.id"  *ngFor="let row1 of all_distributor.all_distributor"><small> {{row1.company_name}}</small>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      
+      <div class="save mt10">
+        <button mat-button class="mb0" (click)="statusVerified()">SAVE</button>
+      </div>
+  </div>
+</div>

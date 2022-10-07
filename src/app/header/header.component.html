@@ -1,0 +1,78 @@
+<!-- top-header -->
+<header>
+  <div class="top-header">
+    <div class="other-sec">
+      
+      <div class="logo">
+        <img src="assets/logo.png">
+        <div id="nav-icon" (click)="toggleHeader()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      
+      <div class="navigation">
+        <ul>
+          <li><a routerLink="/dashboard"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Dashboard</a></li>
+          <li><a routerLink="/offer-list"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Offer</a></li>
+          <li><a routerLink="/gift-list"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Gift Gallery</a></li>
+          <li><a routerLink="/redeem-request-list"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Redeem Requests</a></li>
+          <li><a routerLink="/karigar-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Plumber</a></li>
+          <li><a routerLink="/super-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Super 30</a></li>
+          <li><a routerLink="/coupon-code-list" routerLinkActive="active"  >Coupon Codes</a></li>
+          <li><a routerLink="/complaints-list/service" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Services</a></li>
+          <li><a routerLink="/complaints-list/installation" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Installations</a></li>
+          <li><a routerLink="/customer-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Customer</a></li>
+          <li><a routerLink="/main-catefory-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Master</a></li>
+          
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="connect-alignment">
+      <ul>
+        <!-- <button class="mbtnn"><i class="fa fa-angle-down"></i></button> -->
+        <li>
+          <div class="abacus-connect after-line">
+            <button (click)="goToConnect()">
+              <img src="assets/abacus-icon.png">
+              Abacus Connect
+              <span *ngIf="taskCount.task_count">{{taskCount.task_count}}</span>
+            </button>
+          </div>
+        </li>
+        
+        <li>
+          <div class="abacus-connect after-line">
+            <a  href="https://app.gravitybath.com/crm/"> 
+              <i class="material-icons"> open_in_new</i> 
+              Go To CRM
+            </a>
+          </div>
+        </li>
+        <li>
+          <div class="top-nav">
+            <ul>
+              <li>
+                <button  mat-button [matMenuTriggerFor]="menu" class="mat-drop pl0">Welcome {{this.db.datauser.username}}</button>
+                <!-- <img src="assets/How.jpg"> -->
+                <mat-menu #menu="matMenu">
+                  <!-- <a mat-menu-item>Profile</a> -->
+                  <a mat-menu-item (click)="logout()">Log Out</a>
+                </mat-menu>
+              </li> 
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+</header>
+
+
+<footer>
+  <img src="assets/abacusdesk.png" alt="">
+</footer>

@@ -1,0 +1,303 @@
+<div class="main-container">
+  <div class="offer-container">
+    <div class="container">
+      <form name="addOffer" (ngSubmit)="f.form.valid && saveOffer(f) " #f="ngForm" novalidate autocomplete="off">
+        <div class="row">
+          
+          <div class="col s12 ">
+            <div class="sprate-box ">
+              <div class="full-offer">
+                <div class="top-heading">
+                  <h2>FULL OFFER INFORMATION</h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s8 ">
+                  <div class="option-field">
+                    <div class="row">
+                      <div class="col s6">
+                        <div class="control-field">
+                          <mat-form-field class="cs-input">
+                            <input matInput placeholder="Title" name="title" [(ngModel)] = "addOffer.title" #title="ngModel" required>
+                          </mat-form-field>  
+                        </div>
+                      </div>
+                      <div class="col s6 ">
+                        <div class="control-field">
+                          <mat-form-field class="cs-input">
+                            <input matInput placeholder="Offer Code" name="offer_code" [(ngModel)] = "addOffer.offer_code" #offer_code="ngModel" required>
+                          </mat-form-field>  
+                        </div>
+                      </div>
+                      <div class="col s6">
+                        <div class="control-field">
+                          <mat-form-field class="cs-input">
+                            <input placeholder="Offer Start Date" (click)="openDatePicker(picker1)"  [(ngModel)]="addOffer.start_date"  name="start_date" matInput  [matDatepicker]="picker1" required readonly>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1 ></mat-datepicker>
+                          </mat-form-field>  
+                        </div>
+                      </div>
+                      <div class="col s6 ">
+                        <div class="control-field">
+                          <mat-form-field class="cs-input">
+                            <input placeholder="Offer End Date" (click)="openDatePicker(picker)" [min]="date1" [(ngModel)]="addOffer.end_date"  name="end_date" matInput  [matDatepicker]="picker" required readonly>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker ></mat-datepicker>
+                          </mat-form-field>  
+                        </div>
+                      </div>
+                  
+                    </div>
+                    <div class="row">
+                      <div class="col s6">
+                        <div class="control-field">
+                          <!-- <mat-form-field  class="cs-input"> -->
+                            <app-ngx-editor height="150px" minHieght="50px" [placeholder]="'Description'" [spellcheck]="true"  [(ngModel)]="addOffer.description"  #description="ngModel" name="description"></app-ngx-editor>
+                            
+                            
+                          </div>
+                        </div>
+                        
+                        <div class="col s6 ">
+                          <div class="control-field">
+                            <!-- <mat-form-field  class="cs-input"> -->
+                              <app-ngx-editor height="150px" class="h115" minHieght="50px" [placeholder]="'Terms & Conditions '" [spellcheck]="true"  [(ngModel)]="addOffer.terms"  #terms="ngModel" name="terms"></app-ngx-editor>
+                              
+                              
+                              <!-- <textarea matInput placeholder="Terms & Conditions " class="h115" name="terms" [(ngModel)] = "addOffer.terms" #terms="ngModel" required></textarea> -->
+                              <!-- </mat-form-field> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="col s4 mt15 pr10">
+                      <div class="option-field">
+                        <div class="territory-infos">
+                          <div class="heads">
+                            <h2>OFFER BANNER</h2>
+                          </div>
+                          <div class="cs-checkboxs">
+                            <div class="checkbox-outers image-inputes">
+                              
+                                                            
+                                <label>
+                                  <input type="file" (change)="onUploadChange1($event)" style="display:none;" accept=".png, .jpg, .jpeg" required />
+                                      <img  [src]="addOffer.offer_banner" alt="" id="img">
+                                      <h4>Upload Image</h4>
+                                      <i class="material-icons add-file-icon" >add</i>
+                                </label>
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              
+              <div class="row">
+                <div class="col s5 ">
+                  
+                  <div class="sprate-box ">
+                    <div class="full-offer">
+                      <div class="top-heading">
+                        <h2>AREA WISE SELECTION</h2>
+                        <p>Indicates required fields ( * )</p>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="main-pd">
+                        <div class="col s6 pl15">
+                          <div class="territory-info">
+                            <div class="head">
+                              <h2>STATE</h2>
+                              <mat-checkbox class="fix-check" [(ngModel)]="addOffer.allStates" (change)="allState()"  name="allStates"  value="true"></mat-checkbox>
+                              
+                              <!-- <i class="material-icons search-icon" matRipple>search</i>
+                              <input type="text" placeholder="search..." class="fix-search">
+                              <i class="material-icons close-icon" matRipple>clear</i> -->
+                            </div>
+                            <div class="cs-checkbox">
+                              <div class="checkbox-outer">
+                                <section  class="checkbox-inner" *ngFor = "let val of states;let i = index" >
+                                  <mat-checkbox class="check-list" [(ngModel)]="val.selected" (change)="getDistrictList()"  [name]="'state'+i"  value="true"> {{val.state_name}}</mat-checkbox>
+                                </section >
+                              </div>
+                            </div>
+                            
+                            
+                          </div>
+                        </div>
+                        
+                        <div class="col s6 pr15">
+                          <div class="territory-info">
+                            <div class="head">
+                              <h2>DISTRICTS</h2>
+                              <mat-checkbox class="fix-check" [(ngModel)]="addOffer.allDistrict" (change)="allDistrict()"  name="allDistrict"  value="true"></mat-checkbox>
+                              
+                              
+                              <!-- <i class="material-icons search-icon" matRipple>search</i>
+                              <input type="text" placeholder="search..." class="fix-search">
+                              <i class="material-icons close-icon" matRipple>clear</i> -->
+                            </div>
+                            <div class="cs-checkbox">
+                              <div class="checkbox-outer">
+                                
+                                <ng-container *ngFor = "let val of districts;let i = index">
+                                  <ng-container *ngIf="val.selected"  >
+                                    
+                                    <section  class="checkbox-inner new-bg-add" >
+                                      <mat-checkbox class="check-list"  [(ngModel)]="val.stateWiseDistrict" (change)="allStateWiseDistrict(i)" [name]="'dist'+i"  > {{val.state_name}}</mat-checkbox>
+                                    </section >
+                                    
+                                    <section  class="checkbox-inner"   *ngFor = "let v of val.districts; let x = index">
+                                      <mat-checkbox class="check-list" [(ngModel)]="v.selected"  [name]="'district'+x+i"  value="true"> {{v.district_name}}</mat-checkbox>
+                                    </section >
+                                    
+                                  </ng-container>
+                                  
+                                </ng-container>
+                                
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col s7 ">
+                  
+                  <div class="sprate-box ">
+                    <div class="full-offer">
+                      <div class="top-heading">
+                        <h2>ADD GIFT</h2>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col s6">
+                        <div class="option-field">
+                          <div class="row">
+                            <div class="col s12 ">
+                              <div class="control-field">
+                                <mat-form-field class="cs-input">
+                                  <input matInput placeholder="Gift Title" name="gift_title" [(ngModel)] = "gift.gift_title" #gift_title="ngModel"  >
+                                </mat-form-field>  
+                              </div>
+                            </div>
+                            <div class="col s12 ">
+                              <div class="control-field">
+                                <mat-form-field class="cs-input">
+                                  <input matInput placeholder="Coupon Points" name="coupon_points" [(ngModel)] = "gift.coupon_points" #coupon_points="ngModel" (keypress)="numeric_Number($event)"  >
+                                </mat-form-field>  
+                              </div>
+                            </div>
+                          </div> 
+                          
+                        </div>
+                      </div>
+                      
+                      <div class="col s6">
+                        <div class="option-field">
+                          <div class="control-field">
+                            <mat-form-field  class="cs-input">
+                              <textarea matInput placeholder="Gift Specification " class="h115" name="gift_specification" [(ngModel)] = "gift.gift_specification" #gift_specification="ngModel" ></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="cs-file">
+                          <p>Upload  Image</p>
+                          <ul>
+                            <li>
+                              <div class="add-img-co">
+                                <div class="cs-file  file-up">
+                                  <label>
+                                    <input type="file" (change)="onUploadChange2($event)" style="display:none;" accept=".png, .jpg, .jpeg " />
+                                    <img  [src]="gift.image" alt="" id="img">
+                                    <i class="material-icons">backup</i>
+                                  </label>
+                                </div>
+                                <div class="control-field">
+                                  <div class="save un-save " style="cursor:pointer">
+                                    <p mat-button (click)="addgiftList()" class="mb0">ADD GIFT</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="col s12" *ngIf="giftList?.length">
+                        <div class="css-table left-right-15">
+                          <div class="sticky-header">
+                            <div class="header">
+                              <table> 
+                                <tr>
+                                  <th class="w50" >&nbsp;</th>
+                                  <th class="w150" style="border-left: 1px solid #D2D2D2;">Title</th>
+                                  <th class="w100">Points</th>
+                                  <th >Specification</th>
+                                  <th class="w110">Action</th>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                          
+                          <div class="table-container" >
+                            <div class="table-body">
+                              <table>
+                                <tr *ngFor="let raw of giftList; let p = index">
+                                  <td class="w50" style="border-right: 1px solid #D2D2D2;">
+                                    <div class="image-thum"><img [src]="raw.image"></div>
+                                  </td>
+                                  
+                                  <td class="w150">{{ raw.gift_title }}</td>
+                                  <td class="w100">{{ raw.coupon_points }}</td>
+                                  <td>{{ raw.gift_specification }}</td>
+                                  
+                                  <td class="w110 active">
+                                    <div class="action-btns mt11 left-btn opcity-non">
+                                     
+                                      <div class="dele-sec" style="cursor:pointer" mat-raised-button (click)="RemoveItem(p)">
+                                          <i class="material-icons">delete_sweep</i>
+                                          <p>Delete</p>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>               
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="save un-save" [ngClass]="{loading: savingData}" >
+                <button mat-button  [disabled]="savingData" >SAVE</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      
+      

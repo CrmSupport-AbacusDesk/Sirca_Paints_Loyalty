@@ -1,0 +1,287 @@
+<div class="loader" *ngIf = "loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="offer-container">
+    <div class="container">
+      
+      
+      <form name="verifyfrom" (ngSubmit)="v.form.valid && AssignCustomer(v)" #v="ngForm" novalidate autocomplete="off" *ngIf="!status">
+        <div class="row " >
+          <div class="col s12 ">
+            <div class="sprate-box ">
+              <div class="full-offer">
+                <div class="top-heading">
+                  <h2>ADD NEW COMPLAINTS</h2>
+                  <p>Indicates required fields ( * )</p>
+                </div>
+              </div>
+              <div class="row mb0">
+                <div class="col s12 mb0 ">
+                  
+                  <div class="col s4">
+                    
+                    <div class="option-field">
+                      <div class="row mb0">
+                        <div class="col s12">
+                          <div class="control-field">
+                            <mat-form-field class="cs-input">
+                              <input matInput placeholder="Mobile No." (keypress)="numeric_Number($event)" name="mobile_no" [(ngModel)] = "complaintfrom.mobile_no" #mobile_no="ngModel" minlength="10" maxlength="10" required >
+                            </mat-form-field>  
+                          </div>
+                        </div>
+                        
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  <div class="col s8 mb17">
+                    
+                    <div class="save mt15" [ngClass]="{loading: savingData}" >
+                      <button class="mb0" mat-button  >NEXT</button>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+      </form>
+      
+      
+      
+      <form name="complaintfrom" (ngSubmit)="f.form.valid && savecomplaintfrom(f)" #f="ngForm" novalidate autocomplete="off" *ngIf="status">
+        <div class="row " >
+          <div class="col s12 ">
+            <div class="sprate-box ">
+              <div class="full-offer">
+                <div class="top-heading">
+                  <h2>
+                    <i style="cursor: pointer" (click)="clear()" class="material-icons">
+                      keyboard_backspace
+                    </i>
+                    ADD NEW COMPLAINTS
+                  </h2>
+                  <p>Indicates required fields ( * )</p>
+                </div>
+              </div>
+              <div class="row mb0">
+                <div class="col s12 mb0 ">
+                  
+                  <div class="col s4">
+                    
+                    <div class="option-field">
+                      <div class="row mb0">
+                        <div class="col s12">
+                          <div class="control-field">
+                            <mat-form-field class="cs-input">
+                              <input matInput placeholder="Mobile No." readonly (keyup)="AssignCustomer()" name="mobile_no" [(ngModel)] = "complaintfrom.mobile_no" [disabled]="complaints_id" #mobile_no="ngModel" maxlength="10" minlength="10" required >
+                            </mat-form-field>  
+                          </div>
+                        </div>
+                        <div class="col s12" *ngIf="complaintfrom.mobile_no">
+                          <div class="control-field">
+                            <mat-form-field class="cs-input">
+                              <input matInput placeholder="Customer Name" name="first_name" [(ngModel)] = "complaintfrom.first_name" #first_name="ngModel"  required>
+                            </mat-form-field>  
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s8" *ngIf="complaintfrom.mobile_no">
+                    
+                    
+                    <div class="option-field">
+                      <div class="col s12 ">
+                        <div class="control-field">
+                          <mat-form-field  class="cs-input">
+                            <textarea matInput placeholder="Nature Problem" class="h107" name="nature_problem" [(ngModel)] = "complaintfrom.nature_problem" #nature_problem="ngModel" required></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col s12" *ngIf="complaintfrom.mobile_no">
+                  <div class="row">
+                    <div class="col s4">
+                      <div class="option-field">
+                        
+                        <div class="col s12" >
+                          <div class="control-field">
+                            <div>
+                              <mat-form-field class=" cs-input cs-multi-select">
+                                <mat-select placeholder="Select State" name="state"  (selectionChange)="getDistrictList(1)" [(ngModel)]="complaintfrom.state" #state="ngModel" required>
+                                  <mat-option *ngFor = "let val of states" [value]="val.state_name"> {{val.state_name}} </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="col s12">
+                          <div class="control-field">
+                            <div>
+                              <mat-form-field class="cs-input ">
+                                <input matInput placeholder="City" name="city" [(ngModel)] = "complaintfrom.city"  #city="ngModel"  >
+                              </mat-form-field>  
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="col s4">
+                      <div class="option-field">
+                        <div class="col s12">
+                          <div class="option-field">
+                            <div class="control-field">
+                              
+                              <div >
+                                <mat-form-field class=" cs-input cs-multi-select">
+                                  <mat-select placeholder="Select District" name="district"  (selectionChange)="pincodeBlank()"  [(ngModel)]="complaintfrom.district" #district="ngModel" required>
+                                    <mat-option *ngFor="let val of districts" [value]="val.district_name"> {{val.district_name}} </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>  
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="col s12" >
+                          <div class="control-field">
+                            <div>
+                              <mat-form-field class=" cs-input ">
+                                <input matInput placeholder = "Pincode" (keypress)="numeric_Number($event)" maxlength="6" minlength="6" name = "pincode"  [(ngModel)] = "complaintfrom.pincode"  #pincode = "ngModel" required>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="col s4">
+                      <div class="option-field">
+                        <!-- <div class="col s12 ">
+                          <div class="control-field">
+                            <mat-form-field  class="cs-input">
+                              <textarea matInput placeholder="Nature Problem" class="h107" name="nature_problem" [(ngModel)] = "complaintfrom.nature_problem" #nature_problem="ngModel" required></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div> -->
+                        <div class="col s12 ">
+                          <div class="control-field">
+                            <mat-form-field  class="cs-input">
+                              <textarea matInput placeholder="Street" class="h107" name="address" [(ngModel)] = "complaintfrom.address"  #address="ngModel" ></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row " *ngIf="complaintfrom.state && sales_users.length">
+          <div class="col s12 ">
+            <div class="sails-user">
+              <div class="text-area">
+                <h4>ASSIGN PLUMBER</h4>
+              </div>
+              <div class="form-blok">
+                <div class="row">
+                  <div class="col s4">
+                    <div class="option-field">
+                      <div class="control-field">
+                        <mat-form-field class=" cs-input cs-multi-select" >
+                          <mat-select placeholder="Assign Plumber" name="sales_name"  (selectionChange)="selectSales()"  [(ngModel)]="complaintfrom.sales_name" #sales_name="ngModel" >
+                            <mat-option *ngFor="let val of sales_users" [value]="val.id"> {{val.first_name +'  '+ val.mobile_no}} </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>				
+            </div>
+          </div>
+        </div>
+        
+        <div class="row " *ngIf="data.type=='service'">
+          <div class="col s12 ">
+            <div class="sprate-box ">
+              <div class="full-offer">
+                <div class="top-heading">
+                  <h2>
+                    
+                    UPLOAD COMPLAINT VIDEOS AND IMAGES
+                  </h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="main-padding">
+                  <div class="uploade-campal">
+                    <ul>
+                      <li *ngFor="let val of media; let i=index">
+
+                        <ng-container *ngIf="val.type == 'image'">
+                          <img [src]="val.file" >
+                        </ng-container>
+
+                        <ng-container *ngIf="val.type == 'video'">
+                        <p >{{val.name}}</p>
+                      </ng-container>
+                        
+                        <span class="cancel-icon">
+                          <i class="material-icons crose-icon " (click)="deleteProductImage(i)">clear</i>
+                        </span>									
+                      </li>
+                      <li class="add-bg-1">
+                        <label>
+                          <input style="display:none;" type="file" (change)="fileChange($event)" name="file" placeholder="Upload file" accept=".png,.jpg,.jpeg,.mp4" multiple />
+                          
+                          <div class="other">
+                            <i class="material-icons">backup</i>
+                          </div>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        <div class="save mt30" [ngClass]="{loading: savingData}" *ngIf="complaintfrom.mobile_no">
+          <button mat-button  >SAVE</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="loader" *ngIf = "loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="main-container">
+  <div class="fixed">
+    <div class="middle-container">
+      <div class="tabs-list">
+      </div>
+    </div>
+  </div>
+  <div class="container-outer tab-container">
+    <div class="master-tab">
+      <ul>
+        <li routerLink="/main-catefory-list" routerLinkActive="active"><a>Category</a></li>
+        <li routerLink="/products-list" routerLinkActive="active"><a>Products</a></li>
+        <li routerLink="/video-list" routerLinkActive="active"><a>Videos</a></li>
+        <li routerLink="/login-banner-list" routerLinkActive="active"><a>Login Banner</a></li>
+        <li routerLink="/registration-loyality" routerLinkActive="active"><a>Registration Loyality</a></li>
+        <li routerLink="/referral-master" routerLinkActive="active"><a>Points Master</a></li>
+        <li routerLink="/special-dis" routerLinkActive="active"><a>Special Discount/Extra Premium</a></li>
+        <li routerLink="/plumber-meet-data" routerLinkActive="active"><a>Plumber Meet Data</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="css-table left-right-15">
+        <div class="sticky-header">
+          <div class="header">
+            <table>
+              <tr>
+                <th class="w50">S. No.</th>
+                <th class="w200">Date Created</th>
+                <th>Created By</th>
+                <th>Company Name</th>
+                <th class="w135">Meeting Date</th>
+                <th class="w200">Type</th>
+                <th class="w165">View</th>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="header border-bott">
+            <table>
+              <tr>
+                <th class="w50">&nbsp;</th>
+                <th class="w200">
+                  <div class="date-form">
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="date_created_picker" placeholder="Date" name="date_created" [(ngModel)]="filter.date_created" (dateChange)="con_date(filter.date_created,'date_created')" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="date_created_picker"></mat-datepicker-toggle>
+                      <mat-datepicker #date_created_picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </th>
+                <th>
+                  <div class="search-form">
+                    <input matInput placeholder="Name. . ." name="created_by_name" [(ngModel)]="filter.created_by_name" (keyup.enter)="get_plumber_data_list();">
+                    <i class="material-icons">search</i>
+                  </div>
+                  
+                </th>
+
+                <th></th>
+
+                <th class="w135">
+                  <div class="date-form">
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker" placeholder="Date" name="date_of_meeting" [(ngModel)]="filter.date_of_meeting" (dateChange)="con_date(filter.date_of_meeting,'date_of_meeting')" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </th>
+                <th class="w200"></th>
+                <th class="w165"></th>
+              </tr>
+            </table>
+          </div>
+        </div>
+        
+        <div class="table-container">
+          <div class="table-body">
+            <table>
+              <tr *ngFor="let plumber_data of plumber_data_list; let i = index">
+                <td class="w50">{{i+1}}</td>
+                <td class="w200">{{plumber_data.date_created && plumber_data.date_created!='' ? (plumber_data.date_created | date :' d MMM, y hh:mm a') : '--'}}</td>
+                <td>{{plumber_data.created_by_type=='Executive' ? (plumber_data.created_by_user_name && plumber_data.created_by_user_name!='' ? plumber_data.created_by_user_name : '--'):(plumber_data.created_by_dr_name && plumber_data.created_by_dr_name!='' ? plumber_data.created_by_dr_name : '--')}}</td>
+                <td>{{(plumber_data.company_name && plumber_data.company_name!='' ? (plumber_data.company_name | titlecase) : '--')}}</td>
+                <td class="w135">{{plumber_data.date_of_meeting && plumber_data.date_of_meeting!='' ? (plumber_data.date_of_meeting | date :' d MMM, y') : '--'}}</td>
+                <td class="w200">{{plumber_data.created_by_type=='Executive' ? 'Executive' : (plumber_data.dr_type && plumber_data.dr_type !='' && plumber_data.dr_type != null ? plumber_data.dr_type == '1' ? 'Channel Partner' : plumber_data.dr_type == '3' ? 'Dealer' : 'Direct Dealer' : '--')}}</td>
+                <td class="w165">
+                  <a style ="cursor: pointer" (click)="view_plumber_data(plumber_data.id)" class="ankr-clr">View Plumber Data</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

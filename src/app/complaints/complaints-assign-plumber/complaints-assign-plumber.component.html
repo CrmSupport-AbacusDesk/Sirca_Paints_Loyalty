@@ -1,0 +1,50 @@
+<div class="loader" *ngIf = "loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="gift-box">
+  <div class="zift-hadding">
+    <p>Assign Plumber</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+    <div class="trans pt15">
+      <form name="complaint" (ngSubmit)="f.form.valid && addCompalintStatus(f) " #f="ngForm" novalidate autocomplete="off">
+
+        <div class="form-area" style="overflow: inherit;">
+            <div class="ng-autocomplete wp100 mt5 mb15">
+                <ng-autocomplete
+                [data]="sales_users"
+                [searchKeyword]="keyword"
+                (selected)='selectEvent($event)'
+                (inputChanged)='onChangeSearch($event)'
+                (inputFocused)='onFocused($event)'
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate">                                 
+              </ng-autocomplete>
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.user"></a>
+              </ng-template>
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </div>
+        </div>
+        
+        <!-- <div class="option-field">
+          <div class="control-field">
+            <mat-form-field  class="cs-input">
+              <input matInput placeholder="Mobile No. " (keypress)="numeric_Number($event)"  maxlength="10" minlength="10" name="sales_mobile"   [(ngModel)]="complaint.sales_mobile" readonly>
+            </mat-form-field>
+          </div>
+        </div> -->
+        
+        <div class="save mt10">
+          <button mat-button class="mb0"  >SAVE</button>
+        </div>
+      </form>
+    </div>
+  </div>

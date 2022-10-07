@@ -1,0 +1,57 @@
+<div class="loader" *ngIf = "loading_list">
+    <div class="loding-logo">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+<div class="row">
+  
+  <div class="sprate-box ">
+    <div class="full-offer">
+      <div class="top-heading">
+        <h2>ADD COMPLAINT IMAGE AND VIDEO</h2>
+        <div class="close-icon">
+          <button mat-button mat-dialog-close ><i class="material-icons" style="color: #fff;">clear</i></button>
+        </div>
+      </div>
+    </div>
+    <form name="offer" (ngSubmit)="f.form.valid && addGallery(f) " #f="ngForm" novalidate autocomplete="off">
+      <div class="row">
+        <div class="main-padding">
+          <div class="uploade-campal multi-module-image scroll-12">
+            <ul>
+              <li *ngFor="let val of media; let i=index">
+                
+                <ng-container *ngIf="val.type == 'image'">
+                  <img [src]="val.file" >
+                </ng-container>
+                
+                <ng-container *ngIf="val.type == 'video'">
+                  <p >{{val.name}}</p>
+                </ng-container>
+                
+                <span class="cancel-icon">
+                  <i class="material-icons crose-icon " (click)="deleteProductImage(i)">clear</i>
+                </span>									
+              </li>
+              <li class="add-bg-1">
+                <label>
+                  <input style="display:none;" type="file" (change)="fileChange($event)" name="file" placeholder="Upload file" accept=".png,.jpg,.jpeg,.mp4" multiple />
+                  
+                  <div class="other">
+                    <i class="material-icons">backup</i>
+                  </div>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="add-btn">
+        <button mat-button  [ngClass]="{loading: savingData}"><i class="material-icons">check</i></button>
+        
+      </div>
+      
+    </form>
+  </div>
+  
+</div>

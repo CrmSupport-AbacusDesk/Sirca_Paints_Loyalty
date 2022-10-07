@@ -1,0 +1,238 @@
+<div class="loader" *ngIf = "loading_list">
+    <div class="loding-logo">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>
+<div class="main-container">
+    <div class="fixed">
+        <div class="middle-container">
+            <div class="tabs-list gift-tab-list pl6">
+                <h1>Master</h1>
+                <div class="input-field">
+                    <input type="text" placeholder="Search..." [(ngModel)]="filter.search"  (keyup.enter)="current_page = 1;getCategoryList()">
+                    <i class="material-icons">search</i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-outer tab-container">
+        <div class="master-tab">
+            <ul>
+                <li routerLink="/main-catefory-list" routerLinkActive="active"><a>Category</a></li>
+                <li routerLink="/products-list" routerLinkActive="active"><a>Products</a></li>
+                <li routerLink="/video-list" routerLinkActive="active"><a>Videos</a></li>
+                <li routerLink="/login-banner-list" routerLinkActive="active"><a>Login Banner</a></li>
+                <li routerLink="/registration-loyality" routerLinkActive="active"><a>Registration Loyality</a></li>
+                <li routerLink="/referral-master" routerLinkActive="active"><a>Points Master</a></li>
+                <li routerLink="/special-dis" routerLinkActive="active"><a>Special Discount/Extra Premium</a></li>
+                <li routerLink="/plumber-meet-data" routerLinkActive="active"><a>Plumber Meet Data</a></li>
+
+            </ul>
+        </div>
+        <div class="image-lists">
+            <div class="cs-table scroll-336">
+                <table>
+                    <tr>
+                        <th class="first-head">
+                            <div class="table-head">
+                                <table>
+                                    <tr>
+                                        <th class="w200 border-right text-center">CATEGORY</th>
+                                        <th>SUB CATEGORY</th>
+                                        <th class="w100 ">Action</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="table-body">
+                                <table>
+                                    <tr class="arject" *ngFor="let val of categories; let i = index" >
+                                        <td class="w200 text-center">{{val.main_category}} || PRODUCTS:{{val.product_count}}</td>
+                                        
+                                        <td>
+                                            <div class="tags">
+                                                <ul >
+                                                    <li *ngFor="let row of val.sub_categories; let j = index">
+                                                        <span>{{row.category_name}}|| PRODUCTS:{{row.product_count}}
+                                                            
+                                                            <div class="action-item">
+                                                                <ul>
+                                                                    <li (click)="toggle1 = !toggle1;editSubCategory(row.id,j)"><a><i class="material-icons">create</i></a></li>
+                                                                    <li *ngIf="row.product_count==0" (click)="deleteSubCategory(row.id)"><a><i  class="material-icons  red-clr">delete_sweep</i></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td class="w100">
+                                            <button mat-raised-button class="accent" [matMenuTriggerFor]="menu">Action</button>
+                                            <mat-menu #menu="matMenu">
+                                                <button mat-menu-item (click)="toggle = !toggle; editCategory(val.main_category ); val.mainCategory = val.main_category">Edit Category</button>
+                                                <button mat-menu-item (click)="toggle1 = !toggle1; addSubCategory(val.main_category)">Add Sub Category</button>
+                                                <button mat-menu-item  *ngIf="val.product_count==0" (click)="deleteProduct(val.main_category)" >Delete Category</button>
+                                            </mat-menu>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div> 
+                
+                <!-- <ul>
+                    <li *ngFor="let val of categories; let i = index">
+                        <div class="image-section1"  >
+                            <img [src]="val.image" (click)="openDialog(image.image, 'test2' )" >
+                        </div>
+                        <div class="hvr-edit">
+                            <a (click)="deleteProduct(val.main_category)" class="delete-icn"><i class="material-icons" >delete_sweep</i></a>
+                            <a (click)="toggle = !toggle; editCategory(val.main_category )" class="edit-icn"><i class="material-icons" >edit</i></a>
+                        </div>
+                        <h1>{{val.main_category  | titlecase}}</h1>
+                    </li>
+                </ul> -->
+            </div> 
+        </div>
+        <div class="add">
+            <button mat-button class="add-btn" (click)="toggle = !toggle; addCategory()"><i class="material-icons" >add</i></button>
+        </div>
+    </div>
+    
+    <div class="side-main" [ngClass] ="{'on' : toggle == true}">
+        <div class="category-field" >
+            <!-- f.form.valid &&  -->
+            <form name="category" (ngSubmit)="savecategory(f)" #f="ngForm"  novalidate autocomplete="off">
+                <div class="category-hadding">
+                    <h2>Add Main Category</h2>
+                    <i class="material-icons" (click)="toggle = !toggle">clear</i>
+                </div>
+                
+                <div class="add-image">
+                    
+                    <div class="option-field">
+                        <div class="control-field">
+                            <mat-form-field class="cs-input">
+                                <input matInput placeholder="Main Category" name="main_category" [(ngModel)] = "category.main_category" #main_category="ngModel" required>
+                            </mat-form-field>  
+                        </div>
+                    </div>
+                    
+                    <div class="uploade-image add-img-12">
+                        <h4>Upload Image</h4>
+                        <ul>
+                            
+                            <li class="add-bg-1">
+                                <label>
+                                    <input type="file" (change)="onUploadChange1($event)" style="display:none;" accept=".png, .jpg, .jpeg"  />
+                                    <img  [src]="category.image" alt="" id="img">
+                                    <h4>Upload Image</h4>
+                                    
+                                    <span class="cancel-icon">
+                                        <i class="material-icons crose-icon "  >clear</i>
+                                    </span>	
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="save btn-save mt90" [ngClass]="{loading: savingData}" >
+                        <button mat-button type="submit" [disabled]="save_button_disabled">SAVE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        
+        
+        <div class="side-bg" (click)="toggle = !toggle"></div>
+    </div>
+    
+    <div class="side-main" [ngClass] ="{'on' : toggle1 == true}">
+        <div class="category-field" >
+            <form name="category" (ngSubmit)="f.form.valid && saveSubcategory(f)" #f="ngForm" novalidate autocomplete="off">
+                <div class="category-hadding">
+                    <h2>Add Sub Category</h2>
+                    <i class="material-icons" (click)="toggle1 = !toggle1;clearData()">clear</i>
+                </div>
+                
+                <div class="add-image">
+                    <div class="option-field">
+                        <div class="control-field">
+                            <mat-form-field class="cs-input">
+                                <!-- <mat-select placeholder="Main Category" name="main_category"  [(ngModel)]="category.main_category" #main_category="ngModel"  >
+                                    <mat-option *ngFor="let val of ma_category" [value]="val.main_category"> {{val.main_category}} </mat-option>
+                                </mat-select> -->
+                                
+                                <input matInput placeholder="Main Category Name" name="main_category" [(ngModel)] = "category.main_category" #main_category="ngModel" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    <div class="option-field">
+                        <div class="control-field">
+                            <mat-form-field class="cs-input">
+                                <input matInput placeholder="Category Name" name="category_name" [(ngModel)] = "category.category_name" #category_name="ngModel" required>
+                            </mat-form-field>  
+                        </div>
+                    </div>
+                    
+                    <div class="uploade-image">
+                        <h4>Upload Image</h4>
+                        <ul>
+                            <!-- <li *ngFor="let image of selected_image; let i=index" [ngClass]="{'active':category.profile_selected == i }">
+                                <img [src]="image" >
+                                <span class="cancel-icon">
+                                    <i class="material-icons check-icon" (click)="ProductProfile(i)">done</i>
+                                    <i class="material-icons crose-icon " (click)="deleteSubCategoryImage(i)">clear</i>
+                                </span>									
+                            </li> -->
+                            <div *ngIf="image !=[]">
+                            <li *ngFor="let data of image; let i=index" >
+                                <img [src]="data.image">
+                                <span class="cancel-icon">
+                                    <i class="material-icons check-icon" (click)="ProductProfile(i)">done</i>
+                                    <i class="material-icons crose-icon " (click)="deleteSubCategoryImage(i)">clear</i>
+                                </span>									
+                            </li>
+                        </div>
+                        <!-- <div *ngIf="image==[]">
+                            <li *ngIf="category.image" >
+                                <img [src]="category.image">
+                                <span class="cancel-icon">
+                                    <i class="material-icons check-icon" (click)="ProductProfile(i)">done</i>
+                                    <i class="material-icons crose-icon " (click)="deleteSubCategoryImage(i)">clear</i>
+                                </span>									
+                            </li>
+                        </div> -->
+                            <li class="add-bg-1" >
+                                <label>
+                                    <input type="file" (change)="onUploadChange($event)" style="display:none;" accept=".png, .jpg, .jpeg"  />
+
+                                    <img [src]="category.image" alt="" id="img">
+                                    <h4>Upload Image</h4>
+                                    
+                                   
+                                </label>
+                            </li>
+                        </ul>
+                        </div>
+                        
+                        <div class="save btn-save mt90" [ngClass]="{loading: savingData}">
+                            <button mat-button [disabled]="save_button_disabled" >SAVE</button>
+                           
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            
+            
+            <div class="side-bg" (click)="toggle1 = !toggle1"></div>
+        </div>

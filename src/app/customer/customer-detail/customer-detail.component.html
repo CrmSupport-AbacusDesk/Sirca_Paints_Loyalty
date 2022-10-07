@@ -1,0 +1,259 @@
+<div class="loader" *ngIf = "loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="main-container" *ngIf = "!loading_list" >
+  <div class="offer-container">
+    <div class="row">
+      <div class="col s12 padding0">
+        <div class="sprate-box">
+          <div class="full-offer">
+            <div class="top-heading">
+              <h2>CUSTOMER DETAIL</h2>
+            </div>
+            
+            <div class="detail-info">
+              <div class="basic-details">
+                <div class="profile-info">
+                  <ul>
+                    
+                    <li>
+                      <figure>
+                        <div class="left-img" *ngIf="!getData.profile">
+                          <img src="assets/male.svg">
+                        </div>
+                        
+                        <div class="left-img" *ngIf="getData.profile">
+                          <img [src]="getData.profile"  (click)="openDialog( getData.id,'test5')">
+                        </div>
+                        <div class="right-cont">
+                          <p>Name</p>
+                          <span>{{getData.first_name | titlecase }} {{getData.last_name | titlecase }}</span>
+                        </div>
+                      </figure>
+                      
+                    </li>
+                    <li>
+                      
+                      <figure>
+                        <div class="left-img">
+                          <img src="assets/contact.svg">
+                        </div>
+                        <div class="right-cont">
+                          <p>Mobile No.</p>
+                          <span>{{getData.mobile_no}}</span>
+                        </div>
+                      </figure>
+                      
+                    </li>
+                    
+                    <li>
+                      <figure>
+                        <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div>
+                        <div class="right-cont">
+                          <p>Address</p>
+                          <span>{{getData.address | titlecase }}   {{getData.city | titlecase }} {{getData.district | titlecase }} {{getData.state | titlecase }} {{getData.pincode}}</span>
+                          
+                        </div>
+                      </figure>
+                      
+                    </li>
+                    <li *ngIf="getData.document_image">
+                      <figure>
+                        <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div>
+                        <div class="right-cont">
+                          <p>Document</p>
+                          <span *ngIf="getData.document_type && getData.document_no">{{getData.document_type | titlecase }}  -  {{getData.document_no}}</span>
+<!--                           
+                          <a download="{{getData.first_name}} - {{getData.document_type}} Document.png" href="{{getData.document_image}}"  target="_blank">Click To Download {{getData.document_type}}</a> -->
+                          
+                        </div>
+                      </figure>
+                      
+                    </li>
+                    <li *ngIf="getData.document_image">
+                      <figure>
+                        <!-- <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div> -->
+                        <div class="right-cont">
+                          <!-- <p>Document</p>
+                          <span *ngIf="getData.document_type && getData.document_no">{{getData.document_type | titlecase }}  -  {{getData.document_no}}</span> -->
+                          <span>
+
+                            <a download="{{getData.first_name}} - {{getData.document_type}} Document.png" href="{{getData.document_image}}"  target="_blank">Click To Download {{getData.document_type}}</a>
+                          </span>
+                          
+                        </div>
+                      </figure>
+                      
+                    </li>
+                    <li *ngIf="getData.cust_geo_address">
+                      <figure>
+                        <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div>
+                        <div class="right-cont">
+                          <p>Geo Location</p>
+                          <span>{{getData.cust_geo_address | titlecase }}</span>
+                          
+                        </div>
+                      </figure>
+                      
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="used-code">
+        <div class="tab-header">
+          <div class="tab-header no-sticky gift-tab-list ">
+            <div class="tabs-list gift-tab-list ">
+              <ul>
+                <li [ngClass]="{'active': data.type=='Service'}">
+                  <a (click)="getComplaintsList('Service')">
+                    <p>Services</p>
+                    <!-- <span>{{complaints_count}}</span> -->
+                  </a>
+                </li>
+                <li [ngClass]="{'active': data.type=='Installation'}">
+                  <a (click)="getComplaintsList('Installation')">
+                    <p>Installations</p>
+                    <!-- <span>{{complaints_count}}</span> -->
+                  </a>
+                </li>
+              </ul>
+              
+              
+              
+            </div>
+          </div>	
+          <div class="dobale"  >
+            <div class="top-pagination" >
+              <ul>
+                <li><p >Pages {{ current_page }} of {{ last_page }}</p></li>
+                <li><button mat-button class="left-btn" (click) = 'redirect_previous()'><i class="material-icons">keyboard_arrow_left</i></button></li>
+                <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"  (keyup.enter)="getScannedList()"></li>
+                <li><button mat-button class="right-btn" (click) = 'redirect_next()'><i class="material-icons">keyboard_arrow_right</i></button></li>
+              </ul>
+            </div>
+          </div>				
+          
+        </div>
+      </div>
+      
+      <div class="sprate-box no-box">
+        <div class="css-table ">
+          <div class="sticky-header bo-non">
+            <div class="header">
+              <table>
+                
+                <tr>
+                  <th class="w100">CMP No.</th>
+                  <th class="w150">Date / Created By </th>
+                  <th class="w200">Plumber Name</th>
+                  <th class="w100">Days</th>
+                  <th>Nature Problem</th>
+                  <th class="w100">OTP</th>
+                </tr>
+              </table>
+            </div>
+            <div class="header">
+              <table>
+                <tr>
+                  <th class="w100"></th>
+                  <th class="w150">
+                    <div class="date-form">
+                      <i *ngIf="filter.date" class="material-icons" (click)="filter.date = '';getComplaintsList(data.type) ">clear</i>
+                      
+                      <mat-form-field >
+                        <input placeholder="Search" [(ngModel)]="filter.date"  name="date" (click)="openDatePicker(picker)" matInput (dateChange)="getComplaintsList(data.type)" [matDatepicker]="picker" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      
+                    </div>
+                  </th>
+                  
+                  
+                  
+                  <th class="w200">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.plumber_name"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th class="w100">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.days"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.nature_problem"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th class="w100">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.otp"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                </tr>
+              </table>
+            </div>
+          </div>
+          
+          <div class="table-container" *ngIf="complaints.length">
+            <div class="table-body">
+              <table>
+                <tr *ngFor="let val of complaints; let i = index">
+                  <td class="w100"><a class="blue" routerLink="/complaints-detail/{{val.id | crypt}}" routerLinkActive="active">Com# {{ val.id }}</a></td>
+                  <td class="w150"><ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' "> {{val.date_created | date: 'dd MMM yyyy'}} / {{val.created_name}} </ng-container> </td>
+                  <td class="w200">
+                    <a class="blue" *ngIf="val.plumber_name" routerLink="/karigar-detail/{{val.assigned_plumber | crypt}}" routerLinkActive="active">{{ val.plumber_name | titlecase}}</a>
+                    <a  *ngIf="!val.plumber_name" >NA</a>
+                  </td>
+                  <td class="w100">{{ toInt(val.days_count) + 1}} Days</td>
+                  <td>{{val.nature_problem}}</td>
+                  <td class="w100">{{val.otp}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="date-not" *ngIf="!loading_list && !complaints.length && complaints_count">
+        <div class="no-img">
+          <img src="assets/result-not-found.png"> 
+        </div>
+      </div>
+      
+      <div class="date-not"  *ngIf="!loading_list && !complaints_count ">
+        <div class="no-img">
+          <img src="assets/not-available.jpg"> 
+        </div>
+        
+      </div>			
+      
+      
+    </div>
+  </div>
+</div>
+
+<div class="add-button">
+  <button mat-button (click)="edit()"><i class="material-icons">edit</i></button>
+</div>

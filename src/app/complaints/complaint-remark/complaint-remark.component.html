@@ -1,0 +1,25 @@
+<div class="gift-box">
+  <div class="zift-hadding">
+    <p>Visit</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans padding0" >
+    <div class="scroling">
+        <div class="remark"  *ngFor="let val of remark; let i = index">
+     
+            <div class="time">
+              <h4>{{val.date_created | date: 'dd MMM yyyy' }}</h4>
+              <h4>---</h4>
+            </div>
+      
+            <div class="content">
+              <p><span>Remark</span>{{val.remark}}</p>
+            </div>
+        
+        </div>
+    </div>
+  </div>
+</div>

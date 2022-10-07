@@ -1,0 +1,100 @@
+[<div class="main-container">
+	<div class="offer-container">
+		<div class="container">
+			<form name="customerform" (ngSubmit)="f.form.valid && savecustomerform(f)" #f="ngForm" novalidate autocomplete="off">
+				<div class="row ">
+					<div class="col s12 ">
+						<div class="sprate-box ">
+							<div class="full-offer">
+								<div class="top-heading">
+									<h2>FULL CUSTOMER INFORMATION </h2>
+									<p>Indicates required fields ( * )</p>
+								</div>
+							</div>
+							<div class="row mb0">
+								<div class="col s8 ">
+									<div class="option-field">
+										<div class="row">
+											<div class="col s6">
+												<div class="control-field">
+													<mat-form-field class="cs-input">
+														<input matInput placeholder="Customer Name" name="first_name" [(ngModel)] = "customerform.first_name" #first_name="ngModel" required>
+													</mat-form-field>  
+												</div>
+											</div>
+											<div class="col s6">
+												<div class="control-field">
+													<mat-form-field class="cs-input">
+														<input matInput placeholder="Mobile No." (keypress)="numeric_Number($event)" name="mobile_no" [(ngModel)] = "customerform.mobile_no" maxlength="10" minlength="10" #mobile_no="ngModel"  required >
+													</mat-form-field>  
+												</div>
+											</div>
+											
+												<div class="col s6" >
+													<div class="control-field">
+														<div>
+															<mat-form-field class=" cs-input cs-multi-select">
+																<mat-select  placeholder="Select State" name="state"  (selectionChange)="getDistrictList(1)" [(ngModel)]="customerform.state" #state="ngModel" required>
+																	<mat-option *ngFor = "let val of states" [value]="val.state_name"> {{val.state_name}} </mat-option>
+																</mat-select>
+															</mat-form-field>
+														</div>
+													</div>
+												</div>
+											<div class="col s6 ">
+												<div class="option-field">
+													<div class="control-field">
+														
+														<div >
+															<mat-form-field class=" cs-input cs-multi-select">
+																<mat-select class="h44" placeholder="Select District" name="district"  (selectionChange)="pincodeBlank()"  [(ngModel)]="customerform.district" #district="ngModel" required>
+																	<mat-option *ngFor="let val of districts" [value]="val.district_name"> {{val.district_name}} </mat-option>
+																</mat-select>
+															</mat-form-field>
+														</div>  
+													</div>
+												</div>
+											</div>
+											<div class="col s6" >
+													<div class="control-field">
+														<div>
+															<mat-form-field class=" cs-input ">
+																<input matInput placeholder = "Pincode" (keypress)="numeric_Number($event)" maxlength="6"  name = "pincode"  [(ngModel)] = "customerform.pincode" #pincode = "ngModel" required>
+															</mat-form-field>
+														</div>
+													</div>
+												</div>
+											<div class="col s6">
+												<div class="control-field">
+													<div>
+														<mat-form-field class="cs-input ">
+															<input matInput placeholder="City" name="city" [(ngModel)] = "customerform.city" #city="ngModel"  >
+														</mat-form-field>  
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col s4 ">
+									<div class="option-field">
+										<div class="col s12 ">
+											<div class="control-field">
+												<mat-form-field  class="cs-input">
+													<textarea matInput placeholder="Street" class="h166" name="address" [(ngModel)] = "customerform.address" #address="ngModel" ></textarea>
+												</mat-form-field>
+											</div>
+										</div>
+									</div> 
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="save mt30" [ngClass]="{loading: savingData}">
+					<button mat-button  >SAVE</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

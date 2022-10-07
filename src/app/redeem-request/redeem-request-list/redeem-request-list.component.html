@@ -1,0 +1,363 @@
+<div class="loader" *ngIf = "loading_list">
+    <div class="loding-logo">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>
+<div class="main-container pb0" >
+    <div class="fixed">
+        <div class="tab-header">
+            <div class="tabs-list gift-tab-list">
+                <ul>
+                    <li (click)="filter = {};filter.gift_status = ''; getReedamList('')" [ngClass]="{'active': filter.gift_status == ''}" >
+                        <a>
+                            <p>All</p>
+                            <!-- <span>{{reedam_all}}</span> -->
+                        </a>
+                    </li>
+                    <li (click)="filter = {};filter.gift_status = 'Pending'; getReedamList('')" [ngClass]="{'active': filter.gift_status == 'Pending'}">
+                        <a>
+                            <p>PENDING</p>
+                            <!-- <span class="request-bg">{{ reedam_pending }}</span> -->
+                        </a>
+                    </li>
+                    <li (click)="filter = {};filter.gift_status = 'Approved'; getReedamList('')" [ngClass]="{'active': filter.gift_status == 'Approved'}">
+                        <a>
+                            <p >APPROVED</p>
+                            <!-- <span class="approved-bg">{{reedam_approved}}</span> -->
+                        </a>
+                    </li>
+                    <li (click)="filter = {};filter.gift_status = 'Reject'; getReedamList('')" [ngClass]="{'active': filter.gift_status == 'Reject'}">
+                        <a>
+                            <p >REJECT</p>
+                            <!-- <span class="reject-bg">{{reedam_reject}}</span> -->
+                        </a>
+                    </li>
+                </ul>
+                <div class="input-field" *ngIf="(filter.gift_status == '' && reedam_all ) || (filter.gift_status == 'Pending' && reedam_pending ) || (filter.gift_status == 'Approved' && reedam_approved ) || (filter.gift_status == 'Reject' && reedam_reject )  ">
+                    <input type="text" placeholder="Search" [(ngModel)]="filter.search"  (keyup.enter)="current_page = 1;getReedamList('')">
+                    <i class="material-icons">
+                        search
+                    </i>
+                </div>
+                
+                <!-- <div class="master-btn pl15">
+                    <button  mat-raised-button color="primary" (click)="openDatepicker()">Date Filter</button>
+                </div> -->
+                
+            </div>
+            
+            
+            
+            
+            <div class="top-pagination">
+                <ul >
+                    <li>
+                        <div class="refresh-btn">
+                            <a mat-button matTooltip="Refresh" matTooltipPosition="below" (click)="getReedamList('refresh')"><i class="material-icons">refresh</i>
+                            </a>
+                        </div>
+                        
+                    </li>
+                    
+                    
+                    <li><p >Pages {{ current_page }} of {{ last_page }}</p></li>
+                    <li><button mat-button  matTooltip="First Page" class="left-btn" (click) = 'current1()'>First</button></li>
+                    
+                    <li><button mat-button  (click) = 'redirect_previous()'><i class="material-icons">keyboard_arrow_left</i></button></li>
+                    <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"  (keyup.enter)="getReedamList('')"></li>
+                    <li><button mat-button  (click) = 'redirect_next()'><i class="material-icons">keyboard_arrow_right</i></button></li>
+                    <li><button mat-button  matTooltip="Last Page" class="right-btn" (click) = 'last1()'>Last</button></li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    <div class="css-table hr-scroll-table">
+        <div class="sticky-header">
+            
+            <div class="header">
+                <table>
+                    
+                    <tr>
+                        <th class="w30">&nbsp;</th>
+                        <th class="w160" >Date / Plumber Name</th>
+                        <th class="w90">Req. ID</th>
+                        <th class="w70">Point</th>
+                        <th class="w100">Mobile No.</th>
+                        <th class="w80">A/C Status</th>
+                        <th class="w110">Gift</th>
+                        <th class="w120">Dealer Name</th>
+                        <th class="w120">Channel Partner</th>
+                        <th class="w240">Offer-valid Upto</th>
+                        <th class="w80">Bank Detail Type</th>
+                        <th class="w80">Account Holder Name</th>
+                        <th class="w120">Bank Account Number</th>
+                        <th class="w110">IFSC Code</th>
+                        <th class="w100">Paytm Number</th>
+                        <th class="w85">Redeem Status</th>
+                        <th class="w120">Gift Status</th>
+                        <th class="w70">Action</th>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div class="header border-bott">
+                <table>
+                    <tr>
+                        <th class="w30">&nbsp;</th>
+                        <th class="w160">
+                            <div class="vaild-into">
+                                
+                                
+                                <div class="date-form">
+                                    <mat-form-field >
+                                        <i *ngIf="filter.date" class="material-icons" (click)="filter.date = '';getReedamList('') ">clear</i>
+                                        
+                                        <input placeholder="Date" [(ngModel)]="filter.date"  name="date" (click)="openDatePicker(picker1)" matInput (dateChange)="getReedamList('')" [matDatepicker]="picker1" readonly>
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-area wp-21 ml10">
+                                    <div class="search-form">
+                                        <input type="text" placeholder="Plumber Name" [(ngModel)]="filter.name"  (keyup.enter)="current_page = 1;getReedamList('')">
+                                        <i class="material-icons">search</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                        
+                        <th class="w90">
+                            <div class="search-form">
+                                <input type="text"  [(ngModel)]="filter.id"  (keyup.enter)="current_page = 1;getReedamList('')">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </th>
+                        <th class="w70">
+                            <!-- <div class="search-form">
+                                <input type="text"  [(ngModel)]="filter.id"  (keyup.enter)="current_page = 1;getReedamList()">
+                                <i class="material-icons">search</i>
+                            </div> -->
+                        </th>
+                        
+                        <th class="w100">
+                            <div class="search-form">
+                                <input type="text" placeholder="Mobile No." [(ngModel)]="filter.mobile"  (keyup.enter)="current_page = 1;getReedamList('')">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </th>
+                        
+                        <th class="w80">
+                            <div class="form-area">
+                                <div class="slect">
+                                    <mat-form-field>
+                                        <mat-label>Search</mat-label>
+                                        <mat-select  [(ngModel)]="filter.account_status" name="account_status" #account_status="ngModel" (selectionChange)="getReedamList('')">
+                                            <mat-option value="">All</mat-option>
+                                            <mat-option value="Verified">Verified</mat-option>
+                                            <mat-option value="Pending">Pending</mat-option>
+                                            <mat-option value="Reject">Reject</mat-option>
+                                            <mat-option value="Suspect">Suspect</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </th>
+                        
+                        <!-- <th class="w130">
+                            <div class="slect">
+                                <mat-form-field>
+                                    <mat-label>Search</mat-label>
+                                    <mat-select  name="Sales User"  (selectionChange)="getReedamList('')"  [(ngModel)]="filter.sales_user" #sales_user="ngModel" required>
+                                        <mat-option value="">All</mat-option>
+                                        <mat-option *ngFor="let val of sales_users" [value]="val.id"> {{val.first_name}} </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </th> -->
+                        
+                        <th class="w110">
+                            <div class="search-form">
+                                <input type="text" placeholder="Gift" [(ngModel)]="filter.gift"  (keyup.enter)="current_page = 1;getReedamList('')">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </th>
+                        
+                        <th class="w120">
+                            <div class="search-form">
+                                <input type="text" placeholder="Dealer" [(ngModel)]="filter.dealer_name"  (keyup.enter)="current_page = 1;getReedamList('')">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </th>
+                        <th class="w120">
+                            <div class="search-form">
+                                <input type="text" placeholder="Channel Partner" [(ngModel)]="filter.distributor_name"  (keyup.enter)="current_page = 1;getReedamList('')">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </th>
+                        
+                        <th class="w240">
+                            <div class="date-form">
+                                <i *ngIf="filter.end_date" class="material-icons" (click)="filter.end_date = '';getReedamList('') ">clear</i>
+                                
+                                <mat-form-field >
+                                    <input placeholder="Offer Date" [(ngModel)]="filter.end_date" (click)="openDatePicker(picker2)" name="end_date" matInput (dateChange)="getReedamList('')" [matDatepicker]="picker2" >
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </mat-form-field>
+                                
+                            </div>
+                        </th>
+                        
+                        <!-- Payment Mode -->
+                        <th class="w80">
+                            <div class="form-area wp-21">
+                                <div class="slect">
+                                    <mat-form-field>
+                                        <mat-select [(ngModel)]="filter.payment_mode" name="payment_mode" #payment_mode="ngModel" (selectionChange)="getReedamList('')">
+                                            <mat-option value="All">All</mat-option>
+                                            <mat-option value="Paytm">Paytm</mat-option>
+                                            <mat-option value="Bank">Bank</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="w80"></th>
+                        <th class="w120"></th>
+                        <th class="w110"></th>
+                        <th class="w100"></th>
+                        
+                        
+                        <th class="w85">
+                            <div class="form-area">
+                                <div class="slect">
+                                    <mat-form-field>
+                                        <mat-label>Search</mat-label>
+                                        <mat-select [(ngModel)]="filter.gift_status" name="gift_status" #gift_status="ngModel" (selectionChange)="getReedamList('')" >
+                                            <mat-option value="" >All</mat-option>
+                                            <mat-option value="Pending">Pending</mat-option>
+                                            <mat-option value="Approved">Approved</mat-option>
+                                            <mat-option value="Reject">Reject</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </th>
+                        
+                        <th class="w120">
+                            <div class="form-area">
+                                <div class="slect">
+                                    <mat-form-field>
+                                        <mat-label>Search</mat-label>
+                                        <mat-select [(ngModel)]="filter.received_status" name="received_status" #received_status="ngModel" (selectionChange)="getReedamList('')">
+                                            <mat-option value="">All</mat-option>
+                                            <mat-option value="Received">Received</mat-option>
+                                            <mat-option value="Shipped">Shipped</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="w70">
+                            <div class="form-area"> 
+                                <button mat-button class="go" (click)="getReedamList('')">Go</button>
+                            </div>
+                        </th>
+                        
+                    </tr>
+                </table>
+            </div>
+            
+        </div>
+        <div class="table-container"  *ngIf="reedam.length">
+            <div class="table-body">
+                <table> 
+                    <tr *ngFor="let val of reedam; let i = index">
+                        <td class="w30">{{ ( (current_page - 1 ) * 20 ) + ( i+1 ) }}</td>
+                        <td class="w160"><ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' "> {{val.date_created | date: 'dd MMM yyyy'}}/ </ng-container><a class="blue" routerLink="/karigar-detail/{{val.karigar_id | crypt }}" routerLinkActive="active">{{val.first_name}} {{val.last_name}}</a></td>
+                        <td class="w90"> REQ# {{val.id }}</td>
+                        <td class="w70">{{val.gift_points}}</td>
+                        <td class="w100">{{val.mobile_no}}</td>
+                        <td class="w80 bg-change {{val.karigar_status}}">{{val.karigar_status}}</td>
+                        <td class="w110 ">{{val.gift_title}}</td>
+                        <td class="w120">{{val.dealer_contact_person}}</td>
+                        <td class="w120">{{val.distributor_name}}</td>
+                        <td class="w240"><a  routerLink="/offer-detail/{{val.offer_id | crypt}}" class="blue">{{val.title}} #{{val.offer_code}}</a> -{{val.end_date | date: 'dd MMM yyyy'}}</td>
+                        <td class="w80">{{val.bank_detail_type}}</td>
+                        <td class="w80">{{val.account_holder_name ? val.account_holder_name:'--'}}</td>
+                        <td class="w120">{{val.bank_account_number ?val.bank_account_number:'--' }}</td>
+                        <td class="w110">{{val.bank_ifsc_code ? val.bank_ifsc_code :'--' }}</td>
+                        <td class="w100">{{val.paytm_mobile ? val.paytm_mobile :'--' }}</td>
+                        <td class="w85  {{val.gift_status}}" >{{val.gift_status}}</td>
+                        <td class="w120 {{val.receive_status}}">
+                            
+                            <div class="center"  *ngIf="val.receive_status != 'Received' && val.gift_status == 'Approved'   ">
+                                <select class="{{val.receive_status}}"  [name]="'receive_status'+i" placeholder="Status" [(ngModel)]="val.receive_status" (change)="karigarsSatus(i) " >
+                                    <option  value="">Under Process</option>
+                                    <option  value="Shipped" class="Shipped">Shipped</option>
+                                    <option  value="Received" class="Received">Received</option>
+                                </select> 
+                            </div>
+                            <div  *ngIf="val.receive_status != 'Received' && val.gift_status == 'Pending'   ">
+                                <p class="center">---</p>
+                            </div>
+                            <ng-container *ngIf="val.receive_status == 'Received'  ">
+                                {{val.receive_status}}
+                            </ng-container>
+                            
+                        </td>
+                        <td class="w70 blue">
+                            <a (click)="changeStatus(i, val.id, val.gift_status )" *ngIf="val.receive_status == '' && val.gift_status != 'Reject'  ">Status</a>
+                        </td>
+                        
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <div class="container-outer">
+        
+        
+        <div class="date-not"  *ngIf="!loading_list  && !reedam.length">
+            <div class="no-img">
+                <img src="assets/not-available.jpg"> 
+            </div>
+        </div>
+        
+        <div class="excel-btn"  (click)="exportRedeemList()" *ngIf="reedam.length">
+            <div class="image-area">
+                <a>
+                    <img src="assets/excel.svg">
+                </a>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    
+    
+    
+    
+    
+    
+    <!-- <div class="date-not" *ngIf="!loading_list && !reedam.length && ( (filter.gift_status == '' && reedam_all ) || (filter.gift_status == 'Pending' && reedam_pending ) || (filter.gift_status == 'Approved' && reedam_approved ) || (filter.gift_status == 'Reject' && reedam_reject )   )">
+        <div class="no-img">
+            <img src="assets/result-not-found.png"> 
+        </div>
+    </div>
+-->
+
+
+
+</div>
