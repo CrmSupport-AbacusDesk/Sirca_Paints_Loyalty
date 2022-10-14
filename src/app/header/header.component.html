@@ -17,13 +17,11 @@
           <li><a routerLink="/dashboard"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Dashboard</a></li>
           <li><a routerLink="/offer-list"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Offer</a></li>
           <li><a routerLink="/gift-list"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Gift Gallery</a></li>
-          <li><a routerLink="/redeem-request-list"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Redeem Requests</a></li>
           <li><a routerLink="/karigar-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Plumber</a></li>
+          <li><a routerLink="/customer-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Customer</a></li>
+          <li><a routerLink="/redeem-request-list"  routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Redeem Requests</a></li>
           <li><a routerLink="/super-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Super 30</a></li>
           <li><a routerLink="/coupon-code-list" routerLinkActive="active"  >Coupon Codes</a></li>
-          <li><a routerLink="/complaints-list/service" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Services</a></li>
-          <li><a routerLink="/complaints-list/installation" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Installations</a></li>
-          <li><a routerLink="/customer-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Customer</a></li>
           <li><a routerLink="/main-catefory-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Master</a></li>
           
           
@@ -33,20 +31,10 @@
     
     <div class="connect-alignment">
       <ul>
-        <!-- <button class="mbtnn"><i class="fa fa-angle-down"></i></button> -->
-        <li>
-          <div class="abacus-connect after-line">
-            <button (click)="goToConnect()">
-              <img src="assets/abacus-icon.png">
-              Abacus Connect
-              <span *ngIf="taskCount.task_count">{{taskCount.task_count}}</span>
-            </button>
-          </div>
-        </li>
         
         <li>
           <div class="abacus-connect after-line">
-            <a  href="https://app.gravitybath.com/crm/"> 
+            <a  href="https://devcrm.abacusdesk.com/sircapaints/crm/"> 
               <i class="material-icons"> open_in_new</i> 
               Go To CRM
             </a>
