@@ -65,7 +65,7 @@
                                 <th class="w160">Product</th>
                                 <th class="w160">Product Code</th>
                                 <th class="w70">Price</th>
-                                <th class="w70 text-center">Group Type</th>
+                                <!-- <th class="w70 text-center">Group Type</th> -->
                                 <th class="w70 text-center">New Arrival</th>
                                 <th class="w120">Description</th>
                                 <th class="w90 no-padding">
@@ -143,7 +143,7 @@
                                     </div>
                                 </th>
                                 <th class="w70"></th>
-                                <th class="w70">
+                                <!-- <th class="w70">
                                     <div class="form-area">
                                         <div class="slect">
                                             <mat-form-field>
@@ -156,13 +156,13 @@
                                             </mat-form-field>
                                         </div>
                                     </div>
-                                </th>
+                                </th> -->
                                 <th class="w70">
                                     <div class="form-area">
                                         <div class="slect">
                                             <mat-form-field>
                                                 <mat-label>Search</mat-label>
-                                                <mat-select  [(ngModel)]="filter.new_arrival" name="group_type" #group_type="ngModel" (selectionChange)="getProductList()">
+                                                <mat-select  [(ngModel)]="filter.new_arrival" name="new_arrival" #new_arrival="ngModel" (selectionChange)="getProductList()">
                                                     <mat-option value="">All</mat-option>
                                                     <mat-option value="Yes">Yes</mat-option>
                                                     <mat-option value="No">No</mat-option>
@@ -227,7 +227,7 @@
                             <td class="w160">{{val.product_name}}</td>
                             <td class="w160">{{val.material_code }}</td>
                             <td class="w70 text-center">&#8377; {{val.price }}</td>
-                            <td class="w70">{{val.group_type}}</td>
+                            <!-- <td class="w70">{{val.group_type}}</td> -->
                             <td class="w70">{{val.new_arrival == 1 ? 'Yes' : 'No'}}</td>
                             <td class="w120">{{val.desc}}</td>
                             <td class="w90 no-padding active ">
@@ -292,18 +292,6 @@
                                 </mat-form-field>
                             </div>
                         </div>
-                        <!-- aamir changes -->
-                        <div class="option-field">
-                            <div class="control-field">
-                                <mat-form-field class="cs-input">
-                                    <mat-select placeholder="Select Group Type" name="group_type"  [(ngModel)]="productForm.group_type" #group_type="ngModel" required >
-                                        <mat-option value="PTMT"> PTMT </mat-option>
-                                        <mat-option value="Other"> OTHERS </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <!-- aamir changes -->
                         <div class="option-field">
                             <div class="control-field">
                                 <mat-form-field class="cs-input">
@@ -325,13 +313,13 @@
                                 </mat-form-field>  
                             </div>
                         </div>
-                        <div class="option-field">
+                        <!-- <div class="option-field">
                             <div class="control-field">
                                 <mat-form-field class="cs-input">
                                     <input matInput placeholder="PCS/Set" name="pcs" (keypress)="numeric_Number($event)" [(ngModel)]="productForm.pcs" #pcs="ngModel" required >
                                 </mat-form-field>  
                             </div>
-                        </div>
+                        </div> -->
                         <div class="option-field">
                             <div class="control-field">
                                 <mat-form-field class="cs-input">
@@ -351,14 +339,6 @@
                             <div class="control-field ">
                                 <mat-form-field class="cs-input">
                                     <textarea matInput placeholder="Description " class="h115" name="desc" [(ngModel)] = "productForm.desc" #desc="ngModel"></textarea>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="option-field mb20">
-                            <!--  -->
-                            <div class="control-field ">
-                                <mat-form-field class="cs-input">
-                                    <textarea matInput placeholder="Video Link " class="h115" name="video_link" [(ngModel)] = "productForm.video_link" #desc="ngModel"></textarea>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -386,36 +366,6 @@
                         </li>
                     </ul>
                 </div>
-                
-                <!-- /// Bulk image upload code //// -->
-                
-                <!-- <div class="uploade-image">
-                    <h4>Bulk Image</h4>
-                    <ul>
-                        <li *ngFor="let image of images; let i=index">
-                            <img [src]="image">
-                            <span class="cancel-icon">
-                                <i class="material-icons check-icon"  (click)="ProductProfile(i)">done</i>
-                                <i class="material-icons crose-icon" (click)="deleteProductImage(i)">clear</i>
-                            </span>									
-                        </li>
-                        <li class="add-bg-1">
-                            <label>
-                                <input type="file" (change)="upload($event)" style="display:none;" accept=".png, .jpg, .jpeg, .pdf" multiple required />
-                                <div class="other">
-                                    <i class="material-icons">backup</i>
-                                </div>
-                            </label>
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                
-                <div class="save btn-save mt90" *ngIf="images.length > 0">
-                    <a mat-button [disabled]="savingData" (click)="bulk_upload()" style="bottom: 20px;">SAVE one</a>
-                </div> -->
-                
                 
                 <div class="save btn-save mt90"  [ngClass]="{loading: savingData}">
                     <button mat-button [disabled]="savingData" [disabled]="save_button_disabled" >SAVE</button>

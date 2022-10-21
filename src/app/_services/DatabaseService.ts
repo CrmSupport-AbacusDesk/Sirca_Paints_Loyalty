@@ -14,24 +14,9 @@
     @Injectable({ providedIn: 'root' })
     export class DatabaseService implements OnInit {
         
-        // unused links : 
-        // dbUrl="https://app.gravitybath.com/crm/api/index.php/";
-        // myurl = 'http://localhost/github_d/pearl_api/gravity/dd_api/';     
-        // myurl = 'http://localhost/gravity_api/';
-        
-        
-        // live links : 
-        // myurl = 'https://app.gravitybath.com/dd_api/';
-        // myurl1 = 'https://app.gravitybath.com/crm/api/index.php/';
-
-        
-        
         // New test Links :
-        myurl = 'https://apps.abacusdesk.com/gravity2k21/dd_api/';
-        myurl1 = 'https://apps.abacusdesk.com/gravity2k21/crm/api/index.php/';
-        
-
-       
+        myurl = 'https://devcrm.abacusdesk.com/sircapaints/dd_api/';
+        myurl1 = 'https://devcrm.abacusdesk.com/sircapaints/crm/api/index.php/';
         
 
 
