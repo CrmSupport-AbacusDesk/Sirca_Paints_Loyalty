@@ -22,8 +22,9 @@
           <li><a routerLink="/contractor-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Contractor</a></li>
           <li><a routerLink="/architect-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Architect</a></li>
           <!-- <li><a routerLink="/super-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Super 30</a></li> -->
+          <li><a routerLink="/site-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Site</a></li>
           <li><a routerLink="/user-list/1" *ngIf="this.db.datauser.id==1 || this.db.datauser.sales_team == 1" routerLinkActive="active">Sales Team</a></li>
-          <li><a routerLink="/site-list/1" *ngIf="this.db.datauser.id==1 || this.db.datauser.site == 1" routerLinkActive="active">Site</a></li>
+          <!-- <li><a routerLink="/site-list/1" *ngIf="this.db.datauser.id==1 || this.db.datauser.site == 1" routerLinkActive="active">Site</a></li> -->
           <li><a routerLink="/main-catefory-list" routerLinkActive="active"  *ngIf="this.db.datauser.id==1">Master</a></li>
           
           

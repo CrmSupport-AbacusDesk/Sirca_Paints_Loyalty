@@ -23,7 +23,7 @@
         can_active = '';
         datauser: any = {};
         loading: any;
-        
+        filters:any={};
         customer_name: any;
         franchise_name: any;
         franchise_id;
@@ -66,6 +66,11 @@
                 return this.http.post(this.myurl1+fn,JSON.stringify(data),{ headers:this.header })
             }
             
+
+            set_filters(data)
+            {
+                this.filters = data;
+            }
             
    
             

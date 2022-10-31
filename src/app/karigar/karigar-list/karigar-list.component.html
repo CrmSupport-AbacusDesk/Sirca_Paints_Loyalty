@@ -58,7 +58,7 @@
                 </div>
                 
                 
-                <p (click)="getKarigarList()"><i class="material-icons">refresh</i> Refresh</p>
+                <p (click)="filter={}; getKarigarList()"><i class="material-icons">refresh</i> Refresh</p>
                 <!-- <ul *ngIf="(filter.status == '' && karigar_all ) || (filter.status == 'Pending' && karigar_pending ) || (filter.status == 'Verified' && karigar_verified ) || (filter.status == 'Reject' && karigar_reject ) || (filter.status == 'Suspect' && karigar_suspect )  ">
                     <li>
                         <p (click)="filter={};filter.status='';karigarFilterBlank();">Reset Filter</p>
@@ -178,7 +178,7 @@
                                 <i class="material-icons">search</i>
                             </div> -->
                             
-                            <div class="form-area">
+                            <!-- <div class="form-area">
                                 <div class="slect mr0">
                                     <mat-form-field>
                                         <mat-select  [(ngModel)]="filter.balance_point" name="balance_point" #balance_point="ngModel" (selectionChange)="current_page = 1;getKarigarList()">
@@ -189,7 +189,7 @@
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
-                            </div>
+                            </div> -->
                             
                         </th>
                         <th class="w140">

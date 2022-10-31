@@ -91,6 +91,8 @@ import { ComplaintRemarkModalComponent } from './complaints/complaint-remark-mod
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddCouponPointsComponent } from './add-coupon-points/add-coupon-points.component'
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { SiteListComponent } from './site-list/site-list.component';
+import { SiteAddComponent } from './site-add/site-add.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -110,6 +112,8 @@ const routes: Routes = [
   {path: 'video-list', component: VideoComponent , canActivate: [AuthGuard] },
   {path: 'referral-master', component: ReferralMasterComponent , canActivate: [AuthGuard] },
   {path: 'special-dis', component: SpecialDiscountComponent , canActivate: [AuthGuard] },
+  {path: 'site-add/:id', component:SiteAddComponent , canActivate: [AuthGuard] },
+  {path: 'site-add', component:SiteAddComponent , canActivate: [AuthGuard] },
 
   {path: 'contractor-list', component: KarigarListComponent , canActivate: [AuthGuard] },
   {path: 'karigar-add', component: KarigarAddComponent , canActivate: [AuthGuard] },
@@ -117,6 +121,7 @@ const routes: Routes = [
   {path: 'karigar-detail/:karigar_id',  component: KarigarDetailComponent , canActivate: [AuthGuard] },
   {path: 'coupon-code-list',  component: CouponCodeListComponent , canActivate: [AuthGuard] },
   {path: 'super-list', component: SuperComponent , canActivate: [AuthGuard] },
+  {path: 'site-list', component: SiteListComponent , canActivate: [AuthGuard] },
   {path: 'complaints-list/:type', component: ComplaintsComponent , canActivate: [AuthGuard] },
   {path: 'architect-list', component: CustomerComponent , canActivate: [AuthGuard] },
   {path: 'customer-detail/:customer_id',  component: CustomerDetailComponent , canActivate: [AuthGuard] },
@@ -206,10 +211,11 @@ const routes: Routes = [
     ChangePriceModelComponent,
     SpecialDiscountComponent,
     PopupComponent,
+    SiteListComponent,
     PlumberMeetDataComponent,
     ComplaintRemarkModalComponent,
     AddCouponPointsComponent,
-   
+    SiteAddComponent,
   ],
   imports: [
     // AutocompleteLibModule,

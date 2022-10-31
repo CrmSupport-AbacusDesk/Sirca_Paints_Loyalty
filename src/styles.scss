@@ -146,6 +146,66 @@ html
     
 }
 
+.fab-btns {
+    position: fixed;
+    bottom: 65px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column-gap: 10px;
+    z-index: 2;
+    
+    
+    
+    a, button{
+        border: 2px solid var(--white);
+        border-radius: 50px;
+        
+        .mat-button-wrapper{padding: 14px 0px;}
+        
+        
+        &.mat-fab {
+            i{
+                margin-right: 0px;
+            }
+        }
+        
+        span{
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            padding: 0px !important;
+            
+            i{
+                margin-right: 10px;
+            }
+        }
+        &.excel{
+            background: var(--white) !important;
+            border: 2px solid var(--success) !important;
+        }
+    }
+    
+    label{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        
+        i{
+            margin-left: 0px;
+        }
+    }
+    
+    img{
+        height: 25px;
+    }
+}
+
 .amber{
     background: #ffd54f;
     border: 1px solid rgba(0, 0, 0, 0.2) !important;

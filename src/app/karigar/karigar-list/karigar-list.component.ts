@@ -71,12 +71,11 @@ export class KarigarListComponent implements OnInit {
                 this.loading_list = false;
                 console.log(d['contractorData']['data']);
 
-                this.current_page = d['contractorData'].current_page;
-                this.last_page = d['contractorData'].last_page;
-                this.total_karigars = d['contractorData'].total;
-                this.karigars =d['contractorData']['data'];
-
-                this.karigar_all = d.karigar_all;
+                this.current_page=d['contractorData'].current_page;
+                this.last_page=d['contractorData'].last_page;
+                this.total_karigars=d['contractorData'].total;
+                this.karigars=d['contractorData']['data'];
+                this.karigar_all=d.karigar_all;
                 this.karigar_pending = d.karigar_pending;
                 this.karigar_reject = d.karigar_reject;
                 this.karigar_suspect = d.karigar_suspect;
