@@ -55,15 +55,15 @@ export class CustomerComponent implements OnInit {
     this.filter.date = this.filter.date  ? this.db.pickerFormat(this.filter.date) : '';
     if( this.filter.date)this.filtering = true;
     this.filter.mode = 0;
-    this.db.post_rqst(  {'filter': this.filter , 'login':this.db.datauser}, 'karigar/customerList?page=' + this.current_page)
+    this.db.post_rqst(  {'filter': this.filter , 'login':this.db.datauser}, 'karigar/architectList?page=' + this.current_page)
     .subscribe( d => {
       this.loading_list = false;
-      //console.log(d);
+      console.log(d['architectData']['data']);
       
-      this.current_page = d.karigars.current_page;
-      this.last_page = d.karigars.last_page;
-      this.total_karigars =d.karigars.total;
-      this.karigars = d.karigars.data;
+      this.current_page = d['architectData'].current_page;
+      this.last_page = d['architectData'].last_page;
+      this.total_karigars =d['architectData'].total;
+      this.karigars = d['architectData']['data'];
       
       this.karigar_all = d.karigar_all;
       // this.karigar_pending = d.karigar_pending;

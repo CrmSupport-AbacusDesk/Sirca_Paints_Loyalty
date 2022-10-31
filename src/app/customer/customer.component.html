@@ -1,4 +1,4 @@
-<div class="loader" *ngIf = "loading_list">
+<div class="loader" *ngIf="loading_list">
     <div class="loding-logo">
         <mat-spinner></mat-spinner>
     </div>
@@ -10,11 +10,11 @@
         <div class="tabs-list gift-tab-list pl15" >
             <ul class="mt0">
                 <li>
-                  <p>Total : <span>{{ karigar_all }}</span></p>
+                  <p>Total:<span>{{karigars.length}}</span></p>
                 </li>
               </ul>
           
-          <div class="input-field" *ngIf="karigar_all">
+          <div class="input-field" *ngIf="karigars.length">
               <input type="text" placeholder="Search" [(ngModel)]="filter.search"  (keyup.enter)="current_page = 1;getCustomerList()">
             <i class="material-icons">
               search
@@ -23,10 +23,10 @@
           
         </div>
           
-          <div class="top-pagination" *ngIf="karigar_all">
-              <!-- <div class="master-btn pr30">
-                  <button mat-button routerLink="/karigar-add"  routerLinkActive="active" >ADD CUSTOMER</button>
-                </div> -->
+          <div class="top-pagination" *ngIf="karigars.length">
+              <div class="master-btn pr30">
+                  <button mat-button routerLink="/karigar-add"  routerLinkActive="active" >Add New</button>
+                </div>
                 <p    (click)="filter={};getCustomerList()"><i class="material-icons">refresh</i> Refresh</p>
             <ul >
                 <!-- <li><p (click)="filter={}; getCustomerList()">Reset Filter</p></li> -->
@@ -38,7 +38,7 @@
           </div>
       </div>
       
-      <div class="css-table" *ngIf="karigar_all">
+      <div class="css-table" *ngIf="karigars.length">
         <div class="sticky-header">
           <div class="header">
             <table>
@@ -50,8 +50,9 @@
                 <th class="w100">Mobile</th>
                 <th class="w135">State</th>
                 <th class="w135">District</th>
-                <th class="w120 text-center">Open Complaint</th>
-                <th class="w120 text-center">Total Complaint</th>
+                <th class="w135">City</th>
+                <!-- <th class="w120 text-center">Open Complaint</th>
+                <th class="w120 text-center">Total Complaint</th> -->
                 <th class="w40 text-center">Action</th>
               </tr>
               
@@ -102,9 +103,14 @@
                       <i class="material-icons">search</i>
                     </div>
                 </th>
-                <th class="w120">
-                </th>
-                <th class="w120"></th>
+                <th class="w135">
+                  <div class="search-form">
+                      <input type="text" placeholder="City" [(ngModel)]="filter.city"  (keyup.enter)="current_page = 1;getCustomerList()">
+                    <i class="material-icons">search</i>
+                  </div>
+              </th>
+                <!-- <th class="w120"></th>
+                <th class="w120"></th> -->
                 <th class="w40"></th>
               </tr>
             </table>
@@ -127,12 +133,13 @@
               <td class="w100">{{val.mobile_no}}</td>
               <td class="w135">{{val.state | titlecase }}</td>
               <td class="w135">{{val.district | titlecase }}</td>
-              <td class="w120 text-center">{{val.open_complaints}}</td>
-              <td class="w120 text-center">{{val.complaints}}
+              <td class="w135">{{val.city | titlecase }}</td>
+              <!-- <td class="w120 text-center">{{val.open_complaints}}</td>
+              <td class="w120 text-center">{{val.complaints}}</td> -->
                 <!-- <div class="over-sec">
                   <i class="material-icons deactive"  (click)="deleteCustomer(val.id)" >delete_sweep</i>
                </div>  -->
-              </td>
+              <!-- </td> -->
               <td class="w40">
                 <i class="material-icons deactive"  (click)="deleteCustomer(val.id)" >delete_sweep</i>
 
@@ -149,14 +156,14 @@
         <div class="row">
         </div>
       </div>
-      <div class="date-not" *ngIf="!loading_list && karigar_all && !karigars.length">
+      <div class="date-not" *ngIf="!loading_list &&  !karigars.length">
           <div class="no-img">
             <img src="assets/result-not-found.png"> 
          </div>
       </div>
     
     
-      <div class="date-not"  *ngIf="!loading_list && !karigar_all && !karigars.length">
+      <div class="date-not"  *ngIf="!loading_list &&  !karigars.length">
           <div class="no-img">
              <img src="assets/not-available.jpg"> 
           </div>

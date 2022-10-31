@@ -8,7 +8,7 @@
     <div class="fixed">
         <div class="tab-header">
             <div class="tabs-list gift-tab-list pl15">
-                <ul>
+                <!-- <ul>
                     <li (click)="filter = {};filter.status = ''; getKarigarList()" [ngClass]="{'active': filter.status == ''}">
                         <a>
                             <p>All</p>
@@ -40,7 +40,7 @@
                             <span class="suspect-bg">{{ karigar_suspect }}</span>
                         </a>
                     </li>
-                </ul>
+                </ul> -->
                 
                 <!-- <div class="input-field" *ngIf="(filter.status == '' && karigar_all ) || (filter.status == 'Pending' && karigar_pending ) || (filter.status == 'Verified' && karigar_verified ) || (filter.status == 'Reject' && karigar_reject ) || (filter.status == 'Suspect' && karigar_suspect )  ">
                     <input type="text" placeholder="Search" [(ngModel)]="filter.search" (keyup.enter)="current_page = 1;getKarigarList()">
@@ -59,7 +59,7 @@
                 
                 
                 <p (click)="getKarigarList()"><i class="material-icons">refresh</i> Refresh</p>
-                <ul *ngIf="(filter.status == '' && karigar_all ) || (filter.status == 'Pending' && karigar_pending ) || (filter.status == 'Verified' && karigar_verified ) || (filter.status == 'Reject' && karigar_reject ) || (filter.status == 'Suspect' && karigar_suspect )  ">
+                <!-- <ul *ngIf="(filter.status == '' && karigar_all ) || (filter.status == 'Pending' && karigar_pending ) || (filter.status == 'Verified' && karigar_verified ) || (filter.status == 'Reject' && karigar_reject ) || (filter.status == 'Suspect' && karigar_suspect )  ">
                     <li>
                         <p (click)="filter={};filter.status='';karigarFilterBlank();">Reset Filter</p>
                     </li>
@@ -69,14 +69,15 @@
                     <li><button mat-button class="left-btn" (click)='redirect_previous()'><i class="material-icons">keyboard_arrow_left</i></button></li>
                     <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page" (keyup.enter)="getKarigarList()"></li>
                     <li><button mat-button class="right-btn" (click)='redirect_next()'><i class="material-icons">keyboard_arrow_right</i></button></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
         
         
     </div>
     <div class="css-table  hr-scroll-table">
-        <div class="sticky-header" *ngIf="(filter.status == '' && karigar_all ) || (filter.status == 'Pending' && karigar_pending ) || (filter.status == 'Verified' && karigar_verified ) || (filter.status == 'Reject' && karigar_reject ) || (filter.status == 'Reject' && karigar_suspect )  ">
+        <!-- <div class="sticky-header" *ngIf="(filter.status == '' && karigar_all ) || (filter.status == 'Pending' && karigar_pending ) || (filter.status == 'Verified' && karigar_verified ) || (filter.status == 'Reject' && karigar_reject ) || (filter.status == 'Reject' && karigar_suspect )  "> -->
+            <div class="sticky-header">
             <div class="header">
                 <table>
                     
@@ -87,15 +88,17 @@
                         <th class="w110">Mobile</th>
                         <th class="w130">State</th>
                         <th class="w130">District</th>
+                        <th class="w130">City</th>
+                        <th class="w130">Pincode</th>
                         <th class="w180">Dealer</th>
-                        <th class="w150">Channel Partner</th>
+                        <th class="w150">Document Type</th>
                         <th class="w120 text-center">Wallet</th>
                         <!-- <th class="w120">Total Earned Points</th> -->
                         <th class="w140">Total Redeem Points</th>
                         <th class="w100">Status</th>
                         <th class="w180">Remark</th>
                         <th class="w120">Remark Updated On</th>
-                        <th class="w130">Complaint Status</th>
+                        <!-- <th class="w130">Complaint Status</th> -->
                     </tr>
                     
                 </table>
@@ -144,6 +147,18 @@
                                 <i class="material-icons">search</i>
                             </div>
                         </th>
+                        <th class="w130">
+                            <div class="search-form">
+                                <input type="text" placeholder="City" [(ngModel)]="filter.city" (keyup.enter)="current_page = 1;getKarigarList()">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </th>
+                        <th class="w130">
+                            <div class="search-form">
+                                <input type="text" placeholder="Pincode" [(ngModel)]="filter.pincode" (keyup.enter)="current_page = 1;getKarigarList()">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </th>
                         <th class="w180">
                             <div class="search-form">
                                 <input type="text" placeholder="Dealer" [(ngModel)]="filter.dealer" (keyup.enter)="current_page = 1;getKarigarList()">
@@ -153,7 +168,7 @@
                         
                         <th class="w150">
                             <div class="search-form">
-                                <input type="text" placeholder="Channel Partner" [(ngModel)]="filter.chnlprtnr" (keyup.enter)="current_page = 1;getKarigarList()">
+                                <input type="text" placeholder="Document Type" [(ngModel)]="filter.document_type" (keyup.enter)="current_page = 1;getKarigarList()">
                                 <i class="material-icons">search</i>
                             </div>
                         </th>
@@ -187,7 +202,7 @@
                         <th class="w180"></th>
                         
                         <th class="w120">
-                            <th class="w130"></th>
+                            <!-- <th class="w130"></th> -->
                         </tr>
                     </table>
                 </div>
@@ -204,12 +219,14 @@
                             <td class="w110">{{val.mobile_no}}</td>
                             <td class="w130">{{val.state | titlecase }}</td>
                             <td class="w130">{{val.district | titlecase }}</td>
+                            <td class="w130">{{val.city | titlecase }}</td>
+                            <td class="w130">{{val.pincode | titlecase }}</td>
                             <td class="w180">{{val.dealer_contact_person | titlecase }}</td>
                             
-                            <td class="w150">{{val.distributor_name | titlecase }}</td>
+                            <td class="w150">{{val.document_type | titlecase }}</td>
                             
                             <td class="w120 text-center">{{val.total_balance}}</td>
-                            <td class="w140 text-center">{{ConvertToInt(val.total_earned_points)}}</td>
+                            <td class="w140 text-center">{{ConvertToInt(val.total_earn)}}</td>
                             <td class="w100 ">
                                 <div class="center">
                                     <select class="{{val.status}}" [name]="'status'+i" placeholder="Status" [(ngModel)]="val.status" (change)="karigarsSatus(i) ">
@@ -232,7 +249,7 @@
                                 
                                 {{val.status_remark ? (val.status_updated_on | date: 'd MMM, y, hh:mm a') : ''}}
                             </td>
-                            
+<!--                             
                             <td class="w130 ">
                                 <div class="center">
                                     <select class="{{val.complaint_status}}" [name]="'complaint_status'+i" placeholder="Complaint Status" [(ngModel)]="val.complaint_status" (change)="karigarsComplaintSatus(i) ">
@@ -243,7 +260,7 @@
                                         <i class="material-icons deactive" (click)="deleteKarigar(val.id)">delete_sweep</i>
                                     </div>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                     </table>
                 </div>
@@ -251,13 +268,13 @@
         </div>
         
         <div class="container-outer">
-            <div class="date-not" *ngIf="!loading_list && !karigars.length && ( (filter.status == '' && karigar_all ) || (filter.status == 'Pending' && karigar_pending ) || (filter.status == 'Verified' && karigar_verified ) || (filter.status == 'Reject' && karigar_reject ) || (filter.status == 'Suspect' && karigar_suspect )   )">
+            <div class="date-not" *ngIf="!loading_list && !karigars.length">
                 <div class="no-img">
                     <img src="assets/result-not-found.png">
                 </div>
             </div>
             
-            <div class="date-not" *ngIf="!loading_list && ( (filter.status == '' && !karigar_all ) || (filter.status == 'Pending' && !karigar_pending ) || (filter.status == 'Verified' && !karigar_verified ) || (filter.status == 'Reject' && !karigar_reject ) || (filter.status == 'Suspect' && !karigar_suspect )  ) ">
+            <div class="date-not" *ngIf="!loading_list && !karigars.length">
                 <div class="no-img">
                     <img src="assets/not-available.jpg">
                 </div>

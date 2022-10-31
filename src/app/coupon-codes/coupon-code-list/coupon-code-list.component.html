@@ -23,14 +23,14 @@
                 </a>
             </li>
             
-            <li (click)="mode='available_secondary';filter = {};get_secondary_or_master_coupon_list('available_secondary')"
+            <li (click)="mode='available_secondary';filter = {};get_secondary_or_master_coupon_list('available_secondary','')"
             [ngClass]="{'active': mode == 'available_secondary'}">
             <a>
                 <p>AVAILABLE (Secondary)</p>
                 <span>{{available_secondary_qr_code_coupon_count}}</span>
             </a>
         </li>
-        <li (click)="mode='scanned_secondary';filter = {};get_secondary_or_master_coupon_list('scanned_secondary')"
+        <li (click)="mode='scanned_secondary';filter = {};get_secondary_or_master_coupon_list('scanned_secondary','')"
         [ngClass]="{'active': mode == 'scanned_secondary'}">
         <a>
             <p>SCANNED (Secondary)</p>
@@ -38,14 +38,14 @@
         </a>
     </li>
     
-    <li (click)="mode='available_master';filter = {};get_secondary_or_master_coupon_list('available_master')"
+    <li (click)="mode='available_master';filter = {};get_secondary_or_master_coupon_list('available_master','')"
     [ngClass]="{'active': mode == 'available_master'}">
     <a>
         <p>AVAILABLE (Master)</p>
         <span>{{available_master_qr_code_coupon_count}}</span>
     </a>
 </li>
-<li (click)="mode='scanned_master';filter = {};get_secondary_or_master_coupon_list('scanned_master')"
+<li (click)="mode='scanned_master';filter = {};get_secondary_or_master_coupon_list('scanned_master','')"
 [ngClass]="{'active': mode == 'scanned_master'}">
 <a>
     <p>SCANNED (Master)</p>

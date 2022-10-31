@@ -23,6 +23,8 @@ export class KarigarAddComponent implements OnInit {
     pincodes: any = [];
     karigar_id:any;
     date1:any;
+    media:any=[];
+    selectedFile: File[]=[];
     
     
     constructor(public db: DatabaseService, private route: ActivatedRoute, private router: Router, public ses: SessionStorage,
@@ -145,7 +147,7 @@ export class KarigarAddComponent implements OnInit {
             this.karigarform.type = "Plumber";
             this.karigarform.status = "Pending";
             
-            this.db.insert_rqst( { 'karigar' : this.karigarform }, 'karigar/addKarigar')
+            this.db.insert_rqst( { 'karigar' : this.karigarform , 'document_image':this.media }, 'app_karigar/addKarigarWeb')
             .subscribe( d => {
                 this.savingData = false;
                 //console.log( d );
@@ -153,8 +155,17 @@ export class KarigarAddComponent implements OnInit {
                     this.dialog.error( 'Mobile No. already exists');
                     return;
                 }
-                this.router.navigate(['karigar-list']);
-                this.dialog.success( 'plumber has been successfully added');
+                if(d['status']=='SUCCESS'){
+                    if(d['type']=='Contractor'){
+                        this.router.navigate(['contractor-list']);
+                        this.dialog.success( 'Contractor successfully added');
+                    }
+                    if(d['type']=='Architect'){
+                        this.router.navigate(['architect-list']);
+                        this.dialog.success( 'Architect successfully added');
+                    }
+
+                }
             });
         }
         sales_users:any=[];
@@ -209,6 +220,43 @@ export class KarigarAddComponent implements OnInit {
                 this.karigarform.permanent_city = '';
                 this.karigarform.permanent_pincode = '';
             }
+        }
+
+        fileChange(event) {
+      
+            console.log(event.target.files);
+            for (var i = 0; i < event.target.files.length; i++) {
+              this.selectedFile.push(event.target.files[i]);
+              var type = event.target.files[i].type;
+              var name = event.target.files[i].name;
+      
+      
+              var reader = new FileReader();
+      
+              reader.readAsDataURL(event.target.files[i]); // read file as data url
+        
+              reader.onload = (e) => { // called once readAsDataURL is completed
+                console.log(e);
+                console.log(e);
+                 this.media.push({file : reader.result, type : type.substr(0,5) , name : name})
+                // this.des.push(event.target.result);
+              }
+      
+      console.log( this.media );
+      
+      
+      
+      
+              
+            }
+            console.log(this.selectedFile);
+          }
+
+        deleteProductImage(index)
+        {
+          //console.log(index);
+          this.selectedFile.splice(index,1)
+          this.media.splice(index,1)
         }
         
     }
