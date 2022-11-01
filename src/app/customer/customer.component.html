@@ -25,7 +25,9 @@
           
           <div class="top-pagination" *ngIf="karigars.length">
               <div class="master-btn pr30">
-                  <button mat-button routerLink="/karigar-add"  routerLinkActive="active" >Add New</button>
+                  <!-- <button mat-button routerLink="/karigar-add"  routerLinkActive="active" >Add New</button> -->
+                  <button mat-button (click)="karigarAdd()" >ADD NEW</button>
+
                 </div>
                 <p    (click)="filter={};getCustomerList()"><i class="material-icons">refresh</i> Refresh</p>
             <ul >

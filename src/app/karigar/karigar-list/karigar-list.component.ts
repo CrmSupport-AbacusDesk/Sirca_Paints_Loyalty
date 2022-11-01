@@ -4,6 +4,7 @@ import {DialogComponent} from '../../dialog/dialog.component';
 import { MatDialog, MatDatepicker } from '@angular/material';
 import { ChangeKarigarStatusComponent } from '../../karigar/change-karigar-status/change-karigar-status.component';
 import { PopupComponent } from 'src/app/popup/popup.component';
+import { Route, Router } from '@angular/router';
 
 
 
@@ -29,7 +30,7 @@ export class KarigarListComponent implements OnInit {
     karigar_suspect: any = 0;
     karigar_verified: any = 0;
 
-    constructor(public db: DatabaseService, public dialog: DialogComponent, public alrt: MatDialog) {
+    constructor(public db: DatabaseService, public dialog: DialogComponent, public alrt: MatDialog, public route:Router) {
     }
 
     ngOnInit() {
@@ -282,6 +283,10 @@ updateRemark(id, status_remark, type) {
 
     }
 
+
+    karigarAdd(){
+        this.route.navigate(['karigar-add' ,{'registration_type':'Contractor'}])
+    }
 
 }
 

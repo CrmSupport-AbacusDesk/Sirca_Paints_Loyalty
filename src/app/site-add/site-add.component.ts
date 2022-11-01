@@ -80,12 +80,12 @@ export class SiteAddComponent implements OnInit {
 
   getStateList(){
     this.loading_list = true;
-    this.db.post_rqst({}, 'master/getLocationStates')
+    this.db.get_rqst({}, 'app_master/getStates')
     .subscribe(d => { 
       
       
       this.loading_list = false;  
-      this.states = d.locationStates;
+      this.states = d['states'];
     },error=>{
       this.loading_list=false;
     });
@@ -98,11 +98,11 @@ export class SiteAddComponent implements OnInit {
     {
       st_name = this.siteform.state;
     }
-    this.db.post_rqst({'state_name':st_name}, 'master/getLocationDistricts')
+    this.db.post_rqst({'state_name':st_name}, 'app_master/getDistrict')
     .subscribe(d => { 
       
       this.loading_list = false;  
-      this.districts = d.locationDistricts;
+      this.districts = d.districts;
     },error=>{
       this.loading_list=false;
     });
@@ -115,11 +115,11 @@ export class SiteAddComponent implements OnInit {
       dist_name = this.siteform.district;
     }
     
-    this.db.post_rqst({'district_name':dist_name}, 'master/getLocationCitys')
+    this.db.post_rqst({'district_name':dist_name}, 'app_master/getCity')
     .subscribe(d => { 
       
       this.loading_list = false;  
-      this.citys = d.locationCitys;
+      this.citys = d.cities;
     },error=>{
       this.loading_list=false;
     });
@@ -192,10 +192,14 @@ export class SiteAddComponent implements OnInit {
   }
   
   getPc(search){
-    this.db.post_rqst({'search':search}, 'karigar/getPCs')
+    let filter={};
+    filter={
+        mode:0
+    };
+    this.db.post_rqst({'filter':filter}, 'karigar/contractorList')
     .subscribe(d => { 
       console.log(d);
-      this.pc = d.pcs;
+      this.pc = d.contractorData['data'];
     },error=>{
       this.loading_list=false;
     });

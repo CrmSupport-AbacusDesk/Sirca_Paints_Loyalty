@@ -25,22 +25,28 @@ export class KarigarAddComponent implements OnInit {
     date1:any;
     media:any=[];
     selectedFile: File[]=[];
-    
+    contractorList:any=[];
     
     constructor(public db: DatabaseService, private route: ActivatedRoute, private router: Router, public ses: SessionStorage,
         public matDialog: MatDialog,  public dialog: DialogComponent) { this.date1 = new Date();}
         
         ngOnInit() {
             this.route.params.subscribe(params => {
+                this.karigarform.registrationType=params.registration_type;
+                console.log( this.karigarform.registrationType);
+
                 this.karigar_id = this.db.crypto(params['karigar_id'],false);
                 //console.log(this.karigar_id );
                 
                 if (this.karigar_id) {
                     this.getKarigarDetails();
                     this.getStateList();
+                this.getContractorList();
+
                 }
                 this.getStateList();
                 this.AssignSaleUser();
+                this.getContractorList();
                 this.karigarform.country_id = 99;
             });
         }
@@ -141,8 +147,9 @@ export class KarigarAddComponent implements OnInit {
         savekarigarform(form:any) {
             this.savingData = true;
             
-            this.karigarform.dob = this.karigarform.dob  ? this.db.pickerFormat(this.karigarform.dob) : '';
-            this.karigarform.created_by = this.db.datauser.id;
+            this.karigarform.dob=this.karigarform.dob  ? this.db.pickerFormat(this.karigarform.dob) : '';
+            this.karigarform.created_by=this.db.datauser.id;
+            // this.karigarform.created_name=this.db.datauser.username;
             this.karigarform.karigar_edit_id =  this.karigar_id  ?  this.karigar_id  : '';
             this.karigarform.type = "Plumber";
             this.karigarform.status = "Pending";
@@ -257,6 +264,17 @@ export class KarigarAddComponent implements OnInit {
           //console.log(index);
           this.selectedFile.splice(index,1)
           this.media.splice(index,1)
+        }
+
+        getContractorList(){
+            let filter={};
+            filter={
+                mode:0
+            };
+            this.db.post_rqst({'filter':filter},'karigar/contractorList').subscribe((result)=>{
+                console.log(result)
+                this.contractorList=result['contractorData']['data'];
+            })
         }
         
     }

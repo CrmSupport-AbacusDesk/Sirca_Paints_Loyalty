@@ -8,7 +8,7 @@
                         <div class="sprate-box ">
                             <div class="full-offer">
                                 <div class="top-heading">
-                                    <h2>FULL CONTRACTOR INFORMATION</h2>
+                                    <h2>FULL INFORMATION</h2>
                                     <p>Indicates required fields ( * )</p>
                                 </div>
                             </div>
@@ -16,7 +16,7 @@
                                 <div class="col s12">
                                     <div class="option-field">
                                         <div class="row">
-                                            <div class="col s6">
+                                            <!-- <div class="col s6">
                                                 <div class="control-field">
                                                     <div>
                                                         <mat-form-field class=" cs-input cs-multi-select">
@@ -24,14 +24,14 @@
                                                                 name="registrationType"
                                                                 [(ngModel)]="karigarform.registrationType"
                                                                 #registrationType="ngModel" required>
-                                                                <mat-option value="Contractor">contractor</mat-option>
+                                                                <mat-optioFn value="Contractor">contractor</mat-optioFn>
                                                                 <mat-option value="Architect">Architect</mat-option>
                                                             </mat-select>
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col s6">
+                                            </div> -->
+                                            <div class="col s4">
                                                 <div class="control-field">
                                                     <mat-form-field class="cs-input">
                                                         <input matInput placeholder="Name" name="first_name"
@@ -40,10 +40,7 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col s6">
+                                            <div class="col s4">
                                                 <div class="control-field">
                                                     <mat-form-field class="cs-input">
                                                         <input placeholder="D.O.B" class="h45"
@@ -56,7 +53,7 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
-                                            <div class="col s6">
+                                            <div class="col s4">
                                                 <div class="control-field">
                                                     <mat-form-field class="cs-input">
                                                         <input matInput placeholder="Mobile No."
@@ -66,6 +63,49 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            <!-- <div class="col s6">
+                                                <div class="control-field">
+                                                    <div>
+                                                        <mat-form-field class="cs-input cs-multi-select">
+                                                            <mat-select placeholder="Select Contractor"
+                                                                name="contractor"
+                                                                [(ngModel)]="karigarform.contractor"
+                                                                #contractor="ngModel" required>
+                                                                <mat-option *ngFor="let data of contractorList" value="{{data.id}}">{{data.first_name}} {{data.last_name}} {{data.mobile_no}}</mat-option>
+                                                              
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div>  -->
+                                            <!-- <div class="col s6 ">
+                                                <div class="option-field">
+                                                    <div class="control-field">
+                                                        <mat-form-field class="cs-input">
+                                                            <input matInput placeholder="Contact Person"
+                                                                name="dealer_contact_person"
+                                                                [(ngModel)]="karigarform.dealer_contact_person"
+                                                                #dealer_contact_person="ngModel">
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <!-- <div class="col s6 ">
+                                                <div class="option-field">
+                                                    <div class="control-field">
+                                                        <mat-form-field class="cs-input">
+                                                            <input matInput placeholder="Mobile No."
+                                                                name="dealer_mobile"
+                                                                [(ngModel)]="karigarform.dealer_mobile"
+                                                                #dealer_mobile="ngModel" maxlength="10" minlength="10"
+                                                                (keypress)="numeric_Number($event)">
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -227,7 +267,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col s12">
                         <div class="sprate-box ">
                             <div class="full-offer">
@@ -239,37 +279,13 @@
                             <div class="row mb0">
                                 <div class="col s12  pl10">
                                     <div class="row">
-                                        <div class="col s6 ">
-                                            <div class="option-field">
-                                                <div class="control-field">
-                                                    <mat-form-field class="cs-input">
-                                                        <input matInput placeholder="Contact Person"
-                                                            name="dealer_contact_person"
-                                                            [(ngModel)]="karigarform.dealer_contact_person"
-                                                            #dealer_contact_person="ngModel">
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col s6 ">
-                                            <div class="option-field">
-                                                <div class="control-field">
-                                                    <mat-form-field class="cs-input">
-                                                        <input matInput placeholder="Mobile No." name="dealer_mobile"
-                                                            [(ngModel)]="karigarform.dealer_mobile"
-                                                            #dealer_mobile="ngModel" maxlength="10" minlength="10"
-                                                            (keypress)="numeric_Number($event)">
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                        </div>
+                                     
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="row ">
                     <div class="col s12">
                         <div class="sprate-box ">
@@ -285,9 +301,8 @@
                                         <div class="control-field">
                                             <div>
                                                 <mat-form-field class=" cs-input cs-multi-select">
-                                                    <mat-select placeholder="Select Document Type" name="documentType"
-                                                        [(ngModel)]="karigarform.documentType" #documentType="ngModel"
-                                                        required>
+                                                    <mat-select placeholder="Select Document Type" name="document_type"
+                                                        [(ngModel)]="karigarform.document_type" #document_type="ngModel">
                                                         <mat-option value="AdharCard">Adhar Card</mat-option>
                                                         <mat-option value="PanCard">Pan Card</mat-option>
                                                         <mat-option value="VoterCard">Voter Card</mat-option>
@@ -300,8 +315,7 @@
                                         <div class="control-field">
                                             <mat-form-field class="cs-input">
                                                 <input matInput placeholder="Document No." name="document_no"
-                                                    [(ngModel)]="karigarform.document_no" #document_no="ngModel"
-                                                    required>
+                                                    [(ngModel)]="karigarform.document_no" #document_no="ngModel">
                                             </mat-form-field>
                                         </div>
                                     </div>

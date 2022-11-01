@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DatabaseService} from '../_services/DatabaseService';
 import {DialogComponent} from '../dialog/dialog.component';
 import { MatDialog, MatDatepicker } from '@angular/material';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class CustomerComponent implements OnInit {
   karigar_suspect : any = 0;
   karigar_verified : any = 0;
   
-  constructor(public db: DatabaseService, public dialog: DialogComponent ) {}
+  constructor(public db: DatabaseService, public dialog: DialogComponent, public router:Router, ) {}
   
   ngOnInit() {
     this.filter.status = '';
@@ -128,5 +129,11 @@ export class CustomerComponent implements OnInit {
   }
     });
   } 
+
+  karigarAdd(){
+    this.router.navigate(['karigar-add' ,{'registration_type':'Architect'}])
+}
+
+
 }
 

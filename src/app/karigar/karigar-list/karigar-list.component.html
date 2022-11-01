@@ -50,11 +50,12 @@
                 </div> -->
             </div>
             <div class="top-pagination">
-                <div class="master-btn pr30">
+                <div class="master-btn pr30"  *ngIf="karigars.length">
                     <button mat-button routerLinkActive="active" (click)="filter.sortAccToWallet=true;getKarigarList()">Sort Acc TO Wallet Bal</button>
                 </div>
-                <div class="master-btn pr30">
-                    <button mat-button routerLink="/karigar-add" routerLinkActive="active">ADD NEW</button>
+                <div class="master-btn pr30"  *ngIf="karigars.length">
+                    <!-- <button mat-button routerLink="/karigar-add" routerLinkActive="active">ADD NEW</button> -->
+                    <button mat-button (click)="karigarAdd()" >ADD NEW</button>
                 </div>
                 
                 
@@ -90,7 +91,7 @@
                         <th class="w130">District</th>
                         <th class="w130">City</th>
                         <th class="w130">Pincode</th>
-                        <th class="w180">Dealer</th>
+                        <!-- <th class="w180">Dealer</th> -->
                         <th class="w150">Document Type</th>
                         <th class="w120 text-center">Wallet</th>
                         <!-- <th class="w120">Total Earned Points</th> -->
@@ -159,12 +160,12 @@
                                 <i class="material-icons">search</i>
                             </div>
                         </th>
-                        <th class="w180">
+                        <!-- <th class="w180">
                             <div class="search-form">
                                 <input type="text" placeholder="Dealer" [(ngModel)]="filter.dealer" (keyup.enter)="current_page = 1;getKarigarList()">
                                 <i class="material-icons">search</i>
                             </div>
-                        </th>
+                        </th> -->
                         
                         <th class="w150">
                             <div class="search-form">
@@ -220,8 +221,8 @@
                             <td class="w130">{{val.state | titlecase }}</td>
                             <td class="w130">{{val.district | titlecase }}</td>
                             <td class="w130">{{val.city | titlecase }}</td>
-                            <td class="w130">{{val.pincode | titlecase }}</td>
-                            <td class="w180">{{val.dealer_contact_person | titlecase }}</td>
+                            <td class="w130">{{val.pincode }}</td>
+                            <!-- <td class="w180">{{val.dealer_contact_person | titlecase }}</td> -->
                             
                             <td class="w150">{{val.document_type | titlecase }}</td>
                             
