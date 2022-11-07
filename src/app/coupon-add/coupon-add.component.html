@@ -1,0 +1,125 @@
+<div class="main-container">
+  <div class="loader" *ngIf="loading_list">
+    <div class="loding-logo">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  <div class="container form-padding">
+    <form name="siteform" (ngSubmit)="f.form.valid && savesiteform(f)" #f="ngForm" novalidate autocomplete="off">
+
+
+      <div class="row">
+        <div class="col s12">
+          <div class="sprate-box ">
+            <div class="full-offer">
+              <div class="top-heading">
+                <!-- <h2> {{karigar_id ? 'EDIT SITE' : 'SITE'}}  INFORMATION</h2> -->
+                <h2> GENERATE NEW PRODUCT QR INFORMATION</h2>
+                <p>Indicates required fields ( * )</p>
+              </div>
+            </div>
+            <div class="row mb0">
+              <div class="col s12">
+                <div class="option-field">
+                  <div class="row mb0">
+                    <!-- <div class="col s3">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
+                          
+                          <mat-select placeholder="State" [(ngModel)]="siteform.state" name="state" #state="ngModel" (ngModelChange)="getDistrictList(1)" required>
+                            <mat-option >
+                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getStateList($event.target.value)"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option [value]="row.state_name" *ngFor="let row of states">{{row.state_name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>  
+                      </div>
+                    </div>
+                    <div class="col s3">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
+                          <mat-select placeholder="District" [(ngModel)]="siteform.district" name="district" #district="ngModel" (ngModelChange)="getCityList(1);" required>
+                            <mat-option >
+                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getDistrictList($event.target.value)"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option [value]="row.district_name" *ngFor="let row of districts">{{row.district_name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>   
+                      </div>
+                    </div>-->
+
+                    <div class="col s4">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
+                          <mat-select placeholder="City" [(ngModel)]="siteform.city" name="city" #city="ngModel" required>
+                            <!-- <mat-option [value]="row.city_name" *ngFor="let row of citys">{{row.city_name}}</mat-option> -->
+                            <mat-option>TEST 1</mat-option>
+                            <mat-option>TEST 2</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col s4">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
+                          <input matInput placeholder="Sales Zone" name="sales_zone" [(ngModel)]="siteform.sales_zone"
+                            #sales_zone="ngModel">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col s4">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
+                          <input matInput placeholder="SKU NUMBER" name="sku_number" [(ngModel)]="siteform.sku_number"
+                            (keypress)="numeric_Number($event)" #sku_number="ngModel" required>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb0">
+                    <div class="col s4">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
+                          <input matInput placeholder="Batch Number" name="batch_number" [(ngModel)]="siteform.batch_number"
+                            (keypress)="numeric_Number($event)" #batch_number="ngModel" required>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col s4">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
+                          <input matInput placeholder="Enter Number To Generate QR Code" name="batch_number" [(ngModel)]="siteform.batch_number"
+                            (keypress)="numeric_Number($event)" #batch_number="ngModel" required>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row mb0">
+
+
+
+
+
+
+
+
+                  </div>
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="save mt30">
+        <button mat-button>{{karigar_id ? 'Update' :'Save'}}</button>
+      </div>
+    </form>
+  </div>
+</div>

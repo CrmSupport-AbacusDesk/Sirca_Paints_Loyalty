@@ -31,18 +31,22 @@ export class SiteAddComponent implements OnInit {
   dealers:any = [];
   sales_person:any = [];
   salesuser_id:any = [];
+  loginId:any;
+  loginName:any;
   
   
-  
-  constructor(public db: DatabaseService, private route: ActivatedRoute, private router: Router, public ses: SessionStorage,public matDialog: MatDialog,  public dialog: DialogComponent) { 
-    this.uploadurl = this.db.myurl1;
+  constructor(public db: DatabaseService, private route: ActivatedRoute, private router: Router, public ses: SessionStorage,public matDialog: MatDialog,  public dialog: DialogComponent,public session:SessionStorage ) { 
+    this.uploadurl = this.db.uploadUrl;
    
     this.date1 = new Date();
+    console.log(this.session.users);
+    this.loginId=this.session.users.id;
+    this.loginName=this.session.users.username;
   }
   
   ngOnInit() {
     
-    this.managerList('');
+    // this.managerList('');
     this.getBrand('');
     this.route.params.subscribe(params => {
       this.karigar_id = params['id'];
@@ -50,11 +54,11 @@ export class SiteAddComponent implements OnInit {
       {
         this.getKarigarDetails();
       }
-      this.managerList('');
+      // this.managerList('');
       this.getStateList();
-      this.get_karigar_type();
+      // this.get_karigar_type();
       this.getPc('');
-      // this.getSalesExecutive('');
+      this.getSalesExecutive('');
       this.siteform.country_id = 99;
     });
   }
@@ -143,9 +147,9 @@ export class SiteAddComponent implements OnInit {
 
   getSalesExecutive = (zone) => {
     this.filter.assigned_location = zone;
-    this.db.post_rqst({'filter':this.filter}, 'karigar/getSalesExecutives')
+    this.db.post_rqst({'filter':this.filter}, 'karigar/salesUsersList')
     .subscribe(d => { 
-      this.sales_person = d.sales_executives;
+      this.sales_person = d.sales_users.data;
 
       console.log('result sales excutive', d.sales_executives);
       // this.siteform.sales_zone = d.locationZones.zone;
@@ -352,6 +356,8 @@ export class SiteAddComponent implements OnInit {
     this.savingData = true;
     this.loading_list = true;
     this.siteform.salesuser_id = this.salesuser_id;
+    this.siteform.loginId = this.loginId;
+    this.siteform.loginName = this.loginName;
     this.siteform.dob = this.siteform.dob  ? this.db.pickerFormat(this.siteform.dob) : '';
     this.siteform.created_by = this.db.datauser.id;
     if(this.karigar_id)
@@ -360,7 +366,7 @@ export class SiteAddComponent implements OnInit {
     }
     else
     {
-      this.siteform.karigar_type = 3;
+      // this.siteform.karigar_type = 3;
     }
     
     this.siteform.image = this.selected_image ? this.selected_image : [];

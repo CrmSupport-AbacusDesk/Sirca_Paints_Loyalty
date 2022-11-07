@@ -4772,6 +4772,9 @@ header
 }
 
 
+
+
+
 .sprate-box
 {
     width: 100%;
@@ -4882,6 +4885,11 @@ header
                     cursor: pointer;
                     border-radius: 0px 4px 4px 0px;
                 }
+            }
+
+            &.no-justify
+            {
+                justify-content: inherit;
             }
         }
     }

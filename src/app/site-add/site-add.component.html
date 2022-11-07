@@ -255,7 +255,7 @@
                       <div class="control-field">
                         <mat-form-field class="cs-input">
                           <mat-select placeholder="Sales Executive" [(ngModel)]="siteform.salesuser_id" name="salesuser_id" #salesuser_id="ngModel" required multiple>
-                            <mat-option class="check-list" [value]="row.id" *ngFor="let row of sales_person; let i = index;" (onSelectionChange)="selectedExecutive($event, i)">{{row.first_name | titlecase}}</mat-option>
+                            <mat-option class="check-list" [value]="row.id" *ngFor="let row of sales_person; let i = index;" (onSelectionChange)="selectedExecutive($event, i)">{{row.name | titlecase}}</mat-option>
                           </mat-select>
                         </mat-form-field>  
                       </div>

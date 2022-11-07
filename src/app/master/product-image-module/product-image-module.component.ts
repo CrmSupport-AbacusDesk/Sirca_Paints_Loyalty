@@ -15,17 +15,23 @@ export class ProductImageModuleComponent implements OnInit {
   franchise_id
   loading_list:any = false;
   mode:any;
-  
+  image_type:any="";
+  uploadUrl:any='';
+  profile_image = '';
+  data:any
   constructor(public db: DatabaseService, private route: ActivatedRoute,
     private router: Router,  public dialog: DialogComponent,
     @Inject(MAT_DIALOG_DATA) public lead_data: any, public dialogRef: MatDialogRef<ProductImageModuleComponent>) {
       //console.log(lead_data);
-      
+
+      this.data = lead_data.data;
       this.part_data.id = lead_data.id; 
       this.part_data.reedem_id = lead_data.reedem_id; 
       this.part_data.offer_gift_id = lead_data.offer_gift_id; 
       //  this.part_data.branch_id = lead_data.franchise_id; 
+      this.part_data.mode = lead_data.mode;
       this.part_data.mode = lead_data.mode; 
+      this.image_type = lead_data.image_type; 
     }
 
     state: string = 'default';
@@ -35,6 +41,7 @@ export class ProductImageModuleComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.uploadUrl = this.db.uploadUrl;
       if( this.part_data.mode == 'test1' )
       {
       this.getProduct();
@@ -70,6 +77,19 @@ export class ProductImageModuleComponent implements OnInit {
       if( this.part_data.mode == 'test16' )
       {
       this.getComplaintsImage();
+      }
+      if( this.part_data.mode == 'base64' )
+      {
+          this.mastergiftimage();
+      }
+
+      if( this.part_data.mode == 'normal' )
+      {
+          this.mastergiftimage();
+      }
+
+      if(this.part_data.mode == 'test17'){
+          this.profile_image = this.part_data.id;
       }
     }
 
@@ -121,6 +141,11 @@ export class ProductImageModuleComponent implements OnInit {
         this.gift = d.giftImage;
         //console.log(this.gift);
       });
+    }
+
+    mastergift:any = {};
+    mastergiftimage() {
+        this.mastergift=this.part_data.id;
     }
 
     karigarImage:any = {};
