@@ -93,6 +93,7 @@ import { AddCouponPointsComponent } from './add-coupon-points/add-coupon-points.
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SiteListComponent } from './site-list/site-list.component';
 import { SiteAddComponent } from './site-add/site-add.component';
+import { SalesUserListComponent } from './sales-user-list/sales-user-list.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -121,7 +122,7 @@ const routes: Routes = [
   {path: 'karigar-detail/:karigar_id',  component: KarigarDetailComponent , canActivate: [AuthGuard] },
   {path: 'coupon-code-list',  component: CouponCodeListComponent , canActivate: [AuthGuard] },
   {path: 'super-list', component: SuperComponent , canActivate: [AuthGuard] },
-  {path: 'site-list', component: SiteListComponent , canActivate: [AuthGuard] },
+  {path: 'site-list/:page', component: SiteListComponent , canActivate: [AuthGuard] },
   {path: 'complaints-list/:type', component: ComplaintsComponent , canActivate: [AuthGuard] },
   {path: 'architect-list', component: CustomerComponent , canActivate: [AuthGuard] },
   {path: 'customer-detail/:customer_id',  component: CustomerDetailComponent , canActivate: [AuthGuard] },
@@ -132,6 +133,8 @@ const routes: Routes = [
   {path: 'coupon-upload', component: CouponCodeUploadComponent , canActivate: [AuthGuard] },
   {path: 'customer-edit/:customer_id', component: CustomerEditComponent , canActivate: [AuthGuard] },
   {path: 'plumber-meet-data', component: PlumberMeetDataComponent , canActivate: [AuthGuard] },
+  {path: 'user-list/:page', component:SalesUserListComponent , canActivate: [AuthGuard] },
+
 
   
 
@@ -216,6 +219,7 @@ const routes: Routes = [
     ComplaintRemarkModalComponent,
     AddCouponPointsComponent,
     SiteAddComponent,
+    SalesUserListComponent,
   ],
   imports: [
     // AutocompleteLibModule,
