@@ -19,7 +19,7 @@ import 'hammerjs';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule} from '@angular/material';
+import {MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatTooltipModule} from '@angular/material';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -96,6 +96,9 @@ import { SiteAddComponent } from './site-add/site-add.component';
 import { SalesUserListComponent } from './sales-user-list/sales-user-list.component';
 import { SiteDetailComponent } from './site-detail/site-detail.component';
 import { CouponAddComponent } from './coupon-add/coupon-add.component';
+import { SchemeListComponent } from './scheme-list/scheme-list.component';
+import { SchemeAddComponent } from './scheme-add/scheme-add.component';
+import { CouponCodeDataListComponent } from './coupon-code-data-list/coupon-code-data-list.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -117,12 +120,15 @@ const routes: Routes = [
   {path: 'special-dis', component: SpecialDiscountComponent , canActivate: [AuthGuard] },
   {path: 'site-add/:id', component:SiteAddComponent , canActivate: [AuthGuard] },
   {path: 'site-add', component:SiteAddComponent , canActivate: [AuthGuard] },
+  {path: 'schemeList', component:SchemeListComponent , canActivate: [AuthGuard] },
+  {path: 'schemeAdd', component:SchemeAddComponent, canActivate: [AuthGuard] },
 
   {path: 'contractor-list', component: KarigarListComponent , canActivate: [AuthGuard] },
   {path: 'karigar-add', component: KarigarAddComponent , canActivate: [AuthGuard] },
   {path: 'karigar-add/:karigar_id', component: KarigarAddComponent , canActivate: [AuthGuard] },
   {path: 'karigar-detail/:karigar_id',  component: KarigarDetailComponent , canActivate: [AuthGuard] },
-  {path: 'coupon-code-list',  component: CouponCodeListComponent , canActivate: [AuthGuard] },
+  // {path: 'coupon-code-list',  component: CouponCodeListComponent , canActivate: [AuthGuard] },
+  {path: 'coupon-code-list',  component: CouponCodeDataListComponent , canActivate: [AuthGuard] },
   {path: 'coupon-code-add',  component: CouponAddComponent , canActivate: [AuthGuard] },
   {path: 'super-list', component: SuperComponent , canActivate: [AuthGuard] },
   {path: 'site-list/:page', component: SiteListComponent , canActivate: [AuthGuard] },
@@ -226,6 +232,9 @@ const routes: Routes = [
     SalesUserListComponent,
     SiteDetailComponent,
     CouponAddComponent,
+    SchemeListComponent,
+    SchemeAddComponent,
+    CouponCodeDataListComponent,
   ],
   imports: [
     // AutocompleteLibModule,
@@ -246,6 +255,7 @@ const routes: Routes = [
     NgxHmCarouselModule,
     FusionChartsModule,
     MatProgressBarModule,
+    MatTooltipModule,
     AutocompleteLibModule,
     MatDialogModule,
     NgxMatSelectSearchModule,

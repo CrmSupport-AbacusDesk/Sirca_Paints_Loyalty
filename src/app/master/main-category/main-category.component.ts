@@ -256,15 +256,16 @@ this.image=[]
     
         });
     }
-id:any={}
-    editSubCategory(id, index) {
+    id:any={}
+    editSubCategory(id, index,points) {
       
         this.EDITIMAGE(id)
         console.log(this.sub_categories, id);
+        console.log(points);
         this.id=id
         this.category.image = [];
 
-
+        this.category.contractor_points=points;
         this.category = this.sub_categories.filter(x => x.id == id)[0];
         this.category.profile_selected = 0;
 
