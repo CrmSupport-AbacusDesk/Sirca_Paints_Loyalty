@@ -12,7 +12,8 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { NgxEditorModule } from 'ngx-editor';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ReferralMasterComponent } from './master/referral-master/referral-master.component';
-
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { NgxBarcodeModule } from 'ngx-barcode';
 import { NgxHmCarouselModule } from 'ngx-hm-carousel';
 import 'hammerjs';
 
@@ -99,6 +100,7 @@ import { CouponAddComponent } from './coupon-add/coupon-add.component';
 import { SchemeListComponent } from './scheme-list/scheme-list.component';
 import { SchemeAddComponent } from './scheme-add/scheme-add.component';
 import { CouponCodeDataListComponent } from './coupon-code-data-list/coupon-code-data-list.component';
+import { CouponCodeDataDetailComponent } from './coupon-code-data-detail/coupon-code-data-detail.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -129,6 +131,7 @@ const routes: Routes = [
   {path: 'karigar-detail/:karigar_id',  component: KarigarDetailComponent , canActivate: [AuthGuard] },
   // {path: 'coupon-code-list',  component: CouponCodeListComponent , canActivate: [AuthGuard] },
   {path: 'coupon-code-list',  component: CouponCodeDataListComponent , canActivate: [AuthGuard] },
+  {path: 'coupon-code-Detail/:id',  component: CouponCodeDataDetailComponent , canActivate: [AuthGuard] },
   {path: 'coupon-code-add',  component: CouponAddComponent , canActivate: [AuthGuard] },
   {path: 'super-list', component: SuperComponent , canActivate: [AuthGuard] },
   {path: 'site-list/:page', component: SiteListComponent , canActivate: [AuthGuard] },
@@ -235,6 +238,7 @@ const routes: Routes = [
     SchemeListComponent,
     SchemeAddComponent,
     CouponCodeDataListComponent,
+    CouponCodeDataDetailComponent,
   ],
   imports: [
     // AutocompleteLibModule,
@@ -246,6 +250,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatIconModule,
     MatInputModule,
+    NgxBarcodeModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
@@ -254,6 +259,7 @@ const routes: Routes = [
     AngularFontAwesomeModule,
     NgxHmCarouselModule,
     FusionChartsModule,
+    NgxQRCodeModule,
     MatProgressBarModule,
     MatTooltipModule,
     AutocompleteLibModule,

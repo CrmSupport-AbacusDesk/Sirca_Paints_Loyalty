@@ -1,0 +1,204 @@
+<div class="loader" *ngIf="loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="main-container">
+  <div class="tab-header">
+    <div class="tabs-list gift-tab-list pl15">
+      <ul class="mt0">
+        <li>
+          <p>            
+            <Strong>
+          <i class="material-icons">arrow_back</i>
+
+              Coupon Detail</Strong></p>
+        </li>
+      </ul>
+    </div>
+
+    
+  </div>
+  <div class="newMainContainer">
+      <div class="row">
+        <div class="col s6">
+          <div class="row">
+            <div class="col s12">
+              <div class="sprate-box">
+                <div class="full-offer">
+                  <div class="top-heading no-justify">
+                    <a class="back-btn" routerLink="/site-list/1"><i class="material-icons">arrow_back</i></a>
+                    <h2>COUPON DETAIL</h2>
+                    <!-- <div class="btn-align">
+                      <button class="back-btn" (click)="openBonusPoint()">BONUS POINTS</button>
+                    </div> -->
+                  </div>
+      
+                  <div class="detail-info pr0">
+                    <div class="basic-details">
+                      <div class="profile-info" style="display: block;">
+                        <ul style="padding:10px">
+                          <li>
+                            <figure>
+                              <div class="right-cont">
+                                <p>Date / Created By</p>
+                                <span>{{getData.date_created | date: 'dd MMM yyyy'}}</span>
+                              </div>
+                            </figure>
+                          </li>
+                          <li>
+                            <figure>
+                              <div class="right-cont">
+                                <p>Product Name</p>
+                                <span>{{getData.product_name | titlecase }}</span>
+                              </div>
+                            </figure>
+                          </li>
+
+                          </ul>
+                          <ul style="padding:10px">
+                            <li>
+                              <figure>
+                                <div class="right-cont">
+                                  <p>Sku Number</p>
+                                  <span>{{getData.sku_number }}</span>
+                                </div>
+                              </figure>
+        
+                            </li>
+                            <li>
+                              <figure>
+                                <div class="right-cont">
+                                  <p>Batch Number</p>
+                                  <span>{{getData.batch_number}}</span>
+                                </div>
+                              </figure>
+                            </li>  
+                          </ul>
+                          
+                         
+      
+      
+                        <ul style="padding:10px">
+                         
+                          <li>
+                            <figure>
+                              <div class="right-cont">
+                                <p>Master Coupon Count</p>
+                                <span>{{getData.total_master}}</span>
+                              </div>
+                            </figure>
+                          </li>
+                          <li>
+      
+                            <figure>
+                              <div class="right-cont">
+                                <p>Secondary Coupon Count</p>
+                                <span>{{getData.total_secondary}}</span>
+                              </div>
+                            </figure>
+                          </li>
+                        </ul>
+      
+                       
+      
+      
+                     
+      
+                      </div>
+                    </div>
+      
+      
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+      
+      
+      
+      
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="row" style="background:white;" *ngFor="let d of getData.master_qr_code_list">
+            <div class="col s8 mb10 mt10">
+              <div>
+                <div>
+                  <h1><Strong>{{d.product_name}}</Strong> </h1><span></span>
+                  <hr class="mb10 mt10" />
+                  <h2><Strong>MRP &#8377; {{d.price}} (Inclusive of all Taxes)</Strong> </h2>
+                  <hr class="mb10 mt10" />
+                  <h3><Strong>Net Content {{d.net_content}} ltr.</Strong> </h3>
+      
+                  <p>Batch No. <span>{{d.batch_number}}</span> </p>
+                  <p>Item Code: <span>{{d.sku_number}}</span> </p>
+                </div>
+      
+      
+                <div class="mt40">
+                  <p>COUNTRY OF ORIGIN : ITALY</p>
+                  <p>Imported , Packed and Marketed by</p>
+                  <p>Manufactured By</p>
+                  <p>Sirca Paints India Limited</p>
+                  <p>G-82 kirti Nagar Delhi-110015</p>
+                  <p>Customer Care No:011-42083083</p>
+                  <p>Email- support@sircapaints.com </p>
+                </div>
+              </div>
+      
+      
+            </div>
+            <div class="col s4">
+              <ngx-barcode [bc-value]="d.master_box_qr_code" [bc-display-value]="true"></ngx-barcode>
+            </div>
+      
+      
+      
+          </div>
+
+          <div class="row" style="background:white;" *ngFor="let data of getData.secondary_qr_code_list">
+            <div class="col s8 mb10 mt10">
+              <div>
+                <div>
+                  <h1><Strong>{{data.product_name}}</Strong> </h1><span></span>
+                  <hr class="mb10 mt10" />
+                  <h2><Strong>MRP &#8377; {{data.price}} (Inclusive of all Taxes)</Strong> </h2>
+                  <hr class="mb10 mt10" />
+                  <h3><Strong>Net Content {{data.net_content}} ltr.</Strong> </h3>
+      
+                  <p>Batch No. <span>{{data.batch_number}}</span> </p>
+                  <p>Item Code: <span>{{data.sku_number}}</span> </p>
+                </div>
+      
+      
+                <div class="mt40">
+                  <p>COUNTRY OF ORIGIN : ITALY</p>
+                  <p>Imported , Packed and Marketed by</p>
+                  <p>Manufactured By</p>
+                  <p>Sirca Paints India Limited</p>
+                  <p>G-82 kirti Nagar Delhi-110015</p>
+                  <p>Customer Care No:011-42083083</p>
+                  <p>Email- support@sircapaints.com </p>
+                </div>
+              </div>
+      
+      
+            </div>
+            <div class="col s4">
+              <ngx-qrcode [value]="data.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L">
+              </ngx-qrcode>
+            </div>
+      
+      
+      
+          </div>
+        </div>
+
+      </div>
+
+
+    
+
+  </div>
+</div>

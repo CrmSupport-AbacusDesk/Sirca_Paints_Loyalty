@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DatabaseService } from '../_services/DatabaseService';
@@ -19,10 +20,10 @@ export class CouponAddComponent implements OnInit {
   todayDate:any=new Date();
   temp_search='';
   loginId:any;
-  constructor(public db: DatabaseService,public session:SessionStorage,public dialog: DialogComponent ) {
+  constructor(public db: DatabaseService,public session:SessionStorage,public dialog: DialogComponent,public router:Router ) {
     console.log(this.session.users);
     this.loginId=this.session.users.id;
-    this.getProductList('');
+    // this.getProductList('');
 
    }
 
@@ -43,9 +44,12 @@ export class CouponAddComponent implements OnInit {
     this.db.post_rqst({'filter':value},'master/couponProductList').subscribe((result)=>{
       console.log(result);
       this.productList=result;
+     
       this.productList2=result;
     this.loading_list=false;
-
+    let index=this.productList.findIndex(row=>row.id==this.siteform.product);
+    console.log(index);
+    this.siteform.sku_number=this.productList[index].material_code
     },err=>{
     this.loading_list=false;
 
@@ -80,11 +84,15 @@ export class CouponAddComponent implements OnInit {
     this.siteform.created_by=this.loginId;
     console.log(this.todayDate);
 
-    this.db.post_rqst({'data':this.siteform},'offer/generateSecondaryQrCode').subscribe((res)=>{
+    this.db.post_rqst({'data':this.siteform},'offer/generateQrCode').subscribe((res)=>{
       console.log(res);
     this.loading_list=false;
       if(res['status']=='Success'){
-        this.dialog.success( 'Coupon has been successfully Generated');
+        this.dialog.success('Coupon has been successfully Generated');
+        this.router.navigate(['/coupon-code-list'])
+      }else{
+        this.dialog.error('Something Went Wrong... Please Wait');
+        
       }
     },err=>{
     this.loading_list=false;

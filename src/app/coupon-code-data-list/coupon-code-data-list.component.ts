@@ -11,7 +11,7 @@ import { DatabaseService } from '../_services/DatabaseService';
 })
 export class CouponCodeDataListComponent implements OnInit {
   loading_list:boolean=false;
-  schemeList:any=[];
+  couponCodeList:any=[];
   filter:any={};
   current_page = 1;
   last_page: number ;
@@ -20,7 +20,7 @@ export class CouponCodeDataListComponent implements OnInit {
   
 
   constructor(public router:Router, public db:DatabaseService ) {
-    this.getSchemeList();
+    this.getCouponCodeList();
    }
   ngOnInit() {
   }
@@ -33,24 +33,24 @@ export class CouponCodeDataListComponent implements OnInit {
 
   redirect_previous() {
     this.current_page--;
-    this.getSchemeList();
+    this.getCouponCodeList();
   }
   redirect_next() {
     if (this.current_page < this.last_page) { this.current_page++; }
     else { this.current_page = 1; }
-    this.getSchemeList();
+    this.getCouponCodeList();
   }
 
-  getSchemeList(){
+  getCouponCodeList(){
     this.loading_list=true;
-    this.db.post_rqst({'filter':this.filter},'offer/schemeList?page='+this.current_page).subscribe((res)=>{
+    this.db.post_rqst({'filter':this.filter},'offer/qrCodeList?page='+this.current_page).subscribe((res)=>{
       console.log(res);
       this.loading_list=false;
 
-      this.current_page = res['schemeList'].current_page;
-      this.last_page = res['schemeList'].last_page;
-      this.total_karigars =res['schemeList'].total;
-      this.schemeList = res['schemeList']['data'];
+      this.current_page = res['secondary_qr_code_list'].current_page;
+      this.last_page = res['secondary_qr_code_list'].last_page;
+      this.total_karigars =res['secondary_qr_code_list'].total;
+      this.couponCodeList = res['secondary_qr_code_list']['data'];
       
       this.karigar_all = res.karigar_all;
     },err=>{
@@ -64,6 +64,11 @@ export class CouponCodeDataListComponent implements OnInit {
     console.log(event.target.value);
     this.filter.valid_from=moment(this.filter.valid_from).format('YYYY-MM-DD');
   }
+  changeDateFormat(event:any){
+    console.log(event.target.value);
+    this.filter.date=moment(this.filter.date).format('YYYY-MM-DD');
+  }
+
 
   changeDate2(event:any){
     console.log(event.target.value);
@@ -72,9 +77,9 @@ export class CouponCodeDataListComponent implements OnInit {
 
   }
 
-  schemeAdd(){
+  couponAdd(){
 
-    this.router.navigate(['/schemeAdd']);
+    this.router.navigate(['/coupon-code-add']);
 
   }
 

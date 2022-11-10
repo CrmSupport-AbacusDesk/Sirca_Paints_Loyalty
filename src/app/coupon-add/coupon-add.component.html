@@ -38,11 +38,26 @@
                     <div class="col s3">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
+                          <mat-select placeholder="Select Qr Code Type" [(ngModel)]="siteform.qr_code_type" name="qr_code_type" #qr_code_type="ngModel"  required>
+                            <!-- <mat-option>
+                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getProductList($event.target.value)"></ngx-mat-select-search>
+                            </mat-option> -->
+                            <mat-option (click)="getProductList('')"  value="Product QR">Product QR Code</mat-option>
+                            <mat-option (click)="getProductList('')" value="Box QR">Box QR Code</mat-option>
+
+                          
+                          </mat-select>
+                        </mat-form-field>   
+                      </div>
+                    </div>
+                    <div class="col s3">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
                           <mat-select placeholder="Select Product" [(ngModel)]="siteform.product" name="product" #product="ngModel"  required>
                             <mat-option>
                               <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getProductList($event.target.value)"></ngx-mat-select-search>
                             </mat-option>
-                            <mat-option [value]="row.id" *ngFor="let row of productList">{{row.product_name}}</mat-option>
+                            <mat-option [value]="row.id" *ngFor="let row of productList" (click)="getProductList('')">{{row.product_name}}</mat-option>
 
                           
                           </mat-select>
@@ -55,7 +70,7 @@
                     <div class="col s3">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
-                          <input matInput placeholder="SKU NUMBER" name="sku_number" [(ngModel)]="siteform.sku_number" #sku_number="ngModel" required>
+                          <input matInput placeholder="SKU NUMBER" name="sku_number" [(ngModel)]="siteform.sku_number" #sku_number="ngModel" readonly required>
                         </mat-form-field>
                       </div>
                     </div>
@@ -67,18 +82,27 @@
                       </div>
                     </div>
 
+                
+
+                  </div>
+                  <div class="row mb10">
+                    <div class="col s3" *ngIf="siteform.qr_code_type=='Box QR'">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
+                          <input matInput placeholder="Enter Total Box Number" name="box_code_number" (keypress)="numeric_Number($event)" [(ngModel)]="siteform.box_code_number" 
+                            #box_code_number="ngModel" required>
+                        </mat-form-field>
+                      </div>
+                    </div>
                     <div class="col s3">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
-                          <input matInput placeholder="Enter Number To Generate QR Code" name="generate_code_number" [(ngModel)]="siteform.generate_code_number" 
+                          <input matInput placeholder="Enter Number To Generate QR Code" name="generate_code_number" (keypress)="numeric_Number($event)" [(ngModel)]="siteform.generate_code_number" 
                             #generate_code_number="ngModel" required>
                         </mat-form-field>
                       </div>
                     </div>
-
-                  </div>
-                  <div class="row mb10">
-                    <div class="col s3">
+                    <div class="col s3" style="margin:25px">
                       <div class="control-field">
                         
                           <mat-checkbox  [(ngModel)]="siteform.manufacturing_date" (change)="checkDateOfManufacturing($event)"   name="manufacturing_date"></mat-checkbox> Date Of Packing

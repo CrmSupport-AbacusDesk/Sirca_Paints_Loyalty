@@ -23,8 +23,8 @@
                 
                 <div class="top-pagination">
                     <ul >
-                        <li><p>Pages {{ current_page }} of {{ last_page }}</p></li>
-                        <li><button mat-button class="left-btn" (click) = 'redirect_previous()'><i class="material-icons">keyboard_arrow_left</i></button></li>
+                        <li><p>Pages {{current_page}} of {{last_page}}</p></li>
+                        <li><button mat-button class="left-btn" (click)='redirect_previous()'><i class="material-icons">keyboard_arrow_left</i></button></li>
                         <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"  (keyup.enter)="getProductList()"></li>
                         <li><button mat-button class="right-btn" (click) = 'redirect_next()'><i class="material-icons">keyboard_arrow_right</i></button></li>
                     </ul>
@@ -67,6 +67,8 @@
                                 <th class="w70">Price</th>
                                 <!-- <th class="w70 text-center">Group Type</th> -->
                                 <th class="w70 text-center">New Arrival</th>
+                                <th class="w100 text-center">Product Type</th>
+                                <th class="w100 text-center">Net Content</th>
                                 <th class="w120">Description</th>
                                 <th class="w90 no-padding">
                                     <table>
@@ -75,7 +77,7 @@
                                         </tr>
                                     </table>
                                 </th>
-                                <th class="w70">
+                                <th class="w100">
                                     <table>
                                         <tr>
                                             <th>Action</th>
@@ -171,6 +173,8 @@
                                         </div>
                                     </div>
                                 </th>
+                                <th class="w100" style="word-break: break-all;"></th>
+                                <th class="w100" style="word-break: break-all;"></th>
                                 <th class="w120" style="word-break: break-all;"></th>
                                 <th class="w90 no-padding">
                                     <table>
@@ -192,7 +196,7 @@
                                         </tr>
                                     </table>
                                 </th>
-                                <th class="w70">
+                                <th class="w100">
                                     <table>
                                         <tr>
                                             <th>
@@ -229,6 +233,9 @@
                             <td class="w70 text-center">&#8377; {{val.price }}</td>
                             <!-- <td class="w70">{{val.group_type}}</td> -->
                             <td class="w70">{{val.new_arrival == 1 ? 'Yes' : 'No'}}</td>
+                           
+                            <td class="w100">{{val.net_content}}</td>
+                            <td class="w100">{{val.product_type}}</td>
                             <td class="w120">{{val.desc}}</td>
                             <td class="w90 no-padding active ">
                                 <table>
@@ -241,7 +248,7 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td class="w70 padding0">
+                            <td class="w100 padding0">
                                 <table>
                                     <tr>
                                         <td class=" w70 no-border text-center td-flex padding0">
@@ -306,10 +313,10 @@
                                 </mat-form-field>  
                             </div>
                         </div>
-                        <div class="option-field">
+                        <div class="option-field mt10">
                             <div class="control-field">
                                 <mat-form-field class="cs-input">
-                                    <input matInput placeholder="Product code" name="material_code"  [(ngModel)]="productForm.material_code" #material_code="ngModel" required >
+                                    <input matInput placeholder="Product code/Sku" name="material_code"  [(ngModel)]="productForm.material_code" #material_code="ngModel" required >
                                 </mat-form-field>  
                             </div>
                         </div>
@@ -320,6 +327,28 @@
                                 </mat-form-field>  
                             </div>
                         </div> -->
+                        <div class="option-field">
+                            <div class="control-field">
+                                <mat-form-field class="cs-input">
+                                    <input matInput placeholder="Net Content" name="net_content" (keypress)="numeric_Number($event)" [(ngModel)]="productForm.net_content" #net_content="ngModel"  >
+                                </mat-form-field>  
+                            </div>
+                        </div>
+                        <div class="option-field">
+                            <mat-label>Product Type</mat-label>
+
+                            <div class="control-field">
+                                <mat-radio-group name="product_type "  [(ngModel)]="productForm.product_type " #product_type ="ngModel" >
+                                  <mat-radio-button value="manufactured">Manufactured</mat-radio-button>
+                                  <mat-radio-button value="imported">Imported</mat-radio-button>
+                                </mat-radio-group>
+                              </div>
+                            <!-- <div class="control-field">
+                                <mat-form-field class="cs-input">
+                                    <input matInput placeholder="Country Of Origin" name="country_of_origin"  [(ngModel)]="productForm.country_of_origin" #country_of_origin="ngModel"  >
+                                </mat-form-field>  
+                            </div> -->
+                        </div>
                         <div class="option-field">
                             <div class="control-field">
                                 <mat-form-field class="cs-input">
