@@ -371,7 +371,7 @@ export class SiteAddComponent implements OnInit {
     
     this.siteform.image = this.selected_image ? this.selected_image : [];
     
-    this.db.insert_rqst( { 'data' : this.siteform }, 'master/siteLocationAdd')
+    this.db.post_rqst( { 'data' : this.siteform }, 'master/siteLocationAdd')
     .subscribe( d => {
       this.savingData = false;
       this.loading_list = false;

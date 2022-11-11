@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepicker } from '@angular/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DatabaseService } from '../_services/DatabaseService';
@@ -18,7 +18,8 @@ export class SchemeAddComponent implements OnInit {
   loginId:any;
   pc:any=[];
   categoryList:any=[];
-  constructor(public db:DatabaseService , public session:SessionStorage, public dialog:DialogComponent, public router:Router) { 
+  id:any;
+  constructor(public db:DatabaseService , public session:SessionStorage,public route:ActivatedRoute ,  public dialog:DialogComponent, public router:Router) { 
     this.date1 = new Date();
     this.loginId=this.session.users.id;
     this.getPc('');
@@ -26,6 +27,17 @@ export class SchemeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params)=>{
+      console.log(params);
+    this.id=params['id'];
+    console.log(this.id);
+
+  });
+  if(this.id){
+    this.schemeDetail();
+  }else{
+    this.id=0;
+  }
   }
 
   openDatePicker(picker : MatDatepicker<Date>)
@@ -38,9 +50,26 @@ export class SchemeAddComponent implements OnInit {
       picker.open();
   }
 
+  schemeDetail(){
+    this.loading_list=true;
+    this.db.post_rqst({'id':this.id},'offer/schemeDetail').subscribe((res)=>{
+      console.log(res);
+      this.loading_list=false;
+      this.siteform=res['schemeDetail'];
+
+    },err=>{
+      this.loading_list=false;
+    })
+
+
+
+  }
+
+
   saveSchemeform(f){
     this.loading_list=true;
     this.siteform.created_by=this.loginId;
+    this.siteform.id=this.id;
     this.siteform.valid_from=moment(this.siteform.valid_from).format('YYYY-MM-DD');
     this.siteform.valid_to=moment(this.siteform.valid_to).format('YYYY-MM-DD');
     this.db.post_rqst({'data':this.siteform},'offer/addScheme').subscribe((res)=>{

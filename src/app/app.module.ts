@@ -101,6 +101,7 @@ import { SchemeListComponent } from './scheme-list/scheme-list.component';
 import { SchemeAddComponent } from './scheme-add/scheme-add.component';
 import { CouponCodeDataListComponent } from './coupon-code-data-list/coupon-code-data-list.component';
 import { CouponCodeDataDetailComponent } from './coupon-code-data-detail/coupon-code-data-detail.component';
+import { SchemeDetailComponent } from './scheme-detail/scheme-detail.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -124,6 +125,8 @@ const routes: Routes = [
   {path: 'site-add', component:SiteAddComponent , canActivate: [AuthGuard] },
   {path: 'schemeList', component:SchemeListComponent , canActivate: [AuthGuard] },
   {path: 'schemeAdd', component:SchemeAddComponent, canActivate: [AuthGuard] },
+  {path: 'schemeAdd/:id', component:SchemeAddComponent, canActivate: [AuthGuard] },
+  {path: 'schemeDetail/:id', component:SchemeDetailComponent, canActivate: [AuthGuard] },
 
   {path: 'contractor-list', component: KarigarListComponent , canActivate: [AuthGuard] },
   {path: 'karigar-add', component: KarigarAddComponent , canActivate: [AuthGuard] },
@@ -239,6 +242,7 @@ const routes: Routes = [
     SchemeAddComponent,
     CouponCodeDataListComponent,
     CouponCodeDataDetailComponent,
+    SchemeDetailComponent,
   ],
   imports: [
     // AutocompleteLibModule,

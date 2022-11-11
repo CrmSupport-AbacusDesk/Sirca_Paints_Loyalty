@@ -39,6 +39,7 @@ export class CouponCodeDataDetailComponent implements OnInit {
       console.log(result)
     this.loading_list=false;
     this.getData=result['qr_code_detail'];      
+    console.log( this.getData)
 
     },err=>{
     this.loading_list=false;

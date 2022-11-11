@@ -167,10 +167,9 @@
           <tr *ngFor="let val of schemeList; let i = index">
             <td class="w30">{{ ( (current_page - 1 ) * 20 ) + ( i+1 ) }}</td>
             <td class="w150">
-              <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' "> {{val.date_created | date: 'dd MMM
-                yyyy'}} / {{val.created_name}} </ng-container>
+              <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' "> {{val.date_created | date: 'dd MMM yyyy'}} / {{val.created_name}} </ng-container>
             </td>
-            <td  class="w100"><a class="blue" routerLink="/customer-detail/{{val.id | crypt}}"
+            <td  class="w100"><a class="blue" routerLink="/schemeDetail/{{val.id}}"
                 routerLinkActive="active">{{val.scheme_name | titlecase }} </a></td>
             <td class="w100" matTooltip="{{val.category_detail}}" matTooltipPosition="above">
               <div  style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
