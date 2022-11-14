@@ -57,11 +57,11 @@
                                             <div class="tags">
                                                 <ul >
                                                     <li *ngFor="let row of val.sub_categories; let j = index">
-                                                        <span>{{row.category_name}}|| PRODUCTS:{{row.product_count}}
+                                                        <span>{{row.category_name}}|| PRODUCTS:{{row.product_count}} || <strong><mark>Points:{{row.points}}</mark> </strong> 
                                                             
                                                             <div class="action-item">
                                                                 <ul>
-                                                                    <li (click)="toggle1 = !toggle1;editSubCategory(row.id,j)"><a><i class="material-icons">create</i></a></li>
+                                                                    <li (click)="toggle1 = !toggle1;editSubCategory(row.id,j,row.points )"><a><i class="material-icons">create</i></a></li>
                                                                     <li *ngIf="row.product_count==0" (click)="deleteSubCategory(row.id)"><a><i  class="material-icons  red-clr">delete_sweep</i></a>
                                                                     </li>
                                                                 </ul>
@@ -105,7 +105,7 @@
         </div>
     </div>
     
-    <div class="side-main" [ngClass] ="{'on' : toggle == true}">
+    <div class="side-main" [ngClass]="{'on' : toggle == true}">
         <div class="category-field" >
             <!-- f.form.valid &&  -->
             <form name="category" (ngSubmit)="savecategory(f)" #f="ngForm"  novalidate autocomplete="off">
@@ -119,10 +119,17 @@
                     <div class="option-field">
                         <div class="control-field">
                             <mat-form-field class="cs-input">
-                                <input matInput placeholder="Main Category" name="main_category" [(ngModel)] = "category.main_category" #main_category="ngModel" required>
+                                <input matInput placeholder="Main Category" name="main_category" [(ngModel)]="category.main_category" #main_category="ngModel" required>
                             </mat-form-field>  
                         </div>
                     </div>
+                    <!-- <div class="option-field">
+                        <div class="control-field">
+                            <mat-form-field class="cs-input">
+                                <input type="number" matInput placeholder="Contractor Points"  name="contractor_points" [(ngModel)]="category.contractor_points" #contractor_points="ngModel" required>
+                            </mat-form-field>  
+                        </div>
+                    </div> -->
                     
                     <div class="uploade-image add-img-12">
                         <h4>Upload Image</h4>
@@ -154,7 +161,7 @@
         <div class="side-bg" (click)="toggle = !toggle"></div>
     </div>
     
-    <div class="side-main" [ngClass] ="{'on' : toggle1 == true}">
+    <div class="side-main" [ngClass]="{'on' : toggle1 == true}">
         <div class="category-field" >
             <form name="category" (ngSubmit)="f.form.valid && saveSubcategory(f)" #f="ngForm" novalidate autocomplete="off">
                 <div class="category-hadding">
@@ -179,6 +186,14 @@
                         <div class="control-field">
                             <mat-form-field class="cs-input">
                                 <input matInput placeholder="Category Name" name="category_name" [(ngModel)] = "category.category_name" #category_name="ngModel" required>
+                            </mat-form-field>  
+                        </div>
+                    </div>
+
+                    <div class="option-field">
+                        <div class="control-field">
+                            <mat-form-field class="cs-input">
+                                <input type="number" matInput placeholder="Contractor Points"  name="contractor_points" [(ngModel)]="category.contractor_points" #contractor_points="ngModel" required>
                             </mat-form-field>  
                         </div>
                     </div>

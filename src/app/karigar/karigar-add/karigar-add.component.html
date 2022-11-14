@@ -190,10 +190,10 @@
                                                         <div>
                                                             <mat-form-field class=" cs-input cs-multi-select">
                                                                 <mat-select placeholder="Select State"
-                                                                    name="permanent_state"
+                                                                    name="state"
                                                                     (selectionChange)="getPerDistrictList(1)"
-                                                                    [(ngModel)]="karigarform.permanent_state"
-                                                                    #permanent_state="ngModel">
+                                                                    [(ngModel)]="karigarform.state"
+                                                                    #state="ngModel">
                                                                     <mat-option *ngFor="let val of per_states"
                                                                         [value]="val.state_name"> {{val.state_name}}
                                                                     </mat-option>
@@ -207,10 +207,10 @@
                                                         <div>
                                                             <mat-form-field class=" cs-input cs-multi-select">
                                                                 <mat-select class="h43" placeholder="Select District"
-                                                                    name="parmanent_district"
+                                                                    name="district"
                                                                     (selectionChange)="getCityList(1)"
-                                                                    [(ngModel)]="karigarform.parmanent_district"
-                                                                    #parmanent_district="ngModel">
+                                                                    [(ngModel)]="karigarform.district"
+                                                                    #district="ngModel">
                                                                     <mat-option *ngFor="let val of per_districts"
                                                                         [value]="val.district_name">
                                                                         {{val.district_name}} </mat-option>
@@ -228,8 +228,8 @@
                                                                 <input matInput placeholder="Pincode"
                                                                     (keypress)="numeric_Number($event)" maxlength="6"
                                                                     name="permanent_pincode"
-                                                                    [(ngModel)]="karigarform.permanent_pincode"
-                                                                    #permanent_pincode="ngModel">
+                                                                    [(ngModel)]="karigarform.pincode"
+                                                                    #pincode="ngModel">
                                                             </mat-form-field>
                                                         </div>
                                                     </div>
@@ -238,9 +238,9 @@
                                                     <div class="control-field">
                                                         <div>
                                                             <mat-form-field class="cs-input ">
-                                                                <input matInput placeholder="City" name="permanent_city"
-                                                                    [(ngModel)]="karigarform.permanent_city"
-                                                                    #permanent_city="ngModel">
+                                                                <input matInput placeholder="City" name="city"
+                                                                    [(ngModel)]="karigarform.city"
+                                                                    #city="ngModel">
                                                             </mat-form-field>
                                                         </div>
                                                     </div>
@@ -252,8 +252,8 @@
                                                     <div class="control-field">
                                                         <mat-form-field class="cs-input">
                                                             <textarea matInput placeholder="Street" class="h100"
-                                                                name="permanent_address"
-                                                                [(ngModel)]="karigarform.permanent_address"
+                                                                name="address"
+                                                                [(ngModel)]="karigarform.address"
                                                                 #address="ngModel"></textarea>
                                                         </mat-form-field>
                                                     </div>
@@ -291,18 +291,19 @@
                         <div class="sprate-box ">
                             <div class="full-offer">
                                 <div class="top-heading">
-                                    <h2>DOCUMENT INFORMATION</h2>
+                                    <h2>ADHAR CARD INFORMATION</h2>
                                 </div>
                             </div>
                             <div class="option-field">
 
                                 <div class="row">
-                                    <div class="col s6">
+                                    <!-- <div class="col s6">
                                         <div class="control-field">
                                             <div>
                                                 <mat-form-field class=" cs-input cs-multi-select">
                                                     <mat-select placeholder="Select Document Type" name="document_type"
-                                                        [(ngModel)]="karigarform.document_type" #document_type="ngModel">
+                                                        [(ngModel)]="karigarform.document_type"
+                                                        #document_type="ngModel">
                                                         <mat-option value="AdharCard">Adhar Card</mat-option>
                                                         <mat-option value="PanCard">Pan Card</mat-option>
                                                         <mat-option value="VoterCard">Voter Card</mat-option>
@@ -310,20 +311,59 @@
                                                 </mat-form-field>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col s6">
                                         <div class="control-field">
                                             <mat-form-field class="cs-input">
-                                                <input matInput placeholder="Document No." name="document_no"
-                                                    [(ngModel)]="karigarform.document_no" #document_no="ngModel">
+                                                <input matInput placeholder="Adhar No." name="adhar_no" [(ngModel)]="karigarform.adhar_no" #adhar_no="ngModel">
                                             </mat-form-field>
                                         </div>
                                     </div>
+
+                                    <div class="col s6">
+                                                <div class="main-padding">
+                                                    <div class="uploade-campal" >
+                                                        <ul>
+                                                            <li *ngFor="let val of media; let i=index">
+    
+                                                                <ng-container *ngIf="val.type == 'image'">
+                                                                    <img [src]="val.file">
+                                                                </ng-container>
+    
+                                                                <!-- <ng-container *ngIf="val.type == 'video'">
+                                                                <p >{{val.name}}</p>
+                                                                 </ng-container> -->
+    
+                                                                <span class="cancel-icon">
+                                                                    <i class="material-icons crose-icon "
+                                                                        (click)="deleteProductImage(i)">clear</i>
+                                                                </span>
+                                                            </li>
+                                                            <li class="add-bg-1" style="width: calc(17% - -100px);" *ngIf="media.length==0">
+                                                                <label>
+                                                                    <input style="display:none;" type="file"
+                                                                        (change)="fileChange($event)" name="file"
+                                                                        placeholder="Upload file" accept=".png,.jpg,.jpeg"
+                                                                        multiple />
+    
+                                                                    <div class="other">
+                                                                        <i class="material-icons">backup</i>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+    
+                                    
+    
+                                    </div>
+                                 
                                 </div>
 
                             </div>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col s12">
                                     <div class="sprate-box">
                                         <div class="full-offer">
@@ -343,9 +383,9 @@
                                                                 <img [src]="val.file">
                                                             </ng-container>
 
-                                                            <!-- <ng-container *ngIf="val.type == 'video'">
-                                              <p >{{val.name}}</p>
-                                            </ng-container> -->
+                                                            <ng-container *ngIf="val.type == 'video'">
+                                                                <p >{{val.name}}</p>
+                                                                 </ng-container> 
 
                                                             <span class="cancel-icon">
                                                                 <i class="material-icons crose-icon "
@@ -370,10 +410,270 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
+
+                <div class="row ">
+                    <div class="col s12">
+                        <div class="sprate-box ">
+                            <div class="full-offer">
+                                <div class="top-heading">
+                                    <h2>PAN CARD INFORMATION</h2>
+                                </div>
+                            </div>
+                            <div class="option-field">
+
+                                <div class="row">
+                                    <!-- <div class="col s6">
+                                        <div class="control-field">
+                                            <div>
+                                                <mat-form-field class=" cs-input cs-multi-select">
+                                                    <mat-select placeholder="Select Document Type" name="document_type"
+                                                        [(ngModel)]="karigarform.document_type"
+                                                        #document_type="ngModel">
+                                                        <mat-option value="AdharCard">Adhar Card</mat-option>
+                                                        <mat-option value="PanCard">Pan Card</mat-option>
+                                                        <mat-option value="VoterCard">Voter Card</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col s6">
+                                        <div class="control-field">
+                                            <mat-form-field class="cs-input">
+                                                <input matInput placeholder="Pan Card No." name="pan_no" [(ngModel)]="karigarform.pan_no" #pan_no="ngModel">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="col s6">
+                                                <div class="main-padding">
+                                                    <div class="uploade-campal" >
+                                                        <ul>
+                                                            <li *ngFor="let val of media2; let i=index">
+    
+                                                                <ng-container *ngIf="val.type == 'image'">
+                                                                    <img [src]="val.file">
+                                                                </ng-container>
+    
+                                                                <!-- <ng-container *ngIf="val.type == 'video'">
+                                                                <p >{{val.name}}</p>
+                                                                 </ng-container> -->
+    
+                                                                <span class="cancel-icon">
+                                                                    <i class="material-icons crose-icon "
+                                                                        (click)="deleteProductImage2(i)">clear</i>
+                                                                </span>
+                                                            </li>
+                                                            <li class="add-bg-1" style="width: calc(17% - -100px);" *ngIf="media2.length==0">
+                                                                <label>
+                                                                    <input style="display:none;" type="file"
+                                                                        (change)="fileChange2($event)" name="file"
+                                                                        placeholder="Upload file" accept=".png,.jpg,.jpeg"
+                                                                        multiple />
+    
+                                                                    <div class="other">
+                                                                        <i class="material-icons">backup</i>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+    
+                                    
+    
+                                    </div>
+                                 
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col s12">
+                                    <div class="sprate-box">
+                                        <div class="full-offer">
+                                            <div class="top-heading">
+                                                <h2>
+                                                    UPLOAD IMAGES
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="main-padding">
+                                                <div class="uploade-campal">
+                                                    <ul>
+                                                        <li *ngFor="let val of media; let i=index">
+
+                                                            <ng-container *ngIf="val.type == 'image'">
+                                                                <img [src]="val.file">
+                                                            </ng-container>
+
+                                                            <ng-container *ngIf="val.type == 'video'">
+                                                                <p >{{val.name}}</p>
+                                                                 </ng-container> 
+
+                                                            <span class="cancel-icon">
+                                                                <i class="material-icons crose-icon "
+                                                                    (click)="deleteProductImage(i)">clear</i>
+                                                            </span>
+                                                        </li>
+                                                        <li class="add-bg-1" *ngIf="media.length==0">
+                                                            <label>
+                                                                <input style="display:none;" type="file"
+                                                                    (change)="fileChange($event)" name="file"
+                                                                    placeholder="Upload file" accept=".png,.jpg,.jpeg"
+                                                                    multiple />
+
+                                                                <div class="other">
+                                                                    <i class="material-icons">backup</i>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row ">
+                    <div class="col s12">
+                        <div class="sprate-box ">
+                            <div class="full-offer">
+                                <div class="top-heading">
+                                    <h2>CANCEL CHECK INFORMATION</h2>
+                                </div>
+                            </div>
+                            <div class="option-field">
+
+                                <div class="row">
+                                    <!-- <div class="col s6">
+                                        <div class="control-field">
+                                            <div>
+                                                <mat-form-field class=" cs-input cs-multi-select">
+                                                    <mat-select placeholder="Select Document Type" name="document_type"
+                                                        [(ngModel)]="karigarform.document_type"
+                                                        #document_type="ngModel">
+                                                        <mat-option value="AdharCard">Adhar Card</mat-option>
+                                                        <mat-option value="PanCard">Pan Card</mat-option>
+                                                        <mat-option value="VoterCard">Voter Card</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col s6">
+                                        <div class="control-field">
+                                            <mat-form-field class="cs-input">
+                                                <input matInput placeholder="Cancel Check" name="cancel_check" [(ngModel)]="karigarform.cancel_check" #cancel_check="ngModel">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="col s6">
+                                                <div class="main-padding">
+                                                    <div class="uploade-campal" >
+                                                        <ul>
+                                                            <li *ngFor="let val of media3; let i=index">
+    
+                                                                <ng-container *ngIf="val.type == 'image'">
+                                                                    <img [src]="val.file">
+                                                                </ng-container>
+    
+                                                                <!-- <ng-container *ngIf="val.type == 'video'">
+                                                                <p >{{val.name}}</p>
+                                                                 </ng-container> -->
+    
+                                                                <span class="cancel-icon">
+                                                                    <i class="material-icons crose-icon "
+                                                                        (click)="deleteProductImage3(i)">clear</i>
+                                                                </span>
+                                                            </li>
+                                                            <li class="add-bg-1" style="width: calc(17% - -100px);" *ngIf="media3.length==0">
+                                                                <label>
+                                                                    <input style="display:none;" type="file"
+                                                                        (change)="fileChange3($event)" name="file"
+                                                                        placeholder="Upload file" accept=".png,.jpg,.jpeg"
+                                                                        multiple />
+    
+                                                                    <div class="other">
+                                                                        <i class="material-icons">backup</i>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+    
+                                    
+    
+                                    </div>
+                                 
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col s12">
+                                    <div class="sprate-box">
+                                        <div class="full-offer">
+                                            <div class="top-heading">
+                                                <h2>
+                                                    UPLOAD IMAGES
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="main-padding">
+                                                <div class="uploade-campal">
+                                                    <ul>
+                                                        <li *ngFor="let val of media; let i=index">
+
+                                                            <ng-container *ngIf="val.type == 'image'">
+                                                                <img [src]="val.file">
+                                                            </ng-container>
+
+                                                            <ng-container *ngIf="val.type == 'video'">
+                                                                <p >{{val.name}}</p>
+                                                                 </ng-container> 
+
+                                                            <span class="cancel-icon">
+                                                                <i class="material-icons crose-icon "
+                                                                    (click)="deleteProductImage(i)">clear</i>
+                                                            </span>
+                                                        </li>
+                                                        <li class="add-bg-1" *ngIf="media.length==0">
+                                                            <label>
+                                                                <input style="display:none;" type="file"
+                                                                    (change)="fileChange($event)" name="file"
+                                                                    placeholder="Upload file" accept=".png,.jpg,.jpeg"
+                                                                    multiple />
+
+                                                                <div class="other">
+                                                                    <i class="material-icons">backup</i>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
                 <div class="save mt30" [ngClass]="{loading: savingData}">
                     <button mat-button>SAVE</button>
                 </div>

@@ -12,14 +12,15 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { NgxEditorModule } from 'ngx-editor';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ReferralMasterComponent } from './master/referral-master/referral-master.component';
-
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { NgxBarcodeModule } from 'ngx-barcode';
 import { NgxHmCarouselModule } from 'ngx-hm-carousel';
 import 'hammerjs';
 
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule} from '@angular/material';
+import {MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatTooltipModule} from '@angular/material';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -94,6 +95,13 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SiteListComponent } from './site-list/site-list.component';
 import { SiteAddComponent } from './site-add/site-add.component';
 import { SalesUserListComponent } from './sales-user-list/sales-user-list.component';
+import { SiteDetailComponent } from './site-detail/site-detail.component';
+import { CouponAddComponent } from './coupon-add/coupon-add.component';
+import { SchemeListComponent } from './scheme-list/scheme-list.component';
+import { SchemeAddComponent } from './scheme-add/scheme-add.component';
+import { CouponCodeDataListComponent } from './coupon-code-data-list/coupon-code-data-list.component';
+import { CouponCodeDataDetailComponent } from './coupon-code-data-detail/coupon-code-data-detail.component';
+import { SchemeDetailComponent } from './scheme-detail/scheme-detail.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -115,14 +123,22 @@ const routes: Routes = [
   {path: 'special-dis', component: SpecialDiscountComponent , canActivate: [AuthGuard] },
   {path: 'site-add/:id', component:SiteAddComponent , canActivate: [AuthGuard] },
   {path: 'site-add', component:SiteAddComponent , canActivate: [AuthGuard] },
+  {path: 'schemeList', component:SchemeListComponent , canActivate: [AuthGuard] },
+  {path: 'schemeAdd', component:SchemeAddComponent, canActivate: [AuthGuard] },
+  {path: 'schemeAdd/:id', component:SchemeAddComponent, canActivate: [AuthGuard] },
+  {path: 'schemeDetail/:id', component:SchemeDetailComponent, canActivate: [AuthGuard] },
 
   {path: 'contractor-list', component: KarigarListComponent , canActivate: [AuthGuard] },
   {path: 'karigar-add', component: KarigarAddComponent , canActivate: [AuthGuard] },
   {path: 'karigar-add/:karigar_id', component: KarigarAddComponent , canActivate: [AuthGuard] },
   {path: 'karigar-detail/:karigar_id',  component: KarigarDetailComponent , canActivate: [AuthGuard] },
-  {path: 'coupon-code-list',  component: CouponCodeListComponent , canActivate: [AuthGuard] },
+  // {path: 'coupon-code-list',  component: CouponCodeListComponent , canActivate: [AuthGuard] },
+  {path: 'coupon-code-list',  component: CouponCodeDataListComponent , canActivate: [AuthGuard] },
+  {path: 'coupon-code-Detail/:id',  component: CouponCodeDataDetailComponent , canActivate: [AuthGuard] },
+  {path: 'coupon-code-add',  component: CouponAddComponent , canActivate: [AuthGuard] },
   {path: 'super-list', component: SuperComponent , canActivate: [AuthGuard] },
   {path: 'site-list/:page', component: SiteListComponent , canActivate: [AuthGuard] },
+  {path: 'site-detail/:id/:page', component:SiteDetailComponent , canActivate: [AuthGuard] },
   {path: 'complaints-list/:type', component: ComplaintsComponent , canActivate: [AuthGuard] },
   {path: 'architect-list', component: CustomerComponent , canActivate: [AuthGuard] },
   {path: 'customer-detail/:customer_id',  component: CustomerDetailComponent , canActivate: [AuthGuard] },
@@ -220,6 +236,13 @@ const routes: Routes = [
     AddCouponPointsComponent,
     SiteAddComponent,
     SalesUserListComponent,
+    SiteDetailComponent,
+    CouponAddComponent,
+    SchemeListComponent,
+    SchemeAddComponent,
+    CouponCodeDataListComponent,
+    CouponCodeDataDetailComponent,
+    SchemeDetailComponent,
   ],
   imports: [
     // AutocompleteLibModule,
@@ -231,6 +254,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatIconModule,
     MatInputModule,
+    NgxBarcodeModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
@@ -239,7 +263,9 @@ const routes: Routes = [
     AngularFontAwesomeModule,
     NgxHmCarouselModule,
     FusionChartsModule,
+    NgxQRCodeModule,
     MatProgressBarModule,
+    MatTooltipModule,
     AutocompleteLibModule,
     MatDialogModule,
     NgxMatSelectSearchModule,

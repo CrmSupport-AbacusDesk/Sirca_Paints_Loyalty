@@ -77,5 +77,28 @@
                 <li (click)="rotateImage('right')" ><i class="material-icons" title="Left">rotate_left</i></li>
             </ul>
         </div>
+
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'base64'">  
+            <div class="form-area">
+                <img [src]="mastergift">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+        
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'normal'">  
+            <div class="form-area">
+                <img [src]="mastergift">
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
+
+
+        <div class="gift-box product-img " *ngIf=" part_data.mode == 'image'">  
+            <div class="form-area">
+                <img src="{{uploadUrl+lead_data.name}}">
+                <p class="fix-text">{{data.visit_image_address}} {{data.site_image_address}} {{data.date_created | date: 'MMM d, y, h:mm:ss a'}}</p>
+            </div>
+            <button mat-button [mat-dialog-close]="false" ><i class="material-icons">clear</i></button>
+        </div>
     </mat-dialog-content>
 </div>

@@ -24,7 +24,11 @@ export class KarigarAddComponent implements OnInit {
     karigar_id:any;
     date1:any;
     media:any=[];
+    media2:any=[];
+    media3:any=[];
     selectedFile: File[]=[];
+    selectedFile2: File[]=[];
+    selectedFile3: File[]=[];
     contractorList:any=[];
     
     constructor(public db: DatabaseService, private route: ActivatedRoute, private router: Router, public ses: SessionStorage,
@@ -64,6 +68,7 @@ export class KarigarAddComponent implements OnInit {
                 this.loading_list = false;
                 //console.log(d);
                 this.karigarform = d.karigar;
+                this.karigarform.registrationType=this.karigarform.type
                 //console.log( this.karigarform);
                 this. getStateList();
                 this.getDistrictList(1);
@@ -100,7 +105,7 @@ export class KarigarAddComponent implements OnInit {
             let st_name;
             if(val == 1)
             {
-                st_name = this.karigarform.permanent_state;
+                st_name = this.karigarform.state;
             }
             this.db.post_rqst({'state_name':st_name}, 'app_master/getDistrict')
             .subscribe(d => {  
@@ -154,7 +159,7 @@ export class KarigarAddComponent implements OnInit {
             this.karigarform.type = "Plumber";
             this.karigarform.status = "Pending";
             
-            this.db.insert_rqst( { 'karigar' : this.karigarform , 'document_image':this.media }, 'app_karigar/addKarigarWeb')
+            this.db.insert_rqst( { 'karigar' : this.karigarform , 'adhar_image':this.media,'pan_card_image':this.media2,'cancel_check_image':this.media3 }, 'app_karigar/addKarigarWeb')
             .subscribe( d => {
                 this.savingData = false;
                 //console.log( d );
@@ -264,6 +269,81 @@ export class KarigarAddComponent implements OnInit {
           //console.log(index);
           this.selectedFile.splice(index,1)
           this.media.splice(index,1)
+        }
+
+
+        fileChange2(event) {
+      
+            console.log(event.target.files);
+            for (var i = 0; i < event.target.files.length; i++) {
+              this.selectedFile2.push(event.target.files[i]);
+              var type = event.target.files[i].type;
+              var name = event.target.files[i].name;
+      
+      
+              var reader = new FileReader();
+      
+              reader.readAsDataURL(event.target.files[i]); // read file as data url
+        
+              reader.onload = (e) => { // called once readAsDataURL is completed
+                console.log(e);
+                console.log(e);
+                 this.media2.push({file : reader.result, type : type.substr(0,5) , name : name})
+                // this.des.push(event.target.result);
+              }
+      
+      console.log( this.media2 );
+      
+      
+      
+      
+              
+            }
+            console.log(this.selectedFile2);
+          }
+
+        deleteProductImage2(index)
+        {
+          //console.log(index);
+          this.selectedFile2.splice(index,1)
+          this.media2.splice(index,1)
+        }
+
+        fileChange3(event) {
+      
+            console.log(event.target.files);
+            for (var i = 0; i < event.target.files.length; i++) {
+              this.selectedFile3.push(event.target.files[i]);
+              var type = event.target.files[i].type;
+              var name = event.target.files[i].name;
+      
+      
+              var reader = new FileReader();
+      
+              reader.readAsDataURL(event.target.files[i]); // read file as data url
+        
+              reader.onload = (e) => { // called once readAsDataURL is completed
+                console.log(e);
+                console.log(e);
+                 this.media3.push({file : reader.result, type : type.substr(0,5) , name : name})
+                // this.des.push(event.target.result);
+              }
+      
+      console.log( this.media3 );
+      
+      
+      
+      
+              
+            }
+            console.log(this.selectedFile3);
+          }
+
+        deleteProductImage3(index)
+        {
+          //console.log(index);
+          this.selectedFile3.splice(index,1)
+          this.media3.splice(index,1)
         }
 
         getContractorList(){
