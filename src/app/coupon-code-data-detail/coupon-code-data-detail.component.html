@@ -11,9 +11,20 @@
           <p>
             <Strong> Coupon Detail</Strong>
             <!-- <i class="material-icons">arrow_back</i> -->
-
-
           </p>
+         
+        </li>
+        <li *ngIf="getData.total_master!='0'">
+          <div class="master-btn pr30" >
+            <!-- <button mat-button routerLink="/karigar-add" routerLinkActive="active">ADD NEW</button> -->
+            <button mat-button title="Share As PDF" (click)="exportPDF('MyDIv');">Print</button>
+        </div>
+        </li>
+        <li *ngIf="getData.total_master=='0'">
+          <div class="master-btn pr30" >
+            <!-- <button mat-button routerLink="/karigar-add" routerLinkActive="active">ADD NEW</button> -->
+            <button mat-button title="Share As PDF" (click)="exportAsPDF2('MyDIvPdf');">Print</button>
+        </div>
         </li>
       </ul>
     </div>
@@ -122,8 +133,8 @@
         </div>
       </div>
       <div class="col s6" style="overflow-x: auto;height: 600px;">
-          <ng-container *ngIf="getData.total_master !='0'">
-            <div class="row" style="background:white;" *ngFor="let d of getData.master_qr_code_list">
+          <ng-container *ngIf="getData.total_master!='0'">
+            <div id="MyDIv" class="row" style="background:white;" *ngFor="let d of getData.master_qr_code_list">
               <div class="col s8 mb10 mt10">
                 <div>
                   <div>
@@ -197,7 +208,7 @@
        
 
           <ng-container *ngIf="getData.total_master=='0'">
-            <div class="row" style="background:white;"   *ngFor="let data of getData.secondary_qr_code_detail">
+            <div id="MyDIvPdf" class="row"  style="background:white;"  *ngFor="let data of getData.secondary_qr_code_detail">
               <div class="col s8 mb10 mt10">
                 <div>
                   <div>

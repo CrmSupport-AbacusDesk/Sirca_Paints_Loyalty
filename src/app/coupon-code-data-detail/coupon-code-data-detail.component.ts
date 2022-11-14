@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatabaseService } from '../_services/DatabaseService';
+import  jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 @Component({
   selector: 'app-coupon-code-data-detail',
   templateUrl: './coupon-code-data-detail.component.html',
@@ -13,6 +17,8 @@ export class CouponCodeDataDetailComponent implements OnInit {
   getData:any={};
   coupon_id:any='';
   loading_list:boolean=false;
+  showDivpdf:boolean=false;
+  imgFile:any=[];
   constructor(private route: ActivatedRoute,public db:DatabaseService) { }
 
   ngOnInit() {
@@ -45,6 +51,149 @@ export class CouponCodeDataDetailComponent implements OnInit {
     this.loading_list=false;
       
     });
+
+  }
+
+  // exportAsPDF(div_id)
+  // {
+  //   let data = document.getElementById(div_id);  
+  //   html2canvas(data).then(canvas => {
+  //     const contentDataURL = canvas.toDataURL('image/png')  
+  //     let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+  //     // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
+  //     pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
+  //     pdf.save('Filename.pdf');   
+  //   }); 
+  // }
+
+ 
+
+  exportPDF(div_id){
+
+    this.showDivpdf = true;
+    this.imgFile = []
+
+    var imgWidth = 0;
+    var pageHeight = 0;
+    var imgHeight = 0;
+    var heightLeft = 0;
+    var position = 0;
+    let pdf = null;
+    let coponId=this.getData.id;
+    var element : HTMLElement = null;
+
+    setTimeout(() => {
+
+      if(this.showDivpdf==true)
+      {
+            element = document.getElementById(div_id);
+
+            htmlToImage.toPng(element).then(function (dataUrl) {
+
+                  console.log(dataUrl);
+
+                  const imgFile = dataUrl;
+                  imgWidth = 200;
+                  pageHeight = 295;
+                  imgHeight = element.offsetHeight * imgWidth / element.offsetWidth;
+                  heightLeft = imgHeight;
+
+                  pdf=new jspdf('p', 'mm');
+                  position = 5;
+                  console.log('image width 1 '+imgWidth)
+                  console.log('image imgHeight 1 '+imgHeight)
+
+                  pdf.addImage(imgFile,'PNG', 5,position, imgWidth, imgHeight);
+                  heightLeft -= pageHeight;
+
+                  while (heightLeft >= 0) {
+
+                        position = heightLeft - imgHeight + 5;
+
+                        pdf.addPage();
+                        pdf.addImage(imgFile,'PNG', 5,position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                  }
+
+                  pdf.save(`Coupon${coponId}.pdf`);
+            });
+
+        
+      }
+
+    }, 1000);
+
+    setTimeout(() => {
+
+      //  this.showDivpdf=false;
+      // window.location.reload();
+    }, 5000);
+
+
+  }
+
+  exportAsPDF2(div_id){
+
+    this.showDivpdf = true;
+    this.imgFile = []
+
+    var imgWidth = 0;
+    var pageHeight = 0;
+    var imgHeight = 0;
+    var heightLeft = 0;
+    var position = 0;
+    let pdf = null;
+    let coponId=this.getData.id;
+
+    var element : HTMLElement = null;
+
+    setTimeout(() => {
+
+      if(this.showDivpdf==true)
+      {
+            element = document.getElementById(div_id);
+
+            htmlToImage.toPng(element).then(function (dataUrl) {
+
+                  console.log(dataUrl);
+
+                  const imgFile = dataUrl;
+                  imgWidth = 200;
+                  pageHeight = 295;
+                  imgHeight = element.offsetHeight * imgWidth / element.offsetWidth;
+                  heightLeft = imgHeight;
+
+                  pdf=new jspdf('p', 'mm');
+                  position = 5;
+                  console.log('image width 1 '+imgWidth)
+                  console.log('image imgHeight 1 '+imgHeight)
+
+                  pdf.addImage(imgFile,'PNG', 5,position, imgWidth, imgHeight);
+                  heightLeft -= pageHeight;
+
+                  while (heightLeft >= 0) {
+
+                        position = heightLeft - imgHeight + 5;
+
+                        pdf.addPage();
+                        pdf.addImage(imgFile,'PNG', 5,position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                  }
+
+                  pdf.save(`Coupon${coponId}.pdf`);
+            });
+
+        
+      }
+
+    }, 1000);
+
+    setTimeout(() => {
+
+      //  this.showDivpdf=false;
+      // window.location.reload();
+    }, 5000);
+
 
   }
 

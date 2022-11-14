@@ -22,9 +22,15 @@ export class SiteAddComponent implements OnInit {
   salesUser:any =[];
   pc:any=[];
   pincodes: any = [];
+  architectList:any=[];
+  architectList2:any=[];
   karigar_id:any;
   image = new FormData();
   date1:any;
+  latitude=20.5937;
+  longitude=78.9629;
+  mapType = 'roadmap';
+  zoom=3;
   zoneData:any =[];
   managerData:any =[];
   uploadurl: any = "";
@@ -47,7 +53,7 @@ export class SiteAddComponent implements OnInit {
   ngOnInit() {
     
     // this.managerList('');
-    this.getBrand('');
+    // this.getBrand('');
     this.route.params.subscribe(params => {
       this.karigar_id = params['id'];
       if (this.karigar_id)
@@ -58,6 +64,7 @@ export class SiteAddComponent implements OnInit {
       this.getStateList();
       // this.get_karigar_type();
       this.getPc('');
+      this.getarchitectList('');
       this.getSalesExecutive('');
       this.siteform.country_id = 99;
     });
@@ -195,6 +202,7 @@ export class SiteAddComponent implements OnInit {
     
   }
   
+  pc2:any=[]
   getPc(search){
     let filter={};
     filter={
@@ -204,9 +212,61 @@ export class SiteAddComponent implements OnInit {
     .subscribe(d => { 
       console.log(d);
       this.pc = d.contractorData['data'];
+      this.pc2 = d.contractorData['data'];
     },error=>{
       this.loading_list=false;
     });
+  }
+
+
+  searchPc(contractor_name){
+  this.tempSearch='';
+  this.pc=[];
+  for(let x=0; x<this.pc2.length;x++){
+    contractor_name=contractor_name.toLowerCase();
+    this.tempSearch=this.pc2[x]['first_name'].toLowerCase();
+    if(this.tempSearch.includes(contractor_name)){
+      this.pc.push(this.pc2[x]);
+    }
+  }    
+
+
+  }
+
+  getarchitectList(search){
+    let filter={};
+    filter={
+        mode:0
+    };
+    this.db.post_rqst({'filter':filter}, 'karigar/architectList')
+    .subscribe(d => { 
+      console.log(d);
+      this.architectList = d.architectData['data'];
+      this.architectList2 = d.architectData['data'];
+    },error=>{
+      this.loading_list=false;
+    });
+  }
+
+  tempSearch:any={};
+  SearcharchitectList(architect_name){
+    this.tempSearch='';
+    this.architectList=[];
+    for(let x=0; x<this.architectList2.length;x++){
+    architect_name=architect_name.toLowerCase();
+    console.log(architect_name);
+
+      this.tempSearch=this.architectList2[x]['first_name'].toLowerCase();
+      console.log(this.tempSearch);
+      if(this.tempSearch.includes(architect_name)){
+        this.architectList.push(this.architectList2[x]);
+        console.log(this.architectList)
+      }
+
+    }
+
+
+
   }
   
   getDelaer(search_zone, search){
@@ -395,6 +455,36 @@ export class SiteAddComponent implements OnInit {
     },error=>{
       this.loading_list=false;
     });
+  }
+
+
+  update_google_location(country, state, district, city, pincode , address, type){
+    console.log(type);
+    console.log(district);
+    console.log(city);
+    console.log(pincode);
+    console.log(address);
+    console.log(country);
+
+    // const dialogRef = this.dialog.open(DistributorModelComponent, {
+    //   width:'500px',
+    //   data: {
+    //     id: this.lead_id,
+    //     country,
+    //     state,
+    //     district,
+    //     city,
+    //     pincode,
+    //     address,
+    //     type,
+    //   }
+    // });
+    // dialogRef.afterClosed().subscribe(latlong => {
+    //   console.log(latlong);
+    //   this.leadDetail();
+    //   this.tabActive('tab1');
+
+    // })
   }
   
 }
