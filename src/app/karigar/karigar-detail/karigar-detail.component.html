@@ -10,7 +10,7 @@
                 <div class="sprate-box">
                     <div class="full-offer">
                         <div class="top-heading">
-                            <h2>PLUMBER DETAIL</h2>
+                            <h2>{{getData.type}} DETAIL</h2>
                             <div class="review-se review-star">
                                 <ul>
                                     <li>
@@ -215,7 +215,7 @@
                 </div>
 
                 <div class="row mt10">
-                    <div class="col s6">
+                    <!-- <div class="col s6">
                         <div class="sprate-box">
                             <div class="full-offer">
                                 <div class="top-heading">
@@ -227,8 +227,7 @@
                                             <div class="img-box">
                                                 <div class="name-box point-sec doc-file" >
                                                     <img *ngIf="getData.document_image"  [src]="getData.document_image"  (click)="openDialog( getData.id,'test6')">
-                                                    <!-- <img *ngIf="getData.document_image == '' "  [src]="assets/abacus-icon.png" > -->
-                                                    <!--  -->
+                                                  
                                                     
                                                     <img *ngIf="getData.document_image == '' " src="assets/aadhar-card.png" >
                                                     
@@ -246,6 +245,159 @@
                                                     <div class="margin pl0">
                                                         <p>Document Number</p>
                                                         <span>{{getData.document_no}}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sprate-box mt10">
+                            <div class="full-offer">
+                                <div class="top-heading">
+                                    <h2>Dealer Detail</h2>
+                                </div>
+                                <div class="detail-info defult-css">
+                        
+                                    <div class="basic-details">
+                                        <div class="profile-info">
+                                            <ul>
+                                                <li>
+                                                    <a><i class="material-icons"> account_circle</i></a>
+                                                    <div class="margin">
+                                                        <p>Name</p>
+                                                        <span>{{(getData.dealer_contact_person != '') ? (getData.dealer_contact_person| titlecase ): ('----')}}</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <a><i class="material-icons">local_phone</i></a>
+                                                    <div class="margin">
+                                                        <p>Mobile No.</p>
+                                                        <span>{{(getData.dealer_mobile != '') ? (getData.dealer_mobile) : ('----') }}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col s6">
+                        <div class="sprate-box">
+                            <div class="full-offer">
+                                <div class="top-heading">
+                                    <h2>ADHAAR DETAIL</h2>
+                                </div>
+                                <div class="detail-info">
+                                    <div class="basic-details">
+                                        <div class="profile-info">
+                                            <div class="img-box">
+                                                <div class="name-box point-sec doc-file" >
+                                                    <img *ngIf="db.uploadUrl+getData.adhar_image"  [src]="db.uploadUrl+getData.adhar_image"  (click)="openDialog( getData.id,'test6')">
+                                                  
+                                                    
+                                                    <img *ngIf="db.uploadUrl+getData.adhar_image == '' " src="assets/aadhar-card.png" >
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="margin pl0">
+                                                        <p>Document Type</p>
+                                                        <span>Adhar Card</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="margin pl0">
+                                                        <p>Document Number</p>
+                                                        <span>{{getData.adhar_no}}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="col s6">
+                        <div class="sprate-box">
+                            <div class="full-offer">
+                                <div class="top-heading">
+                                    <h2>PAN CARD DETAIL</h2>
+                                </div>
+                                <div class="detail-info">
+                                    <div class="basic-details">
+                                        <div class="profile-info">
+                                            <div class="img-box">
+                                                <div class="name-box point-sec doc-file" >
+                                                    <img *ngIf="db.uploadUrl+getData.pan_card_image"  [src]="db.uploadUrl+getData.pan_card_image"  (click)="openDialog( getData.id,'test6')">
+                                                    <!-- <img *ngIf="getData.document_image == '' "  [src]="assets/abacus-icon.png" > -->
+                                                    <!--  -->
+                                                    
+                                                    <img *ngIf="db.uploadUrl+getData.pan_card_image == '' " src="assets/aadhar-card.png" >
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="margin pl0">
+                                                        <p>Document Type</p>
+                                                        <span>PAN CARD</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="margin pl0">
+                                                        <p>Document Number</p>
+                                                        <span>{{getData.pan_no}}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
+                    <div class="col s6">
+                        <div class="sprate-box">
+                            <div class="full-offer">
+                                <div class="top-heading">
+                                    <h2>CANCEL CHECK DETAIL</h2>
+                                </div>
+                                <div class="detail-info">
+                                    <div class="basic-details">
+                                        <div class="profile-info">
+                                            <div class="img-box">
+                                                <div class="name-box point-sec doc-file" >
+                                                    <img *ngIf="db.uploadUrl+getData.cancel_check_image"  [src]="db.uploadUrl+getData.cancel_check_image"  (click)="openDialog( getData.id,'test6')">
+                                                    <!-- <img *ngIf="getData.document_image == '' "  [src]="assets/abacus-icon.png" > -->
+                                                    <!--  -->
+                                                    
+                                                    <img *ngIf="db.uploadUrl+getData.cancel_check_image == '' " src="assets/aadhar-card.png" >
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="margin pl0">
+                                                        <p>Document Type</p>
+                                                        <span>cANCEL CHECK</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="margin pl0">
+                                                        <p>Document Number</p>
+                                                        <span>{{getData.cancel_check}}</span>
                                                     </div>
                                                 </li>
                                             </ul>

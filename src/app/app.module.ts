@@ -16,6 +16,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { NgxHmCarouselModule } from 'ngx-hm-carousel';
 import 'hammerjs';
+import { AgmCoreModule } from '@agm/core';
 
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -252,6 +253,13 @@ const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     RouterModule.forRoot(routes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCcc41_Zu1s8GeOSTbIRbCxU8iZlCogz2c'
+      /* apiKey is required, unless you are a
+      premium customer, in which case you can
+      use clientId
+      */
+    }),
     MatIconModule,
     MatInputModule,
     NgxBarcodeModule,

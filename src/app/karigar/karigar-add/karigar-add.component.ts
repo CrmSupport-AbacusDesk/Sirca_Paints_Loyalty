@@ -159,7 +159,7 @@ export class KarigarAddComponent implements OnInit {
             this.karigarform.type = "Plumber";
             this.karigarform.status = "Pending";
             
-            this.db.insert_rqst( { 'karigar' : this.karigarform , 'adhar_image':this.media,'pan_card_image':this.media2,'cancel_check_image':this.media3 }, 'app_karigar/addKarigarWeb')
+            this.db.insert_rqst( { 'karigar' : this.karigarform , 'adhar_image':this.media,'pan_card_image':this.media2,'cancel_check_image':this.media3 }, 'karigar/addKarigar')
             .subscribe( d => {
                 this.savingData = false;
                 //console.log( d );
@@ -168,11 +168,11 @@ export class KarigarAddComponent implements OnInit {
                     return;
                 }
                 if(d['status']=='SUCCESS'){
-                    if(d['type']=='Contractor'){
+                    if(d['registrationType']=='Contractor'){
                         this.router.navigate(['contractor-list']);
                         this.dialog.success( 'Contractor successfully added');
                     }
-                    if(d['type']=='Architect'){
+                    if(d['registrationType']=='Architect'){
                         this.router.navigate(['architect-list']);
                         this.dialog.success( 'Architect successfully added');
                     }
