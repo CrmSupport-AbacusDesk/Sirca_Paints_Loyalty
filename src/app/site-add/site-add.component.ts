@@ -418,6 +418,8 @@ export class SiteAddComponent implements OnInit {
     this.siteform.salesuser_id = this.salesuser_id;
     this.siteform.loginId = this.loginId;
     this.siteform.loginName = this.loginName;
+    this.siteform.latitude=this.latitude;
+    this.siteform.longitude=this.longitude;
     this.siteform.dob = this.siteform.dob  ? this.db.pickerFormat(this.siteform.dob) : '';
     this.siteform.created_by = this.db.datauser.id;
     if(this.karigar_id)

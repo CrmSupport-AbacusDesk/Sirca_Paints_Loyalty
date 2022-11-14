@@ -103,6 +103,7 @@ import { SchemeAddComponent } from './scheme-add/scheme-add.component';
 import { CouponCodeDataListComponent } from './coupon-code-data-list/coupon-code-data-list.component';
 import { CouponCodeDataDetailComponent } from './coupon-code-data-detail/coupon-code-data-detail.component';
 import { SchemeDetailComponent } from './scheme-detail/scheme-detail.component';
+import { EditStatusComponent } from './edit-status/edit-status.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -244,6 +245,7 @@ const routes: Routes = [
     CouponCodeDataListComponent,
     CouponCodeDataDetailComponent,
     SchemeDetailComponent,
+    EditStatusComponent,
   ],
   imports: [
     // AutocompleteLibModule,
@@ -305,7 +307,8 @@ const routes: Routes = [
     CategoryModelComponent,
     ChangePriceModelComponent,
     ComplaintRemarkModalComponent,
-    AddCouponPointsComponent
+    AddCouponPointsComponent,
+    EditStatusComponent,
 
   ],
   

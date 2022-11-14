@@ -3,6 +3,7 @@ import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatabaseService } from 'src/app/_services/DatabaseService';
 import { Component, OnInit } from '@angular/core';
+import { EditStatusComponent } from '../edit-status/edit-status.component';
 
 @Component({
   selector: 'app-site-list',
@@ -154,7 +155,21 @@ export class SiteListComponent implements OnInit {
   //   });
   // }
 
- 
+  
+  edit(id,status){
+    const dialogRef=this.alrt.open(EditStatusComponent,{
+      width:'400px',
+      data:{
+        id,
+        status
+      }
+    });
+    dialogRef.afterClosed().subscribe(result=>{
+      this.getUserList('');
+    })
+
+  }
+
   salesUsertatus(id, status)
   {
     this.dialog.comanAlert('Do you want to change status')

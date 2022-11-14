@@ -119,7 +119,7 @@
                     <li>
                       <figure>
                         <div class="right-cont">
-                          <p>Max Bahubali</p>
+                          <p>Contractor Detail</p>
                           <span>{{getData.pc_name | titlecase }} - {{getData.pc_contact}}</span>
                         </div>
                       </figure>
@@ -203,7 +203,28 @@
         </div>
       </div>
 
-
+      <div class="col s4">
+        <div class="sprate-box">
+          <div class="full-offer">
+            <div class="top-heading no-justify">
+              <h2>Site Location</h2>
+            </div>
+          </div>
+          <div>
+            <agm-map [zoom]="zoom" center="[getData.latitude, getData.longitude]" [latitude]="getData.latitude" [longitude]="getData.longitude"
+              [mapTypeId]='mapType'>
+              <agm-marker [latitude]="getData.latitude" [longitude]="getData.longitude"></agm-marker>
+            </agm-map>
+            <!-- <div class="cs-btn padding10 border-top text-right">
+              <div class="in-btn sm-btn">
+                <button mat-raised-button color="accent"
+                  (click)="update_google_location('India',lead_detail.state,lead_detail.district,lead_detail.city,lead_detail.pincode,lead_detail.address,'updateGoogleLocation')">Update
+                  Location</button>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
 
 
     </div>

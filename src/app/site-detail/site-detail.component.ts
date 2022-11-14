@@ -19,6 +19,9 @@ export class SiteDetailComponent implements OnInit {
   status:any='';
   loading_list = true;
   executive:any=[];
+  zoom=3;
+  mapType = 'roadmap';
+
   filtering : any = false;
   filter:any = {};
   last_page: number ;

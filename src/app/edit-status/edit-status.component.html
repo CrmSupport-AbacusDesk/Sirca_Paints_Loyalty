@@ -1,0 +1,37 @@
+<div class="gift-box">
+  <div class="zift-hadding">
+    <p>Change Status</p>
+    <div class="close-icon">
+      <button mat-button mat-dialog-close ><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+  
+  <div class="trans">
+    <form name="offer" (ngSubmit)="f.form.valid && changeEditStatus(f)" #f="ngForm" novalidate autocomplete="off">
+      <div class="form-area">
+        <div class="slect none-bo mr0">
+          <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select class="offer.gift_status" placeholder="Status" [(ngModel)]="edit.site_status" #site_status="ngModel" name="site_status" required>
+                <mat-option value ="Active" class="Pending">Active</mat-option>
+                <mat-option value ="Closed" class="Reject">Closed</mat-option>
+            
+              </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <!-- <div class="option-field" *ngIf="offer.gift_status == 'Reject'">
+        <div class="control-field">
+          <mat-form-field  class="cs-input">
+            <textarea matInput placeholder="Description" class="h106" name="desc" [(ngModel)] = "offer.desc" #desc="ngModel" ></textarea>
+          </mat-form-field>
+        </div>
+      </div> -->
+      
+      <div class="save mt10" [ngClass]="{loading: savingData}">
+        <button mat-button class="mb0"  [disabled]="savingData">SAVE</button>
+      </div>
+    </form>
+  </div>
+</div>
