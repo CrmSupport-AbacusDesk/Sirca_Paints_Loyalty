@@ -33,6 +33,21 @@
                     <div class="col s4">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
+                          <mat-select placeholder="Select Category" multiple [(ngModel)]="siteform.category_id"
+                            name="category_id" #category_id="ngModel" required>
+                            <mat-option>
+                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getCategoryList($event.target.value)"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option [value]="row.id" *ngFor="let row of categoryList">{{row.main_category}}</mat-option>
+
+                           
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col s4">
+                      <div class="control-field">
+                        <mat-form-field class="cs-input">
                           <mat-select placeholder="Contractor Name" multiple [(ngModel)]="siteform.contractor_id" name="contractor_id" #contractor_id="ngModel">
                             <mat-option>
                               <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getPc($event.target.value)"></ngx-mat-select-search>
@@ -57,21 +72,7 @@
                         </mat-form-field>  
                       </div>
                     </div> -->
-                    <div class="col s3">
-                      <div class="control-field">
-                        <mat-form-field class="cs-input">
-                          <mat-select placeholder="Select Category" multiple [(ngModel)]="siteform.category_id"
-                            name="category_id" #category_id="ngModel" required>
-                            <mat-option>
-                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getCategoryList($event.target.value)"></ngx-mat-select-search>
-                            </mat-option>
-                            <mat-option [value]="row.id" *ngFor="let row of categoryList">{{row.main_category}}</mat-option>
-
-                           
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
+                
 
                     <div class="col s3">
                       <div class="control-field">

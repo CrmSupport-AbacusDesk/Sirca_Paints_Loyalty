@@ -18,7 +18,7 @@
         myurl = 'https://devcrm.abacusdesk.com/sircapaints/dd_api/';
         myurl1 = 'https://devcrm.abacusdesk.com/sircapaints/crm/api/index.php/';
         uploadUrl= 'https://devcrm.abacusdesk.com/sircapaints/dd_api/app/uploads/'
-
+        main_category_image_url='https://devcrm.abacusdesk.com/sircapaints/dd_api/app/uploads/catImages/'
 
         can_active = '';
         datauser: any = {};

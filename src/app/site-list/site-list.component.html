@@ -1,9 +1,10 @@
-<div class="main-container">
-  <div class="loader" *ngIf="loading_list">
-    <div class="loding-logo">
-      <mat-spinner></mat-spinner>
-    </div>
+<div class="loader" *ngIf="loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
   </div>
+</div>
+<div class="main-container">
+  
   <div class="fixed">
     <div class="tab-header">
       <div class="tabs-list gift-tab-list">
@@ -72,7 +73,7 @@
       </div>
     </div>
 
-    <div class="css-table hr-scroll-table">
+    <div class="css-table">
       <div class="sticky-header">
         <div class="header">
           <table>
@@ -85,13 +86,14 @@
               <th class="w150">State</th>
               <th class="w150">District</th>
               <th class="w150">City</th>
-              <th class="w150">Sales Zone</th>
+              <th class="w150">Architect Detail</th>
+              <!-- <th class="w150">Sales Zone</th> -->
               <!-- <th class="w150">Project Size (Cons. Area) Sq. Ft.</th> -->
               <!-- <th class="w150">Construction Type</th>
                 <th class="w150">Construction Stage</th> -->
-              <th class="w90 text-center">Site Type</th>
-              <th class="w90 text-center">Brand Being Used</th>
-              <th class="w100 text-center">Site Potential(Bags)</th>
+              <!-- <th class="w90 text-center">Site Type</th> -->
+              <!-- <th class="w90 text-center">Brand Being Used</th> -->
+              <!-- <th class="w100 text-center">Site Potential(Bags)</th> -->
               <th class="w150">Contractor Detail</th>
               <th class="w100 text-center">Status</th>
 
@@ -143,12 +145,19 @@
                 </div>
               </th>
               <th class="w150">
+                <!-- <div class="search-form">
+                  <input type="text" placeholder="Search..." [(ngModel)]="filter.city"
+                    (keyup.enter)="current_page = 1;getUserList('')">
+                  <i class="material-icons">search</i>
+                </div> -->
+              </th>
+              <!-- <th class="w150">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.sales_zone"
                     (keyup.enter)="current_page = 1;getUserList('')">
                   <i class="material-icons">search</i>
                 </div>
-              </th>
+              </th> -->
               <!-- <th class="w150">
                   <div class="search-form">
                     <input type="text" placeholder="Search..." [(ngModel)]="filter.project_size"  (keyup.enter)="current_page = 1;getUserList('')">
@@ -167,27 +176,27 @@
                     <i class="material-icons">search</i>
                   </div>
                 </th> -->
-              <th class="w90 text-center">
+              <!-- <th class="w90 text-center">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.site_type"
                     (keyup.enter)="current_page = 1;getUserList('')">
                   <i class="material-icons">search</i>
                 </div>
-              </th>
-              <th class="w90 text-center">
+              </th> -->
+              <!-- <th class="w90 text-center">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.brand"
                     (keyup.enter)="current_page = 1;getUserList('')">
                   <i class="material-icons">search</i>
                 </div>
-              </th>
-              <th class="w100 text-center">
+              </th> -->
+              <!-- <th class="w100 text-center">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.site_potential"
                     (keyup.enter)="current_page = 1;getUserList('')">
                   <i class="material-icons">search</i>
                 </div>
-              </th>
+              </th> -->
               <th class="w150 text-center">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.pc_name"
@@ -230,24 +239,25 @@
               <td class="w150">{{val.state}}</td>
               <td class="w150">{{val.district}}</td>
               <td class="w150">{{val.city}}</td>
-              <td class="w150">{{val.sales_zone}}</td>
+              <td class="w150">{{val.architect_name}}</td>
+              <!-- <td class="w150">{{val.sales_zone}}</td> -->
               <!-- <td class="w150">{{val.project_size}}</td> -->
               <!-- <td class="w150">{{val.construction_type}}</td>
                   <td class="w150">{{val.stage}}</td> -->
-              <td class="w90 text-center">{{val.site_type | titlecase}}</td>
+              <!-- <td class="w90 text-center">{{val.site_type | titlecase}}</td>
               <td class="w90 text-center">{{val.brand | titlecase}}</td>
-              <td class="w100 text-center">{{val.site_potential}}</td>
+              <td class="w100 text-center">{{val.site_potential}}</td> -->
               <td class="w150">
                 <a class="blue" routerLink="/karigar-detail/{{val.pc_id}}/{{current_page}}" routerLinkActive="active">
                   {{val.pc_name | titlecase}}
                 </a>
-                - <strong >{{val.pc_contact}}</strong>
+                - <strong>{{val.pc_contact}}</strong>
               </td>
               <td class="w100">
                 {{val.site_status}}
                 <div class="cs-action">
-                  <a class="ac-green" matTooltip="Edit" matTooltipPosition="below" (click)="edit(val.id,val.site_status)"><i
-                      class="material-icons">edit</i></a>
+                  <a class="ac-green" matTooltip="Edit" matTooltipPosition="below"
+                    (click)="edit(val.id,val.site_status)"><i class="material-icons">edit</i></a>
                 </div>
               </td>
               <!-- <td class="w50 text-center">

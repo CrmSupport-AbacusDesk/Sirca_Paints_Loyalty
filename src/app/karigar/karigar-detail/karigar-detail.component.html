@@ -13,12 +13,12 @@
                             <h2>{{getData.type}} DETAIL</h2>
                             <div class="review-se review-star">
                                 <ul>
-                                    <li>
+                                    <!-- <li>
                                         <button mat-raised-button color="warn" (click)="openAddCouponPoints()"  style="background: #3b8004;">
                                             <i class="material-icons" style="color:#fff;">add</i>
                                             Add Points
                                         </button>
-                                    </li>
+                                    </li> -->
                                     <!-- <li [ngClass]="{'rating':getData.rating>=1}"><i class="material-icons">
                                         star
                                     </i></li>
@@ -172,7 +172,7 @@
                                     </figure>
                                 </li>
                                 
-                                <li *ngIf="getData.status == 'Verified' || getData.dr_id =='0'">
+                                <!-- <li *ngIf="getData.status == 'Verified' || getData.dr_id =='0'">
                                     <figure>
                                         <div class="left-img">
                                             <img src="assets/reason.svg">
@@ -183,7 +183,7 @@
                                             
                                         </div>
                                     </figure>
-                                </li>
+                                </li> -->
                                 
                                 
                                 
@@ -202,12 +202,12 @@
                                     </figure>
                                 </li>
                                 
-                                <li class="wp100">
+                                <!-- <li class="wp100">
                                     <div class="margin">
                                         <p> Channel Partner</p>
                                         <span>{{getData.distributor_name}}</span>
                                     </div>
-                                </li>
+                                </li> -->
                                 
                             </ul>
                         </div>
@@ -524,10 +524,10 @@
                                         <img *ngIf="getData.profile == '' " class="lnr lnr-user"
                                         src="assets/user.png">
                                     </div> -->
-                                    <div class="right-cont col s10">
+                                    <!-- <div class="right-cont col s10">
                                         <p>Earn By Service</p>
                                         <span>{{getData.earn_by_service}}</span>
-                                    </div>
+                                    </div> -->
                                     <div class="col s2">
                                         <i class="material-icons">chevron_right</i>
                                     </div>
@@ -997,7 +997,7 @@
                                                 <mat-option value="Verified">Verified</mat-option>
                                                 <mat-option value="Pending">Pending</mat-option>
                                                 <mat-option value="Reject">Reject</mat-option>
-                                                <mat-option value="Suspect">Suspect</mat-option>
+                                                <!-- <mat-option value="Suspect">Suspect</mat-option> -->
                                             </mat-select>
                                         </mat-form-field>
                                     </div>

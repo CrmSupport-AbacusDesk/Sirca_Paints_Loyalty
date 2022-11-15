@@ -12,7 +12,7 @@ import { EditStatusComponent } from '../edit-status/edit-status.component';
 })
 export class SiteListComponent implements OnInit {
 
-  loading_list = true;
+  loading_list:boolean = false;
   site_locations: any = [];
   total_dealers = 0;
   dealer_all:any =0;
@@ -99,7 +99,7 @@ export class SiteListComponent implements OnInit {
       this.current_page = 1;
     }
     
-    this.db.post_rqst(  {'filter': this.filter , 'login':this.db.datauser,user_type:"3"}, 'master/siteLocationList?page=' + this.current_page)
+    this.db.post_rqst(  {'filter': this.filter , 'login':this.db.datauser,user_type:"3"}, 'master/siteLocationList?page='+this.current_page)
     .subscribe( d => {
       this.loading_list = false;
       console.log(d);            
