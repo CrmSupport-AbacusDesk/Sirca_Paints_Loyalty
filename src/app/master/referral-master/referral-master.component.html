@@ -14,19 +14,21 @@
     <div class="container-outer tab-container">
         <div class="master-tab">
             <ul>
-                <li routerLink="/main-catefory-list" routerLinkActive="active"><a>Category</a></li>
+                <li routerLink="/main-catefory-list" routerLinkActive="active"><a>Main Category</a></li>
+                <li routerLink="/sub-category-list" routerLinkActive="active"><a>Category</a></li>
+
                 <li routerLink="/products-list" routerLinkActive="active"><a>Products</a></li>
-                <li routerLink="/video-list" routerLinkActive="active"><a>Videos</a></li>
+                <!-- <li routerLink="/video-list" routerLinkActive="active"><a>Videos</a></li> -->
                 <li routerLink="/login-banner-list" routerLinkActive="active"><a>Login Banner</a></li>
                 <li routerLink="/registration-loyality" routerLinkActive="active"><a>Registration Loyality</a></li>
                 <li routerLink="/referral-master" routerLinkActive="active"><a>Points Master</a></li>
-                <li routerLink="/special-dis" routerLinkActive="active"><a>Special Discount/Extra Premium</a></li>
-                <li routerLink="/plumber-meet-data" routerLinkActive="active"><a>Plumber Meet Data</a></li>
+                <!-- <li routerLink="/special-dis" routerLinkActive="active"><a>Special Discount/Extra Premium</a></li> -->
+                <!-- <li routerLink="/plumber-meet-data" routerLinkActive="active"><a>Plumber Meet Data</a></li> -->
 
-            </ul>                
-            
+            </ul>
+
         </div>
-        <div class="row " >
+        <div class="row ">
             <div class="col s12 mt14">
                 <div class="sprate-box ">
                     <div class="full-offer">
@@ -42,8 +44,10 @@
                                     <div class="col s3">
                                         <div class="control-field">
                                             <mat-form-field class="cs-input">
-                                                <input matInput placeholder="Referral Points" (keypress)="number($event)" name="referral_point" [(ngModel)]="refer.referral_point">
-                                            </mat-form-field>  
+                                                <input matInput placeholder="Referral Points"
+                                                    (keypress)="number($event)" name="referral_point"
+                                                    [(ngModel)]="refer.referral_point">
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                 </div>
@@ -53,7 +57,7 @@
                     <div class="row">
                         <div class="col s12 ">
                             <div class="save text-right mr15">
-                                <button class="mb0" (click)="update_details()"  mat-button>SAVE</button>
+                                <button class="mb0" (click)="update_details()" mat-button>SAVE</button>
                             </div>
                         </div>
                     </div>

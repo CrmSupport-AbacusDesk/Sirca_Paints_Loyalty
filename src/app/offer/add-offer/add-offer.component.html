@@ -18,14 +18,14 @@
                       <div class="col s6">
                         <div class="control-field">
                           <mat-form-field class="cs-input">
-                            <input matInput placeholder="Title" name="title" [(ngModel)] = "addOffer.title" #title="ngModel" required>
+                            <input matInput placeholder="Title" name="title" [(ngModel)]="addOffer.title" #title="ngModel" required>
                           </mat-form-field>  
                         </div>
                       </div>
                       <div class="col s6 ">
                         <div class="control-field">
                           <mat-form-field class="cs-input">
-                            <input matInput placeholder="Offer Code" name="offer_code" [(ngModel)] = "addOffer.offer_code" #offer_code="ngModel" required>
+                            <input matInput placeholder="Offer Code" name="offer_code" [(ngModel)]="addOffer.offer_code" #offer_code="ngModel" required>
                           </mat-form-field>  
                         </div>
                       </div>
@@ -126,7 +126,7 @@
                             </div>
                             <div class="cs-checkbox">
                               <div class="checkbox-outer">
-                                <section  class="checkbox-inner" *ngFor = "let val of states;let i = index" >
+                                <section  class="checkbox-inner" *ngFor = "let val of states;let i = index">
                                   <mat-checkbox class="check-list" [(ngModel)]="val.selected" (change)="getDistrictList()"  [name]="'state'+i"  value="true"> {{val.state_name}}</mat-checkbox>
                                 </section >
                               </div>

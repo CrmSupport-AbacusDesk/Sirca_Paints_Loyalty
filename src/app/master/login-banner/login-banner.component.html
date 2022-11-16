@@ -1,4 +1,4 @@
-<div class="loader" *ngIf = "loading_list">
+<div class="loader" *ngIf="loading_list">
     <div class="loding-logo">
         <mat-spinner></mat-spinner>
     </div>
@@ -20,7 +20,9 @@
     <div class="container-outer tab-container">
         <div class="master-tab">
             <ul>
-                <li routerLink="/main-catefory-list" routerLinkActive="active"><a>Category</a></li>
+                <li routerLink="/main-catefory-list" routerLinkActive="active"><a>Main Category</a></li>
+                <li routerLink="/sub-category-list" routerLinkActive="active"><a>Category</a></li>
+
                 <!-- <li routerLink="/productcategory-list" routerLinkActive="active"><a>Product Category</a></li> -->
                 <li routerLink="/products-list" routerLinkActive="active"><a>Products</a></li>
                 <!-- <li routerLink="/video-list" routerLinkActive="active"><a>Videos</a></li> -->
@@ -30,7 +32,7 @@
                 <!-- <li routerLink="/special-dis" routerLinkActive="active"><a>Special Discount/Extra Premium</a></li> -->
                 <!-- <li routerLink="/plumber-meet-data" routerLinkActive="active"><a>Plumber Meet Data</a></li> -->
 
-                
+
             </ul>
         </div>
         <!-- <div class="banner">
@@ -40,10 +42,11 @@
             <ul>
                 <li *ngFor="let val of banner; let i = index">
                     <div class="image-section1">
-                        <img [src]="db.myurl+'app/uploads/'+val.banner" (click)="openDialog(val.banner,'test8')" >
+                        <img [src]="db.myurl+'app/uploads/'+val.banner" (click)="openDialog(val.banner,'test8')">
                     </div>
                     <div class="hvr-edit">
-                        <a class="delete-icn"><i class="material-icons" (click)="deleteImage(val.id)">delete_sweep</i></a>
+                        <a class="delete-icn"><i class="material-icons"
+                                (click)="deleteImage(val.id)">delete_sweep</i></a>
                     </div>
                 </li>
             </ul>
@@ -52,7 +55,8 @@
     <div class="add">
         <button mat-button class="add-btn">
             <label style="display:block; margin-top: 14px;">
-                <input style="display:none;" type="file" (change)="profilefileChange($event)" name="file" placeholder="Upload file" accept=".png,.jpg,.jpeg" multiple />
+                <input style="display:none;" type="file" (change)="profilefileChange($event)" name="file"
+                    placeholder="Upload file" accept=".png,.jpg,.jpeg" multiple />
                 <i class="material-icons">add</i>
             </label>
         </button>

@@ -104,6 +104,8 @@ import { CouponCodeDataListComponent } from './coupon-code-data-list/coupon-code
 import { CouponCodeDataDetailComponent } from './coupon-code-data-detail/coupon-code-data-detail.component';
 import { SchemeDetailComponent } from './scheme-detail/scheme-detail.component';
 import { EditStatusComponent } from './edit-status/edit-status.component';
+import { SubCategoryListComponent } from './sub-category-list/sub-category-list.component';
+import { SaleTeamDetailComponent } from './sale-team-detail/sale-team-detail.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -119,6 +121,7 @@ const routes: Routes = [
   {path: 'productcategory-list', component: ProductcategoryListComponent , canActivate: [AuthGuard] },
   {path: 'products-list', component: ProductsListComponent , canActivate: [AuthGuard] },
   {path: 'main-catefory-list', component: MainCategoryComponent , canActivate: [AuthGuard] },
+  {path: 'sub-category-list', component: SubCategoryListComponent , canActivate: [AuthGuard] },
   {path: 'registration-loyality', component: RegistrationLoyalityComponent , canActivate: [AuthGuard] },
   {path: 'video-list', component: VideoComponent , canActivate: [AuthGuard] },
   {path: 'referral-master', component: ReferralMasterComponent , canActivate: [AuthGuard] },
@@ -152,6 +155,7 @@ const routes: Routes = [
   {path: 'customer-edit/:customer_id', component: CustomerEditComponent , canActivate: [AuthGuard] },
   {path: 'plumber-meet-data', component: PlumberMeetDataComponent , canActivate: [AuthGuard] },
   {path: 'user-list/:page', component:SalesUserListComponent , canActivate: [AuthGuard] },
+  {path: 'user-detail/:id', component:SaleTeamDetailComponent , canActivate: [AuthGuard] },
 
 
   
@@ -246,6 +250,8 @@ const routes: Routes = [
     CouponCodeDataDetailComponent,
     SchemeDetailComponent,
     EditStatusComponent,
+    SubCategoryListComponent,
+    SaleTeamDetailComponent,
   ],
   imports: [
     // AutocompleteLibModule,

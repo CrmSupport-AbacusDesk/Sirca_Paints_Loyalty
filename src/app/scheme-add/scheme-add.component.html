@@ -1,9 +1,10 @@
-<div class="main-container">
-  <div class="loader" *ngIf="loading_list">
-    <div class="loding-logo">
-      <mat-spinner></mat-spinner>
-    </div>
+<div class="loader" *ngIf="loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
   </div>
+</div>
+<div class="main-container">
+
   <div class="container form-padding">
     <form name="siteform" (ngSubmit)="f.form.valid && saveSchemeform(f)" #f="ngForm" novalidate autocomplete="off">
 
@@ -38,7 +39,8 @@
                             <mat-option>
                               <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getCategoryList($event.target.value)"></ngx-mat-select-search>
                             </mat-option>
-                            <mat-option [value]="row.id" *ngFor="let row of categoryList">{{row.main_category}}</mat-option>
+                            <mat-checkbox class="ml20" [(ngModel)]="siteform.allCategory_id" (change)="selectAll('allCategory_id')"  name="allCategory_id"  value="true">Select All</mat-checkbox>
+                            <mat-option [value]="row.id" *ngFor="let row of categoryList">{{row.category_name}}</mat-option>
 
                            
                           </mat-select>
@@ -52,6 +54,8 @@
                             <mat-option>
                               <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getPc($event.target.value)"></ngx-mat-select-search>
                             </mat-option>
+                            <mat-checkbox class="ml20" [(ngModel)]="siteform.allpc_id" (change)="selectAll('allpc_id')"  name="allpc_id"  value="true">Select All</mat-checkbox>
+
                             <mat-option [value]="row.id" *ngFor="let row of pc">{{row.first_name | titlecase}} <strong>{{row.mobile_no}}</strong></mat-option>
                           </mat-select>
                         </mat-form-field>   
@@ -129,6 +133,8 @@
                     </div> -->
 
                   </div>
+
+                
 
 
 

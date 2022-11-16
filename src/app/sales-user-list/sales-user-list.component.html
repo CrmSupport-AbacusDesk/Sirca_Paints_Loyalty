@@ -121,7 +121,7 @@
               {{val.created_name ? val.created_name:'N/A'}}
             </td>
             <td>
-              <a class="blue" routerLink="/detail/{{val.id}}/{{current_page}}"routerLinkActive="active">{{val.name}}</a>
+              <a class="blue" routerLink="/user-detail/{{val.id | crypt}}"routerLinkActive="active">{{val.name}}</a>
             </td>
             <td class="w150">{{val.contact_01}}</td>
             <td class="w150">{{val.employee_id}}</td>

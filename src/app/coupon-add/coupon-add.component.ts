@@ -114,6 +114,18 @@ export class CouponAddComponent implements OnInit {
 
   }
 
+  checkAddressLabel(event){
+
+    if(event.checked==true){
+      this.siteform.address_label=1
+    }else{
+      this.siteform.address_label=0;
+    }
+
+
+  }
+
+
   searchProductList(product_name){
     console.log(product_name);
     console.log(this.productList2);

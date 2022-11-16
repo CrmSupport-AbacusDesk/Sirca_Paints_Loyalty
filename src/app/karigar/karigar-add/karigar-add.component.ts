@@ -73,6 +73,14 @@ export class KarigarAddComponent implements OnInit {
                 //console.log(d);
                 this.karigarform = d.karigar;
                 this.karigarform.registrationType=this.karigarform.type
+                this.media.push(this.db.karigar_detail+this.karigarform.adhar_image)
+                console.log( this.media);
+                this.media2.push(this.db.karigar_detail+this.karigarform.pan_card_image);
+                console.log( this.media2);
+
+                this.media3.push(this.db.karigar_detail+this.karigarform.cancel_check_image);
+                console.log( this.media3);
+
                 //console.log( this.karigarform);
                 this. getStateList();
                 this.getDistrictList(1);

@@ -3,138 +3,165 @@
     <mat-spinner></mat-spinner>
   </div>
 </div>
-
-<div class="main-container">
-  <div class="padding10">
+<div class="main-container" *ngIf="!loading_list">
+  <div class="offer-container">
     <div class="row">
-      <div class="col s12">
+      <div class="col s12 padding0">
         <div class="sprate-box">
           <div class="full-offer">
-            <div class="top-heading no-justify">
-              <h2>SCHEME DETAIL</h2>
-
+            <div class="top-heading">
+              <h2>BASIC INFORMATION</h2>
             </div>
-
-            <div class="detail-info pr0">
+            
+            <div class="detail-info">
               <div class="basic-details">
-                <div class="profile-info" style="display: block;">
-                  <ul style="padding:10px">
+                <div class="profile-info">
+                  <ul>
+                    
                     <li>
                       <figure>
+                        <div class="left-img" *ngIf="!getData.profile">
+                          <img src="assets/male.svg">
+                        </div>
+                        
+                        <div class="left-img" *ngIf="getData.profile">
+                          <img [src]="getData.profile">
+                        </div>
                         <div class="right-cont">
-                          <p>Date / Created By</p>
-                          <span>{{getData.date_created}}</span>
+                          <p>Name</p>
+                          <span>{{getData.name | titlecase }} </span>
                         </div>
                       </figure>
+                      
                     </li>
                     <li>
+                      
                       <figure>
+                        <div class="left-img">
+                          <img src="assets/contact.svg">
+                        </div>
                         <div class="right-cont">
-                          <p>Scheme Name</p>
-                          <span>{{getData.scheme_name | titlecase }}</span>
+                          <p>Employee Id</p>
+                          <span>{{getData.employee_id}}</span>
                         </div>
                       </figure>
+                      
                     </li>
-                    <!-- <li>
+                    
+                    <li>
                       <figure>
+                        <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div>
                         <div class="right-cont">
-                          <p>Contractor Name</p>
-                          <span *ngFor="let d of getData.contractor_detail" >{{d.first_name}}</span>
+                          <p>Usertype</p>
+                          <span>{{getData.user_type | titlecase }}</span>
+                          
                         </div>
                       </figure>
-                    </li> -->
-                    <!-- <li>
+                      
+                    </li>
+                    <li *ngIf="getData.date_created">
                       <figure>
+                        <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div>
                         <div class="right-cont">
-                          <p>Category</p>
-                          <span *ngFor="let r of getData.category_detail">{{r.main_category}}</span>
+                          <p>Date Created</p>
+                          <span>{{getData.date_created | date: 'dd-MM-yyyy' }}</span>
+<!--                           
+                          <a download="{{getData.first_name}} - {{getData.document_type}} Document.png" href="{{getData.document_image}}"  target="_blank">Click To Download {{getData.document_type}}</a> -->
+                          
                         </div>
                       </figure>
-                    </li> -->
+                      
+                    </li>
+                    <li *ngIf="getData.document_image">
+                      <figure>
+                        <!-- <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div> -->
+                        <div class="right-cont">
+                          <!-- <p>Document</p>
+                          <span *ngIf="getData.document_type && getData.document_no">{{getData.document_type | titlecase }}  -  {{getData.document_no}}</span> -->
+                          <span>
+
+                            <a download="{{getData.first_name}} - {{getData.document_type}} Document.png" href="{{getData.document_image}}"  target="_blank">Click To Download {{getData.document_type}}</a>
+                          </span>
+                          
+                        </div>
+                      </figure>
+                      
+                    </li>
+                    <li *ngIf="getData.cust_geo_address">
+                      <figure>
+                        <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div>
+                        <div class="right-cont">
+                          <p>Geo Location</p>
+                          <span>{{getData.cust_geo_address | titlecase }}</span>
+                          
+                        </div>
+                      </figure>
+                      
+                    </li>
                   </ul>
-
-
-                  <ul style="padding:10px">
+                 
+                </div>
+                <div class="profile-info">
+                  <ul>
                     <li>
                       <figure>
+                        <div class="left-img">
+                          <img src="assets/book.svg">
+                        </div>
                         <div class="right-cont">
-                          <p>Valid From</p>
-                          <span>{{getData.valid_from }}</span>
+                          <p>Address</p>
+                          <span>{{getData.state_name | titlecase }} | {{getData.district_name | titlecase }} | {{getData.city | titlecase}} | {{getData.street | titlecase }} </span>
+<!--                           
+                          <a download="{{getData.first_name}} - {{getData.document_type}} Document.png" href="{{getData.document_image}}"  target="_blank">Click To Download {{getData.document_type}}</a> -->
+                          
                         </div>
                       </figure>
-
+                      
                     </li>
-                    <li>
-                      <figure>
-                        <div class="right-cont">
-                          <p>Valid To</p>
-                          <span>{{getData.valid_to}}</span>
-                        </div>
-                      </figure>
-                    </li>
-
-
-                    <li>
-                      <figure>
-                        <div class="right-cont">
-                          <p>Bonus Point</p>
-                          <span>{{getData.bonus_points }}</span>
-                        </div>
-                      </figure>
-                    </li>
-                    <li>
-                      <figure>
-                        <div class="right-cont">
-                          <p>Scheme Description</p>
-                          <span>{{getData.scheme_desc}}</span>
-                        </div>
-                      </figure>
-                    </li>
-
                   </ul>
-
-
-
                 </div>
               </div>
-
-
             </div>
-          </div>
+          </div> 
         </div>
       </div>
-
-
-
-
-
     </div>
-
-
-    <div class="row">
+    <div class="row" >
       <div class="used-code">
         <div class="tab-header">
           <div class="tab-header no-sticky gift-tab-list ">
             <div class="tabs-list gift-tab-list">
               <ul>
                 <li [ngClass]="{'active': tabChange=='Contractor'}">
-                  <a (click)="tabChange='Contractor'; schemeDetail()">
-                    <p>Contractor Detail</p>
+                  <a (click)="tabChange='Contractor'; getSaleUserDetail()">
+                    <p>Contractor</p>
                   </a>
                 </li>
-                <li [ngClass]="{'active':tabChange=='Category'}">
-                  <a (click)="tabChange='Category';schemeDetail()">
-                    <p>Category</p>
+                <li [ngClass]="{'active':tabChange=='Architect'}">
+                  <a (click)="tabChange='Architect';getSaleUserDetail()">
+                    <p>Architect</p>
                   </a>
                 </li>
-
+                <li [ngClass]="{'active':tabChange=='Site'}">
+                  <a (click)="tabChange='Site';getSaleUserDetail()">
+                    <p>Site</p>
+                  </a>
+                </li>
               </ul>
-
-
-
+              
+              
+              
             </div>
-          </div>
-          <div class="dobale">
+          </div>	
+          <div class="dobale"  >
             <!-- <div class="top-pagination">
               <ul>
                 <li><p >Pages {{ current_page }} of {{ last_page }}</p></li>
@@ -143,18 +170,19 @@
                 <li><button mat-button class="right-btn" (click) = 'redirect_next()'><i class="material-icons">keyboard_arrow_right</i></button></li>
               </ul>
             </div> -->
-          </div>
-
+          </div>				
+          
         </div>
       </div>
-
+      
       <!-- contractor -->
       <div class="sprate-box no-box" *ngIf="tabChange=='Contractor'">
-        <div class="css-table">
+        <div class="css-table" >
           <div class="sticky-header bo-non">
             <div class="header">
               <table>
-
+                
+            
                 <tr>
                   <th class="w100">S No.</th>
                   <th class="w150">Name</th>
@@ -212,11 +240,11 @@
               </table>
             </div> -->
           </div>
-
+          
           <div class="table-container">
             <div class="table-body">
               <table>
-                <tr *ngFor="let row of getData.contractor_detail;let i = index">
+                <tr *ngFor="let row of getData.contractorAssigned;let i = index">
                   <td class="w100">{{i+1}}</td>
                   <td class="w150">{{row.first_name}} </td>
                    <td class="w100">
@@ -232,14 +260,101 @@
         </div>
       </div>
       <!-- contractor -->
+      
+      <!-- architect -->
+      <div class="sprate-box no-box" *ngIf="tabChange=='Architect'">
+        <div class="css-table" >
+          <div class="sticky-header bo-non">
+            <div class="header">
+              <table>
+                
+                <tr>
+                  <th class="w100">S No.</th>
+                  <th class="w150">Name</th>
+                  <th class="w100">Mobile No.</th>
+                  <th class="w200">Address</th>
+                  <!-- <th>Nature Problem</th>
+                  <th class="w100">OTP</th> -->
+                </tr>
+              </table>
+            </div>
+            <!-- <div class="header">
+              <table>
+                <tr>
+                  <th class="w100"></th>
+                  <th class="w150">
+                    <div class="date-form">
+                      <i *ngIf="filter.date" class="material-icons" (click)="filter.date = '';getSaleUserDetail(data.type) ">clear</i>
+                      
+                      <mat-form-field >
+                        <input placeholder="Search" [(ngModel)]="filter.date"  name="date" (click)="openDatePicker(picker)" matInput (dateChange)="getComplaintsList(data.type)" [matDatepicker]="picker" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      
+                    </div>
+                  </th>
+                  
+                  
+                  
+                  <th class="w200">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.plumber_name"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th class="w100">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.days"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.nature_problem"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th class="w100">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.otp"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                </tr>
+              </table>
+            </div> -->
+          </div>
+          
+          <div class="table-container">
+            <div class="table-body">
+              <table>
+                <tr *ngFor="let row of getData.architectAssigned;let i = index">
+                  <td class="w100">{{i+1}}</td>
+                  <td class="w150">{{row.first_name}} </td>
+                   <td class="w100">
+                    {{row.mobile_no}}
+                  </td> 
+                  <td class="w200">{{row.address}}</td>
+                  <!-- <td>{{val.nature_problem}}</td>
+                  <td class="w100">{{val.otp}}</td> --> 
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <!-- Category -->
-      <div class="sprate-box no-box" *ngIf="tabChange=='Category'">
+      <!-- architect -->
+
+
+      <!-- /////////////////site///////// -->
+      <div class="sprate-box no-box" *ngIf="tabChange=='Site'">
         <div class="css-table">
           <div class="sticky-header bo-non">
             <div class="header">
               <table>
-
+                
                 <tr>
                   <th class="w100">S No.</th>
                   <th class="w150">Name</th>
@@ -297,20 +412,20 @@
               </table>
             </div> -->
           </div>
-
+          
           <div class="table-container">
             <div class="table-body">
               <table>
-                <tr *ngFor="let row of getData.category_detail;let i = index">
+                <tr *ngFor="let row of getData.siteAssigend;let i=index">
                   <td class="w100">{{i+1}}</td>
-                  <td class="w150">{{row.main_category}} </td>
+                  <td class="w150">{{row.assignee_name}} </td>
                   <!-- <td class="w200">
                     <a class="blue" *ngIf="val.plumber_name" routerLink="/karigar-detail/{{val.assigned_plumber | crypt}}" routerLinkActive="active">{{ val.plumber_name | titlecase}}</a>
                     <a  *ngIf="!val.plumber_name" >NA</a>
-                  </td>
-                  <td class="w100">{{ toInt(val.days_count) + 1}} Days</td>
+                  </td> -->
+                <!-- <td class="w100">{{ toInt(val.days_count) + 1}} Days</td>
                   <td>{{val.nature_problem}}</td>
-                  <td class="w100">{{val.otp}}</td> -->
+                  <td class="w100">{{val.otp}}</td>  -->
                 </tr>
               </table>
             </div>
@@ -318,8 +433,7 @@
         </div>
       </div>
 
-      <!-- Category -->
-
+      <!-- ///////////site/////////////// -->
 
 
       <!-- <div class="date-not" *ngIf="!loading_list && !complaints.length && complaints_count">
@@ -327,23 +441,19 @@
           <img src="assets/result-not-found.png"> 
         </div>
       </div> -->
-
+      
       <!-- <div class="date-not"  *ngIf="!loading_list && !complaints_count ">
         <div class="no-img">
           <img src="assets/not-available.jpg"> 
         </div>
         
       </div>			 -->
-
-
+      
+      
     </div>
-
-
-
   </div>
 </div>
 
-
-<div class="add-button">
-  <button mat-button (click)="edit()"><i class="material-icons">edit</i></button>
-</div>
+<!-- <div class="add-button">
+  <button mat-button (click)="edit2()"><i class="material-icons">edit</i></button>
+</div> -->
