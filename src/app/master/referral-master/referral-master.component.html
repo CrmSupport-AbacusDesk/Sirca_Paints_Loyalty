@@ -50,6 +50,15 @@
                                             </mat-form-field>
                                         </div>
                                     </div>
+                                    <div class="col s3">
+                                        <div class="control-field">
+                                            <mat-form-field class="cs-input">
+                                                <input matInput placeholder="Site Points"
+                                                    (keypress)="number($event)" name="site_point"
+                                                    [(ngModel)]="refer.site_point">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
