@@ -241,17 +241,19 @@
                             class="material-icons">edit</i></button>
                         <button class="cancel" *ngIf="val.product_count==0" (click)="deleteSubCategory(val.id)"><i
                             class="material-icons">delete_sweep</i></button>
-                        <button mat-raised-button class="accent" style="margin-left: 20px;"
+                            <button mat-raised-button class="accent" style="margin-left: 20px;" (click)="toggle1 = !toggle1; addSubCategory(val.main_category)"><i
+                              class="material-icons">add</i></button>
+                        <!-- <button mat-raised-button class="accent" style="margin-left: 20px;"
                           [matMenuTriggerFor]="menu">Action</button>
                         <mat-menu #menu="matMenu">
-                          <!-- <button mat-menu-item
+                          <button mat-menu-item
                             (click)="toggle = !toggle; editCategory(val.main_category ); val.mainCategory = val.main_category">Edit
-                            Category</button> -->
+                            Category</button>
                           <button mat-menu-item (click)="toggle1 = !toggle1; addSubCategory(val.main_category)">Add Sub
                             Category</button>
-                          <!-- <button mat-menu-item *ngIf="val.product_count==0"
-                            (click)="deleteProduct(val.main_category)">Delete Category</button> -->
-                        </mat-menu>
+                          <button mat-menu-item *ngIf="val.product_count==0"
+                            (click)="deleteProduct(val.main_category)">Delete Category</button>
+                        </mat-menu> -->
                       </td>
                     </tr>
                   </table>

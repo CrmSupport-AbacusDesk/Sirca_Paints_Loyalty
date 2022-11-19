@@ -358,10 +358,10 @@
                 <tr>
                   <th class="w100">S No.</th>
                   <th class="w150">Name</th>
-                  <!-- <th class="w200"></th> -->
-                  <!-- <th class="w100">Days</th>
-                  <th>Nature Problem</th>
-                  <th class="w100">OTP</th> -->
+                  <th class="w200">State</th>
+                  <th class="w100">City</th>
+                  <th class="w100">District</th>
+                  <th>Address</th>
                 </tr>
               </table>
             </div>
@@ -419,13 +419,16 @@
                 <tr *ngFor="let row of getData.siteAssigend;let i=index">
                   <td class="w100">{{i+1}}</td>
                   <td class="w150">{{row.assignee_name}} </td>
+                  <td class="w200">
+                    {{row.state}}
+                    </td>
                   <!-- <td class="w200">
                     <a class="blue" *ngIf="val.plumber_name" routerLink="/karigar-detail/{{val.assigned_plumber | crypt}}" routerLinkActive="active">{{ val.plumber_name | titlecase}}</a>
                     <a  *ngIf="!val.plumber_name" >NA</a>
                   </td> -->
-                <!-- <td class="w100">{{ toInt(val.days_count) + 1}} Days</td>
-                  <td>{{val.nature_problem}}</td>
-                  <td class="w100">{{val.otp}}</td>  -->
+                <td class="w100">{{row.city}}</td>
+                  <td class="w100">{{row.district}}</td>
+                  <td >{{row.address}}</td> 
                 </tr>
               </table>
             </div>

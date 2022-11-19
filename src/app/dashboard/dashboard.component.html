@@ -1,10 +1,10 @@
-<div class="loader" *ngIf = "loading_list">
+<div class="loader" *ngIf="loading_list">
     <div class="loding-logo">
         <mat-spinner></mat-spinner>
     </div>
 </div>
 
-<div class="main-container" >
+<div class="main-container">
     <div class="dashboard">
         <div class="bg-counter">
             <ul>
@@ -22,13 +22,13 @@
                     </div>
                     <div class="counter-name">Gift Gallery</div>
                 </li>
-                <li matRipple style="background: #3949ab;" (click)="goto_plumberPage()">
+                <!-- <li matRipple style="background: #3949ab;" (click)="goto_plumberPage()">
                     <div class="counter-value">
                         <div class="counter-icon"><img src="assets/pending.svg"></div>
                         <p>{{store?store.plumber:''}}</p>
                     </div>
                     <div class="counter-name">Plumber</div>
-                </li>
+                </li> -->
                 <li matRipple style="background: #f50057;" (click)="goto_balance_coupon_page()">
                     <div class="counter-value">
                         <div class="counter-icon"><img src="assets/marketing_exp.svg"></div>
@@ -50,149 +50,142 @@
                     </div>
                     <div class="counter-name">Product</div>
                 </li>
-                
-                <li matRipple style="background:#9b2450;" (click)="goto_complaintPage()">
+
+                <!-- <li matRipple style="background:#9b2450;" (click)="goto_complaintPage()">
                     <div class="counter-value">
                         <div class="counter-icon"><img src="assets/complaint.png"></div>
                         <p>{{store?store.complaint:''}}</p>
                     </div>
                     <div class="counter-name">Complaints</div>
-                </li>
+                </li> -->
             </ul>
         </div>
-        
+
         <div class="row mb15">
-            <div class="col s4 pl0 pr7" *ngIf="data_Source">
+            <!-- <div class="col s4 pl0 pr7" *ngIf="data_Source">
                 <div class="pie-chart">
                     <div class="chart-header">
                         <p>State Wise Plumber</p>
                     </div>
                     <div class="graph">
-                        <fusioncharts
-                        width="100%"
-                        height="300"
-                        type="pie3d"
-                        [dataSource]=data_Source >
-                    </fusioncharts> 
+                        <fusioncharts width="100%" height="300" type="pie3d" [dataSource]=data_Source>
+                        </fusioncharts>
+                    </div>
+                </div>
+            </div> -->
+
+
+            <div class="col s8 pr0 pl7">
+                <div class="pie-chart" *ngIf="dataSource">
+                    <div class="chart-header">
+                        <!-- <p> Last 15 Day's Coupon Scanned and Complaints</p> -->
+                        <p> Last 15 Day's Coupon Scanned</p>
+                    </div>
+                    <div class="chart">
+                        <fusioncharts type="mscolumn2d" height="350" width="100%" [dataSource]="dataSource">
+                        </fusioncharts>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        
-        <div class="col s8 pr0 pl7">
-            <div class="pie-chart" *ngIf="dataSource">
-                <div class="chart-header">
-                    <p> Last 15 Day's Coupon Scanned and Complaints</p>
-                </div>
-                <div class="chart">
-                    <fusioncharts 
-                        type="mscolumn2d" 
-                        height="350" 
-                        width="100%"  
-                        [dataSource]="dataSource">
-                    </fusioncharts>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row mb15">
-        <div class="col s4 pl0 pr7">
-            <div class="pie-chart">
-                <div class="chart-header">
-                    <p>Last Coupon Scanned</p>
-                </div>
-                <div class="cs-table scroll-335">
-                    <table>
-                        <tr>
-                            <th class="first-head">
-                                <div class="table-head">
-                                    <table>
-                                        <tr>
-                                            <th class="text-center">Coupon Scan</th>
-                                            <th class="w85">Plumber</th>
-                                            <th class="w100 text-center">State</th>
-                                            <th class="w70 text-center">Coupon Point</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="table-body" *ngIf="store">
-                                    <table>
-                                        <tr *ngFor="let data of store.state_wise_scanned_coupon">
-                                            <td class="text-center">{{data.coupon_code +'-'+ (data.scan_date | date: 'dd MMM yyyy') }}</td>
-                                            <td class="w85">{{ ( data.first_name | titlecase ) +' ' + data.mobile_no}}</td>
-                                            <td class="text-center w100">{{data.state | titlecase}}</td>
-                                            <td class="w70 point">{{data.total_coupon_value}}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+
+        <div class="row mb15">
+            <div class="col s4 pl0 pr7">
+                <div class="pie-chart">
+                    <div class="chart-header">
+                        <p>Last Coupon Scanned</p>
+                    </div>
+                    <div class="cs-table scroll-335">
+                        <table>
+                            <tr>
+                                <th class="first-head">
+                                    <div class="table-head">
+                                        <table>
+                                            <tr>
+                                                <th class="text-center">Coupon Scan</th>
+                                                <th class="w85">Contractor</th>
+                                                <th class="w100 text-center">State</th>
+                                                <th class="w70 text-center">Coupon Point</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="table-body" *ngIf="store">
+                                        <table>
+                                            <tr *ngFor="let data of store.state_wise_scanned_coupon">
+                                                <td class="text-center">{{data.coupon_code +'-'+ (data.scan_date | date:
+                                                    'dd
+                                                    MMM yyyy') }}</td>
+                                                <td class="w85">{{ ( data.first_name | titlecase ) +' ' +
+                                                    data.mobile_no}}
+                                                </td>
+                                                <td class="text-center w100">{{data.state | titlecase}}</td>
+                                                <td class="w70 point">{{data.total_coupon_value}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="col s4 pl7 pr7">
-            <div class="pie-chart">
-                <div class="chart-header">
-                    <p>Super 30 Plumber</p>
-                </div>
-                <div class="cs-table scroll-335">
-                    <table>
-                        <tr>
-                            <th class="first-head">
-                                <div class="table-head">
-                                    <table>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th class="w130">State</th>
-                                            <th class="w70 text-center">Balance Points</th>
-                                            <th class="w50 text-center">Gift Eligible</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="table-body" *ngIf="store">
-                                    <table>
-                                        <tr *ngFor="let data of store.super">
-                                            <td>{{data.first_name | titlecase}}</td>
-                                            <td class="w130">{{data.state}}</td>
-                                            <td class="w70 point">{{data.total_balance}}</td>
-                                            <td class="w50 eligible">{{data.gift_eligible}}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+
+            <div class="col s4 pl7 pr7">
+                <!-- <div class="pie-chart">
+                    <div class="chart-header">
+                        <p>Super 30 Plumber</p>
+                    </div>
+                    <div class="cs-table scroll-335">
+                        <table>
+                            <tr>
+                                <th class="first-head">
+                                    <div class="table-head">
+                                        <table>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th class="w130">State</th>
+                                                <th class="w70 text-center">Balance Points</th>
+                                                <th class="w50 text-center">Gift Eligible</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="table-body" *ngIf="store">
+                                        <table>
+                                            <tr *ngFor="let data of store.super">
+                                                <td>{{data.first_name | titlecase}}</td>
+                                                <td class="w130">{{data.state}}</td>
+                                                <td class="w70 point">{{data.total_balance}}</td>
+                                                <td class="w50 eligible">{{data.gift_eligible}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div> -->
             </div>
-        </div>
-        
-        
-        <div class="col s4 pr0 pl7" *ngIf="complaint">
-            <div class="pie-chart">
-                <div class="chart-header">
-                    <p>State Wise Complaints</p>
-                </div>
-                <div class="graph">
-                    <fusioncharts
-                    width="100%"
-                    height="300"
-                    type="pie3d"
-                    [dataSource]=complaint >
-                </fusioncharts> 
+
+
+            <div class="col s4 pr0 pl7" *ngIf="complaint">
+                <!-- <div class="pie-chart">
+                    <div class="chart-header">
+                        <p>State Wise Complaints</p>
+                    </div>
+                    <div class="graph">
+                        <fusioncharts width="100%" height="300" type="pie3d" [dataSource]=complaint>
+                        </fusioncharts>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
