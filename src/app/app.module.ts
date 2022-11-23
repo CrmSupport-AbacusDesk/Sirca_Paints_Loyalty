@@ -262,7 +262,7 @@ const routes: Routes = [
     MatFormFieldModule,
     RouterModule.forRoot(routes),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCcc41_Zu1s8GeOSTbIRbCxU8iZlCogz2c'
+      apiKey: 'AIzaSyBZ4zXanVSs4A1kSVIDCIzDqtMbk6Tv3bg'
       /* apiKey is required, unless you are a
       premium customer, in which case you can
       use clientId

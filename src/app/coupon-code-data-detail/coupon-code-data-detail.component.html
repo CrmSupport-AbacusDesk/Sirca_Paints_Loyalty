@@ -196,6 +196,7 @@
                   </div>
                   <div class="col s4">
                     <ngx-qrcode [value]="r.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L">
+                      <span class="ml20">{{d.sku_number}}</span>
                     </ngx-qrcode>
                   </div>
                 </div>
@@ -241,8 +242,9 @@
           
                 </div>
                 <div class="col s4">
-                  <ngx-qrcode [value]="data.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L">
-                  </ngx-qrcode>
+                  <ngx-qrcode [value]="data.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L"></ngx-qrcode>
+                  <span class="ml10">{{data.sku_number}}</span>
+
                 </div>
           
           

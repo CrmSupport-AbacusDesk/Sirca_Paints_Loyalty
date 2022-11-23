@@ -89,7 +89,7 @@ export class CouponAddComponent implements OnInit {
     this.loading_list=false;
       if(res['status']=='Success'){
         this.dialog.success('Coupon has been successfully Generated');
-        this.router.navigate(['/coupon-code-list'])
+        this.router.navigate(['/coupon-code-Detail/'+res['id']])
       }else{
         this.dialog.error('Something Went Wrong... Please Wait');
         
