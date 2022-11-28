@@ -108,6 +108,7 @@ import { SubCategoryListComponent } from './sub-category-list/sub-category-list.
 import { SaleTeamDetailComponent } from './sale-team-detail/sale-team-detail.component';
 import { GiftMasterComponent } from './gift-master/gift-master.component';
 import { ManualGiftListComponent } from './manual-gift-list/manual-gift-list.component';
+import { ManualGiftAddComponent } from './manual-gift-add/manual-gift-add.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -149,6 +150,7 @@ const routes: Routes = [
   {path: 'complaints-list/:type', component: ComplaintsComponent, canActivate: [AuthGuard] },
   {path: 'architect-list', component: CustomerComponent, canActivate: [AuthGuard] },
   {path: 'gift-master-list', component: GiftMasterComponent, canActivate: [AuthGuard] },
+  {path: 'manual-gift-list', component: ManualGiftListComponent, canActivate: [AuthGuard] },
   {path: 'customer-detail/:customer_id',  component: CustomerDetailComponent , canActivate: [AuthGuard] },
   {path: 'complaints-add/main/:type', component: ComplaintsAddComponent , canActivate: [AuthGuard] },
   {path: 'complaints-add/:complaints_id', component: ComplaintsAddComponent , canActivate: [AuthGuard] },
@@ -257,6 +259,7 @@ const routes: Routes = [
     SaleTeamDetailComponent,
     GiftMasterComponent,
     ManualGiftListComponent,
+    ManualGiftAddComponent,
   ],
   imports: [
     // AutocompleteLibModule,
@@ -306,6 +309,7 @@ const routes: Routes = [
     ChangeKarigarStatusComponent,
     ImportStatusModelComponent,
     KarigarBalanceModelComponent,
+    ManualGiftAddComponent,
     DeactiveStatusComponent,
     KarigarDetailModuleComponent,
     EditGiftComponent,

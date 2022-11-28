@@ -16,14 +16,15 @@ export class GiftMasterComponent implements OnInit {
   filter: any = {};
   toggle1: any;
 
-  current_page: any = 0;
+  current_page = 1;
+  last_page: number ;
   image: any = [];
   giftMasterList: any = [];
   giftCategory: any = {};
   savingData = false;
-
+  total_giftMaster:any;
   save_button_disabled: boolean = false;
-
+  
   constructor(public alrt: MatDialog, public db: DatabaseService, public route: Router, public dialog: DialogComponent) { 
     this.getGiftMasterList();
   }
@@ -31,13 +32,30 @@ export class GiftMasterComponent implements OnInit {
   ngOnInit() {
   }
 
+  
+  redirect_previous() {
+    this.current_page--;
+    this.getGiftMasterList();
+  }
+  redirect_next() {
+    if (this.current_page < this.last_page) { this.current_page++; }
+    else { this.current_page = 1; }
+    this.getGiftMasterList();
+  }
+
   getGiftMasterList() {
     this.loading_list=true;
 
-    this.db.post_rqst({},'offer/masterGiftList').pipe(
+    this.db.post_rqst({'filter':this.filter},'offer/masterGiftList?page='+this.current_page).pipe(
       retry(3)
     ).subscribe((result)=>{
       console.log(result);
+    this.loading_list=false;
+    this.current_page = result['manualGiftList'].current_page;
+    this.last_page = result['manualGiftList'].last_page;
+    this.total_giftMaster =result['manualGiftList'].total;
+      this.giftMasterList=result['manualGiftList'].data;
+    },err=>{
     this.loading_list=false;
 
     })
@@ -57,13 +75,22 @@ export class GiftMasterComponent implements OnInit {
 
       this.save_button_disabled = false;
       if (res['msg'] == 'SUCCESS') {
+
         this.route.navigate(['gift-master-list'])
         this.dialog.success('Successfully added');
+
+      }
+      if (res['status'] == 'UPDATED') {
+
+        this.route.navigate(['gift-master-list'])
+        this.dialog.success('Successfully Updated');
 
       }
       this.toggle1 = "false";
 
       this.selected_image = [];
+      this.getGiftMasterList();
+
     }, err => {
       console.log(err);
       this.savingData = false;
@@ -121,6 +148,33 @@ export class GiftMasterComponent implements OnInit {
     this.giftCategory.image = 'data:image/png;base64,' + btoa(e.target.result);
     console.log(this.giftCategory.image)
     console.log(this.selected_image)
+  }
+
+  editCategory(points,name,image,id){
+    this.giftCategory.image=image;
+    this.giftCategory.gift_name=name;
+    this.giftCategory.gift_points=points;
+    this.giftCategory.id=id
+
+  }
+
+  deleteGiftMaster(id){
+    this.loading_list=true;
+    this.dialog.delete("").then((result)=>{
+      if(result){
+        this.db.post_rqst({'id':id},'offer/masterGiftDelete').subscribe((response)=>{
+          console.log(response);
+          this.loading_list=false;
+          if(response['msg']=='SUCCESS'){
+            this.getGiftMasterList();
+          }
+        },err=>{
+          this.loading_list=false;
+        })
+      }
+    })
+   
+
   }
 
 }

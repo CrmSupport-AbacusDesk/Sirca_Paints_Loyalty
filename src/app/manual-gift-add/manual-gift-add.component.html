@@ -1,0 +1,26 @@
+<div class="gift-box ng-star-inserted">
+  <div class="zift-hadding">
+    <p>
+      Remark update
+    </p>
+    
+    <div class="close-icon">
+      <button mat-button mat-dialog-close><i class="material-icons">clear</i></button>
+    </div>
+  </div>
+
+  <div class="trans pt15 pl30">
+    <form name="remark" (ngSubmit)="f.form.valid  " #f="ngForm" novalidate autocomplete="off">
+      <div class="form-area">
+        <div class="control-field">
+          <mat-form-field class="cs-input textremark">
+            <textarea  matInput placeholder="Remarks" class="h106" name="remark_text" [(ngModel)]="remark_text"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="save mt10">
+        <button mat-button class="mb0 mr10" (click)="remark_save()">save</button>
+      </div>
+    </form>
+  </div>
+</div>
