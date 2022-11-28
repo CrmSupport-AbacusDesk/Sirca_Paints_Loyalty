@@ -515,7 +515,13 @@ export class KarigarDetailComponent implements OnInit {
                 redirect_next3() {
                     if(this.current_page <this.last_page){this.current_page ++;}else {this.current_page =1}
                 }
+                changeStatus(index,id,status){
+
+                }
                 
+                scrollTarget(action){
+
+                }
                 
             }
             

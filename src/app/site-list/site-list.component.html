@@ -1,9 +1,10 @@
-<div class="main-container">
-  <div class="loader" *ngIf="loading_list">
-    <div class="loding-logo">
-      <mat-spinner></mat-spinner>
-    </div>
+<div class="loader" *ngIf="loading_list">
+  <div class="loding-logo">
+    <mat-spinner></mat-spinner>
   </div>
+</div>
+<div class="main-container">
+  
   <div class="fixed">
     <div class="tab-header">
       <div class="tabs-list gift-tab-list">
@@ -81,19 +82,21 @@
               <th class="w100">Date Created</th>
               <th class="w100">Created By</th>
               <th class="w200">Site Address</th>
-              <th>Owner Detail</th>
+              <th class="w200">Owner Detail</th>
               <th class="w150">State</th>
               <th class="w150">District</th>
               <th class="w150">City</th>
-              <th class="w150">Sales Zone</th>
+              <th class="w150">Architect Detail</th>
+              <!-- <th class="w150">Sales Zone</th> -->
               <!-- <th class="w150">Project Size (Cons. Area) Sq. Ft.</th> -->
               <!-- <th class="w150">Construction Type</th>
                 <th class="w150">Construction Stage</th> -->
-              <th class="w90 text-center">Site Type</th>
-              <th class="w90 text-center">Brand Being Used</th>
-              <th class="w100 text-center">Site Potential(Bags)</th>
+              <!-- <th class="w90 text-center">Site Type</th> -->
+              <!-- <th class="w90 text-center">Brand Being Used</th> -->
+              <!-- <th class="w100 text-center">Site Potential(Bags)</th> -->
               <th class="w150">Contractor Detail</th>
-                
+              <th class="w100 text-center">Status</th>
+
               <!-- <th class="w50 text-center">Action</th> -->
             </tr>
           </table>
@@ -113,7 +116,7 @@
                   <i class="material-icons">search</i>
                 </div>
               </th>
-              <th>
+              <th class="w200">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.site_owner_name"
                     (keyup.enter)="current_page = 1;getUserList('')">
@@ -142,12 +145,19 @@
                 </div>
               </th>
               <th class="w150">
+                <!-- <div class="search-form">
+                  <input type="text" placeholder="Search..." [(ngModel)]="filter.city"
+                    (keyup.enter)="current_page = 1;getUserList('')">
+                  <i class="material-icons">search</i>
+                </div> -->
+              </th>
+              <!-- <th class="w150">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.sales_zone"
                     (keyup.enter)="current_page = 1;getUserList('')">
                   <i class="material-icons">search</i>
                 </div>
-              </th>
+              </th> -->
               <!-- <th class="w150">
                   <div class="search-form">
                     <input type="text" placeholder="Search..." [(ngModel)]="filter.project_size"  (keyup.enter)="current_page = 1;getUserList('')">
@@ -166,27 +176,27 @@
                     <i class="material-icons">search</i>
                   </div>
                 </th> -->
-              <th class="w90 text-center">
+              <!-- <th class="w90 text-center">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.site_type"
                     (keyup.enter)="current_page = 1;getUserList('')">
                   <i class="material-icons">search</i>
                 </div>
-              </th>
-              <th class="w90 text-center">
+              </th> -->
+              <!-- <th class="w90 text-center">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.brand"
                     (keyup.enter)="current_page = 1;getUserList('')">
                   <i class="material-icons">search</i>
                 </div>
-              </th>
-              <th class="w100 text-center">
+              </th> -->
+              <!-- <th class="w100 text-center">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.site_potential"
                     (keyup.enter)="current_page = 1;getUserList('')">
                   <i class="material-icons">search</i>
                 </div>
-              </th>
+              </th> -->
               <th class="w150 text-center">
                 <div class="search-form">
                   <input type="text" placeholder="Search..." [(ngModel)]="filter.pc_name"
@@ -194,9 +204,74 @@
                   <i class="material-icons">search</i>
                 </div>
               </th>
+              <th class="w100 text-center"></th>
 
               <!-- <th class="w50 text-center">Action</th> -->
             </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-container" *ngIf="site_locations.length">
+        <div class="table-body">
+          <table>
+            <tr *ngFor="let val of site_locations; let i = index">
+              <td class="w20">{{ ( (current_page - 1 ) * 20 ) + ( i+1 ) }}</td>
+              <td class="w100">
+                <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
+                  {{val.date_created | date: 'dd MMM yyyy'}}
+                </ng-container>
+
+              </td>
+              <td class="w100">
+                <ng-container *ngIf="val.created_by  == null ">
+                  Self
+                </ng-container>
+                <ng-container *ngIf="val.created_name !==''">
+                  {{val.created_name | titlecase}}
+                </ng-container>
+              </td>
+              <td class="w200">{{val.address | titlecase}}</td>
+              <td class="w200">
+                <a class="blue" routerLink="/site-detail/{{val.id}}/{{current_page}}"
+                  routerLinkActive="active">{{val.site_owner_name | titlecase}} - {{val.site_owner_contact}}</a>
+              </td>
+              <td class="w150">{{val.state}}</td>
+              <td class="w150">{{val.district}}</td>
+              <td class="w150">{{val.city}}</td>
+              <td class="w150">{{val.architect_name}}</td>
+              <!-- <td class="w150">{{val.sales_zone}}</td> -->
+              <!-- <td class="w150">{{val.project_size}}</td> -->
+              <!-- <td class="w150">{{val.construction_type}}</td>
+                  <td class="w150">{{val.stage}}</td> -->
+              <!-- <td class="w90 text-center">{{val.site_type | titlecase}}</td>
+              <td class="w90 text-center">{{val.brand | titlecase}}</td>
+              <td class="w100 text-center">{{val.site_potential}}</td> -->
+              <td class="w150">
+                <a class="blue" routerLink="/karigar-detail/{{val.pc_id}}/{{current_page}}" routerLinkActive="active">
+                  {{val.pc_name | titlecase}}
+                </a>
+                - <strong>{{val.pc_contact}}</strong>
+              </td>
+              <td class="w100">
+                {{val.site_status}}
+                <div class="cs-action">
+                  <a class="ac-green" matTooltip="Edit" matTooltipPosition="below"
+                    (click)="edit(val.id,val.site_status)"><i class="material-icons">edit</i></a>
+                </div>
+              </td>
+              <!-- <td class="w50 text-center">
+                    <div class="cs-action">
+                      <a class="ac-green" matTooltip="Edit" matTooltipPosition="below"
+                      (click)="edit(val.id)"><i class="material-icons">edit</i></a>
+                      <a class="ac-red" matTooltip="Delete" matTooltipPosition="below" (click)="deleteDealer(val.id)"><i
+                        class="material-icons">delete_sweep</i></a>
+                      </div>
+                    </td> -->
+            </tr>
+
+
+
           </table>
         </div>
       </div>
@@ -204,63 +279,7 @@
   </div>
 
 
-  <div class="css-table" *ngIf="site_locations.length">
-    <div class="table-container">
-      <div class="table-body">
-        <table>
-          <tr *ngFor="let val of site_locations; let i = index">
-            <td class="w20">{{ ( (current_page - 1 ) * 20 ) + ( i+1 ) }}</td>
-            <td class="w100">
-              <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
-                {{val.date_created | date: 'dd MMM yyyy'}}
-              </ng-container>
 
-            </td>
-            <td class="w100">
-              <ng-container *ngIf="val.created_by  == null ">
-                Self
-              </ng-container>
-              <ng-container *ngIf="val.created_name !==''">
-                {{val.created_name | titlecase}}
-              </ng-container>
-            </td>
-            <td class="w200">{{val.address | titlecase}}</td>
-            <td>
-              <a class="blue" routerLink="/site-detail/{{val.id}}/{{current_page}}"
-                routerLinkActive="active">{{val.site_owner_name | titlecase}} - {{val.site_owner_contact}}</a>
-            </td>
-            <td class="w150">{{val.state}}</td>
-            <td class="w150">{{val.district}}</td>
-            <td class="w150">{{val.city}}</td>
-            <td class="w150">{{val.sales_zone}}</td>
-            <!-- <td class="w150">{{val.project_size}}</td> -->
-            <!-- <td class="w150">{{val.construction_type}}</td>
-                <td class="w150">{{val.stage}}</td> -->
-            <td class="w90 text-center">{{val.site_type | titlecase}}</td>
-            <td class="w90 text-center">{{val.brand | titlecase}}</td>
-            <td class="w100 text-center">{{val.site_potential}}</td>
-            <td class="w150">
-              <a class="blue" routerLink="/karigar-detail/{{val.pc_id}}/{{current_page}}" routerLinkActive="active">
-                {{val.pc_name | titlecase}}
-              </a>
-              - <strong>{{val.pc_contact}}</strong>
-            </td>
-            <!-- <td class="w50 text-center">
-                  <div class="cs-action">
-                    <a class="ac-green" matTooltip="Edit" matTooltipPosition="below"
-                    (click)="edit(val.id)"><i class="material-icons">edit</i></a>
-                    <a class="ac-red" matTooltip="Delete" matTooltipPosition="below" (click)="deleteDealer(val.id)"><i
-                      class="material-icons">delete_sweep</i></a>
-                    </div>
-                  </td> -->
-          </tr>
-
-
-
-        </table>
-      </div>
-    </div>
-  </div>
 
   <div class="container-outer">
     <div class="container">
@@ -282,7 +301,7 @@
   </div>
 
   <div class="fab-btns">
-    <button (click)="exportDealer()" *ngIf="site_locations.length" mat-fab class="excel">
+    <button mat-fab color="secondary" (click)="exportDealer()" *ngIf="site_locations.length" mat-fab class="excel">
       <img src="assets/excel.svg">
     </button>
     <button mat-fab color="primary" routerLink="/site-add" routerLinkActive="active">

@@ -69,7 +69,7 @@ export class CouponCodeDataDetailComponent implements OnInit {
  
 
   exportPDF(div_id){
-
+    this.loading_list=true;
     this.showDivpdf = true;
     this.imgFile = []
 
@@ -93,6 +93,7 @@ export class CouponCodeDataDetailComponent implements OnInit {
                   console.log(dataUrl);
 
                   const imgFile = dataUrl;
+                  
                   imgWidth = 200;
                   pageHeight = 295;
                   imgHeight = element.offsetHeight * imgWidth / element.offsetWidth;
@@ -120,10 +121,12 @@ export class CouponCodeDataDetailComponent implements OnInit {
 
         
       }
+    this.loading_list=false;
 
     }, 1000);
 
     setTimeout(() => {
+    this.loading_list=false;
 
       //  this.showDivpdf=false;
       // window.location.reload();
@@ -133,6 +136,7 @@ export class CouponCodeDataDetailComponent implements OnInit {
   }
 
   exportAsPDF2(div_id){
+    this.loading_list=true;
 
     this.showDivpdf = true;
     this.imgFile = []
@@ -185,6 +189,7 @@ export class CouponCodeDataDetailComponent implements OnInit {
 
         
       }
+    this.loading_list=false;
 
     }, 1000);
 

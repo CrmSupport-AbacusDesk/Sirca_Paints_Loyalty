@@ -11,8 +11,8 @@
         <div class="sprate-box">
           <div class="full-offer">
             <div class="top-heading no-justify">
-              <h2>SITE DETAIL</h2>
-             
+              <h2>SCHEME DETAIL</h2>
+
             </div>
 
             <div class="detail-info pr0">
@@ -35,23 +35,22 @@
                         </div>
                       </figure>
                     </li>
-                    <li>
+                    <!-- <li>
                       <figure>
                         <div class="right-cont">
                           <p>Contractor Name</p>
                           <span *ngFor="let d of getData.contractor_detail" >{{d.first_name}}</span>
                         </div>
                       </figure>
-                    </li>
-                    <li>
-
+                    </li> -->
+                    <!-- <li>
                       <figure>
                         <div class="right-cont">
                           <p>Category</p>
                           <span *ngFor="let r of getData.category_detail">{{r.main_category}}</span>
                         </div>
                       </figure>
-                    </li>
+                    </li> -->
                   </ul>
 
 
@@ -94,7 +93,7 @@
 
                   </ul>
 
-               
+
 
                 </div>
               </div>
@@ -104,12 +103,242 @@
           </div>
         </div>
       </div>
-    
+
 
 
 
 
     </div>
+
+
+    <div class="row">
+      <div class="used-code">
+        <div class="tab-header">
+          <div class="tab-header no-sticky gift-tab-list ">
+            <div class="tabs-list gift-tab-list">
+              <ul>
+                <li [ngClass]="{'active': tabChange=='Contractor'}">
+                  <a (click)="tabChange='Contractor'; schemeDetail()">
+                    <p>Contractor Detail</p>
+                  </a>
+                </li>
+                <li [ngClass]="{'active':tabChange=='Category'}">
+                  <a (click)="tabChange='Category';schemeDetail()">
+                    <p>Category</p>
+                  </a>
+                </li>
+
+              </ul>
+
+
+
+            </div>
+          </div>
+          <div class="dobale">
+            <!-- <div class="top-pagination">
+              <ul>
+                <li><p >Pages {{ current_page }} of {{ last_page }}</p></li>
+                <li><button mat-button class="left-btn" (click) = 'redirect_previous()'><i class="material-icons">keyboard_arrow_left</i></button></li>
+                <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"  (keyup.enter)="getScannedList()"></li>
+                <li><button mat-button class="right-btn" (click) = 'redirect_next()'><i class="material-icons">keyboard_arrow_right</i></button></li>
+              </ul>
+            </div> -->
+          </div>
+
+        </div>
+      </div>
+
+      <!-- contractor -->
+      <div class="sprate-box no-box" *ngIf="tabChange=='Contractor'">
+        <div class="css-table">
+          <div class="sticky-header bo-non">
+            <div class="header">
+              <table>
+
+                <tr>
+                  <th class="w100">S No.</th>
+                  <th class="w150">Name</th>
+                  <th class="w100">Mobile No.</th>
+                  <th class="w200">Address</th>
+                  <!-- <th>Nature Problem</th>
+                  <th class="w100">OTP</th> -->
+                </tr>
+              </table>
+            </div>
+            <!-- <div class="header">
+              <table>
+                <tr>
+                  <th class="w100"></th>
+                  <th class="w150">
+                    <div class="date-form">
+                      <i *ngIf="filter.date" class="material-icons" (click)="filter.date = '';getSaleUserDetail(data.type) ">clear</i>
+                      
+                      <mat-form-field >
+                        <input placeholder="Search" [(ngModel)]="filter.date"  name="date" (click)="openDatePicker(picker)" matInput (dateChange)="getComplaintsList(data.type)" [matDatepicker]="picker" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      
+                    </div>
+                  </th>
+                  
+                  
+                  
+                  <th class="w200">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.plumber_name"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th class="w100">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.days"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.nature_problem"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th class="w100">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.otp"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                </tr>
+              </table>
+            </div> -->
+          </div>
+
+          <div class="table-container">
+            <div class="table-body">
+              <table>
+                <tr *ngFor="let row of getData.contractor_detail;let i = index">
+                  <td class="w100">{{i+1}}</td>
+                  <td class="w150">{{row.first_name}} </td>
+                   <td class="w100">
+                    {{row.mobile_no}}
+                  </td> 
+                  <td class="w200">{{row.address}}</td>
+                  <!-- <td>{{val.nature_problem}}</td>
+                  <td class="w100">{{val.otp}}</td> --> 
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- contractor -->
+
+      <!-- Category -->
+      <div class="sprate-box no-box" *ngIf="tabChange=='Category'">
+        <div class="css-table">
+          <div class="sticky-header bo-non">
+            <div class="header">
+              <table>
+
+                <tr>
+                  <th class="w100">S No.</th>
+                  <th class="w150">Name</th>
+                  <!-- <th class="w200"></th> -->
+                  <!-- <th class="w100">Days</th>
+                  <th>Nature Problem</th>
+                  <th class="w100">OTP</th> -->
+                </tr>
+              </table>
+            </div>
+            <!-- <div class="header">
+              <table>
+                <tr>
+                  <th class="w100"></th>
+                  <th class="w150">
+                    <div class="date-form">
+                      <i *ngIf="filter.date" class="material-icons" (click)="filter.date = '';getSaleUserDetail(data.type) ">clear</i>
+                      
+                      <mat-form-field >
+                        <input placeholder="Search" [(ngModel)]="filter.date"  name="date" (click)="openDatePicker(picker)" matInput (dateChange)="getComplaintsList(data.type)" [matDatepicker]="picker" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      
+                    </div>
+                  </th>
+                  
+                  
+                  
+                  <th class="w200">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.plumber_name"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th class="w100">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.days"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.nature_problem"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                  <th class="w100">
+                    <div class="search-form">
+                      <input type="text" placeholder="Search" [(ngModel)]="filter.otp"  (keyup.enter)="current_page = 1;getComplaintsList(data.type)">
+                      <i class="material-icons">search</i>
+                    </div>
+                  </th>
+                </tr>
+              </table>
+            </div> -->
+          </div>
+
+          <div class="table-container">
+            <div class="table-body">
+              <table>
+                <tr *ngFor="let row of getData.category_detail;let i = index">
+                  <td class="w100">{{i+1}}</td>
+                  <td class="w150">{{row.main_category}} </td>
+                  <!-- <td class="w200">
+                    <a class="blue" *ngIf="val.plumber_name" routerLink="/karigar-detail/{{val.assigned_plumber | crypt}}" routerLinkActive="active">{{ val.plumber_name | titlecase}}</a>
+                    <a  *ngIf="!val.plumber_name" >NA</a>
+                  </td>
+                  <td class="w100">{{ toInt(val.days_count) + 1}} Days</td>
+                  <td>{{val.nature_problem}}</td>
+                  <td class="w100">{{val.otp}}</td> -->
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category -->
+
+
+
+      <!-- <div class="date-not" *ngIf="!loading_list && !complaints.length && complaints_count">
+        <div class="no-img">
+          <img src="assets/result-not-found.png"> 
+        </div>
+      </div> -->
+
+      <!-- <div class="date-not"  *ngIf="!loading_list && !complaints_count ">
+        <div class="no-img">
+          <img src="assets/not-available.jpg"> 
+        </div>
+        
+      </div>			 -->
+
+
+    </div>
+
+
 
   </div>
 </div>

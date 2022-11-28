@@ -134,53 +134,23 @@
       </div>
       <div class="col s6" style="overflow-x: auto;height: 600px;">
           <ng-container *ngIf="getData.total_master!='0'">
-            <div id="MyDIv" class="row" style="background:white;" *ngFor="let d of getData.master_qr_code_list">
-              <div class="col s8 mb10 mt10">
-                <div>
-                  <div>
-                    <h1><Strong>{{d.product_name}}</Strong> </h1><span></span>
-                    <hr class="mb10 mt10" />
-                    <h2><Strong>MRP &#8377; {{d.price}} (Inclusive of all Taxes)</Strong> </h2>
-                    <hr class="mb10 mt10" />
-                    <h3><Strong>Net Content {{d.net_content}} ltr.</Strong> </h3>
-    
-                    <p>Batch No. <span>{{d.batch_number}}</span> </p>
-                    <p>Item Code: <span>{{d.sku_number}}</span> </p>
-                  </div>
-    
-    
-                  <div class="mt40">
-                    <p *ngIf="d.product_type=='imported'">COUNTRY OF ORIGIN : ITALY</p>
-                    <p *ngIf="d.product_type=='imported'">Imported , Packed and Marketed by</p>
-                    <p *ngIf="d.product_type!='imported'">Manufactured By</p>
-                    <p>Sirca Paints India Limited</p>
-                    <p>G-82 kirti Nagar Delhi-110015</p>
-                    <p>Customer Care No:011-42083083</p>
-                    <p>Email- support@sircapaints.com </p>
-                  </div>
-                </div>
-    
-    
-              </div>
-              <div class="col s4">
-                <ngx-barcode [bc-value]="d.master_box_qr_code" [bc-display-value]="true"></ngx-barcode>
-              </div>
-              <div *ngFor="let r of d.secondary_qr_code_detail">
+            <div id="MyDIv">
+              <div  class="row" style="background:white;" *ngFor="let d of getData.master_qr_code_list">
                 <div class="col s8 mb10 mt10">
                   <div>
                     <div>
-                      <h1><Strong>{{r.product_name}}</Strong> </h1><span></span>
+                      <h1><Strong>{{d.product_name}}</Strong> </h1><span></span>
                       <hr class="mb10 mt10" />
-                      <h2><Strong>MRP &#8377; {{r.price}} (Inclusive of all Taxes)</Strong> </h2>
+                      <h2><Strong>MRP &#8377; {{d.price}} (Inclusive of all Taxes)</Strong> </h2>
                       <hr class="mb10 mt10" />
-                      <h3><Strong>Net Content {{r.net_content}} ltr.</Strong> </h3>
-    
-                      <p>Batch No. <span>{{r.batch_number}}</span> </p>
-                      <p>Item Code: <span>{{r.sku_number}}</span> </p>
+                      <h3><Strong>Net Content {{d.net_content}} ltr.</Strong> </h3>
+      
+                      <p>Batch No. <span>{{d.batch_number}}</span> </p>
+                      <p>Item Code: <span>{{d.sku_number}}</span> </p>
                     </div>
-    
-    
-                    <div class="mt40">
+      
+      
+                    <div class="mt40" *ngIf="getData.address_label==1">
                       <p *ngIf="d.product_type=='imported'">COUNTRY OF ORIGIN : ITALY</p>
                       <p *ngIf="d.product_type=='imported'">Imported , Packed and Marketed by</p>
                       <p *ngIf="d.product_type!='imported'">Manufactured By</p>
@@ -190,60 +160,98 @@
                       <p>Email- support@sircapaints.com </p>
                     </div>
                   </div>
-    
-    
+      
+      
                 </div>
                 <div class="col s4">
-                  <ngx-qrcode [value]="r.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L">
-                  </ngx-qrcode>
+                  <ngx-barcode [bc-value]="d.master_box_qr_code" [bc-display-value]="true"></ngx-barcode>
                 </div>
+                <div *ngFor="let r of d.secondary_qr_code_detail">
+                  <div class="col s8 mb10 mt10">
+                    <div>
+                      <div>
+                        <h1><Strong>{{r.product_name}}</Strong> </h1><span></span>
+                        <hr class="mb10 mt10" />
+                        <h2><Strong>MRP &#8377; {{r.price}} (Inclusive of all Taxes)</Strong> </h2>
+                        <hr class="mb10 mt10" />
+                        <h3><Strong>Net Content {{r.net_content}} ltr.</Strong> </h3>
+      
+                        <p>Batch No. <span>{{r.batch_number}}</span> </p>
+                        <p>Item Code: <span>{{r.sku_number}}</span> </p>
+                      </div>
+      
+      
+                      <div class="mt40">
+                        <p *ngIf="d.product_type=='imported'">COUNTRY OF ORIGIN : ITALY</p>
+                        <p *ngIf="d.product_type=='imported'">Imported , Packed and Marketed by</p>
+                        <p *ngIf="d.product_type!='imported'">Manufactured By</p>
+                        <p>Sirca Paints India Limited</p>
+                        <p>G-82 kirti Nagar Delhi-110015</p>
+                        <p>Customer Care No:011-42083083</p>
+                        <p>Email- support@sircapaints.com </p>
+                      </div>
+                    </div>
+      
+      
+                  </div>
+                  <div class="col s4">
+                    <ngx-qrcode [value]="r.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L">
+                      <span class="ml20">{{d.sku_number}}</span>
+                    </ngx-qrcode>
+                  </div>
+                </div>
+      
+      
+      
+      
               </div>
-    
-    
-    
-    
             </div>
+            
           </ng-container>
         
        
 
           <ng-container *ngIf="getData.total_master=='0'">
-            <div id="MyDIvPdf" class="row"  style="background:white;"  *ngFor="let data of getData.secondary_qr_code_detail">
-              <div class="col s8 mb10 mt10">
-                <div>
+            <div id="MyDIvPdf">
+              <div  class="row"  style="background:white;"  *ngFor="let data of getData.secondary_qr_code_detail">
+                <div class="col s8 mb10 mt10">
                   <div>
-                    <h1><Strong>{{data.product_name}}</Strong> </h1><span></span>
-                    <hr class="mb10 mt10" />
-                    <h2><Strong>MRP &#8377; {{data.price}} (Inclusive of all Taxes)</Strong> </h2>
-                    <hr class="mb10 mt10" />
-                    <h3><Strong>Net Content {{data.net_content}} ltr.</Strong> </h3>
-        
-                    <p>Batch No. <span>{{data.batch_number}}</span> </p>
-                    <p>Item Code: <span>{{data.sku_number}}</span> </p>
+                    <div>
+                      <h1><Strong>{{data.product_name}}</Strong> </h1><span></span>
+                      <hr class="mb10 mt10" />
+                      <h2><Strong>MRP &#8377; {{data.price}} (Inclusive of all Taxes)</Strong> </h2>
+                      <hr class="mb10 mt10" />
+                      <h3><Strong>Net Content {{data.net_content}} ltr.</Strong> </h3>
+          
+                      <p>Batch No. <span>{{data.batch_number}}</span> </p>
+                      <p>Item Code: <span>{{data.sku_number}}</span> </p>
+                    </div>
+          
+          
+                    <div class="mt40" *ngIf="getData.address_label==1">
+                      <p *ngIf="data.product_type=='imported'">COUNTRY OF ORIGIN : ITALY</p>
+                        <p *ngIf="data.product_type=='imported'">Imported , Packed and Marketed by</p>
+                        <p *ngIf="data.product_type!='imported'">Manufactured By</p>
+                      <p>Sirca Paints India Limited</p>
+                      <p>G-82 kirti Nagar Delhi-110015</p>
+                      <p>Customer Care No:011-42083083</p>
+                      <p>Email- support@sircapaints.com </p>
+                    </div>
                   </div>
-        
-        
-                  <div class="mt40">
-                    <p>COUNTRY OF ORIGIN : ITALY</p>
-                    <p>Imported , Packed and Marketed by</p>
-                    <p>Manufactured By</p>
-                    <p>Sirca Paints India Limited</p>
-                    <p>G-82 kirti Nagar Delhi-110015</p>
-                    <p>Customer Care No:011-42083083</p>
-                    <p>Email- support@sircapaints.com </p>
-                  </div>
+          
+          
                 </div>
-        
-        
+                <div class="col s4">
+                  <ngx-qrcode [value]="data.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L"></ngx-qrcode>
+                  <span class="ml10">{{data.sku_number}}</span>
+
+                </div>
+          
+          
+          
               </div>
-              <div class="col s4">
-                <ngx-qrcode [value]="data.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L">
-                </ngx-qrcode>
-              </div>
-        
-        
-        
             </div>
+           
           </ng-container>
           
          

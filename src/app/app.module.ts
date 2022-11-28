@@ -103,6 +103,12 @@ import { SchemeAddComponent } from './scheme-add/scheme-add.component';
 import { CouponCodeDataListComponent } from './coupon-code-data-list/coupon-code-data-list.component';
 import { CouponCodeDataDetailComponent } from './coupon-code-data-detail/coupon-code-data-detail.component';
 import { SchemeDetailComponent } from './scheme-detail/scheme-detail.component';
+import { EditStatusComponent } from './edit-status/edit-status.component';
+import { SubCategoryListComponent } from './sub-category-list/sub-category-list.component';
+import { SaleTeamDetailComponent } from './sale-team-detail/sale-team-detail.component';
+import { GiftMasterComponent } from './gift-master/gift-master.component';
+import { ManualGiftListComponent } from './manual-gift-list/manual-gift-list.component';
+import { ManualGiftAddComponent } from './manual-gift-add/manual-gift-add.component';
 
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -118,6 +124,7 @@ const routes: Routes = [
   {path: 'productcategory-list', component: ProductcategoryListComponent , canActivate: [AuthGuard] },
   {path: 'products-list', component: ProductsListComponent , canActivate: [AuthGuard] },
   {path: 'main-catefory-list', component: MainCategoryComponent , canActivate: [AuthGuard] },
+  {path: 'sub-category-list', component: SubCategoryListComponent , canActivate: [AuthGuard] },
   {path: 'registration-loyality', component: RegistrationLoyalityComponent , canActivate: [AuthGuard] },
   {path: 'video-list', component: VideoComponent , canActivate: [AuthGuard] },
   {path: 'referral-master', component: ReferralMasterComponent , canActivate: [AuthGuard] },
@@ -139,9 +146,11 @@ const routes: Routes = [
   {path: 'coupon-code-add',  component: CouponAddComponent , canActivate: [AuthGuard] },
   {path: 'super-list', component: SuperComponent , canActivate: [AuthGuard] },
   {path: 'site-list/:page', component: SiteListComponent , canActivate: [AuthGuard] },
-  {path: 'site-detail/:id/:page', component:SiteDetailComponent , canActivate: [AuthGuard] },
-  {path: 'complaints-list/:type', component: ComplaintsComponent , canActivate: [AuthGuard] },
-  {path: 'architect-list', component: CustomerComponent , canActivate: [AuthGuard] },
+  {path: 'site-detail/:id/:page', component:SiteDetailComponent, canActivate: [AuthGuard] },
+  {path: 'complaints-list/:type', component: ComplaintsComponent, canActivate: [AuthGuard] },
+  {path: 'architect-list', component: CustomerComponent, canActivate: [AuthGuard] },
+  {path: 'gift-master-list', component: GiftMasterComponent, canActivate: [AuthGuard] },
+  {path: 'manual-gift-list', component: ManualGiftListComponent, canActivate: [AuthGuard] },
   {path: 'customer-detail/:customer_id',  component: CustomerDetailComponent , canActivate: [AuthGuard] },
   {path: 'complaints-add/main/:type', component: ComplaintsAddComponent , canActivate: [AuthGuard] },
   {path: 'complaints-add/:complaints_id', component: ComplaintsAddComponent , canActivate: [AuthGuard] },
@@ -151,6 +160,7 @@ const routes: Routes = [
   {path: 'customer-edit/:customer_id', component: CustomerEditComponent , canActivate: [AuthGuard] },
   {path: 'plumber-meet-data', component: PlumberMeetDataComponent , canActivate: [AuthGuard] },
   {path: 'user-list/:page', component:SalesUserListComponent , canActivate: [AuthGuard] },
+  {path: 'user-detail/:id', component:SaleTeamDetailComponent , canActivate: [AuthGuard] },
 
 
   
@@ -244,6 +254,12 @@ const routes: Routes = [
     CouponCodeDataListComponent,
     CouponCodeDataDetailComponent,
     SchemeDetailComponent,
+    EditStatusComponent,
+    SubCategoryListComponent,
+    SaleTeamDetailComponent,
+    GiftMasterComponent,
+    ManualGiftListComponent,
+    ManualGiftAddComponent,
   ],
   imports: [
     // AutocompleteLibModule,
@@ -254,7 +270,7 @@ const routes: Routes = [
     MatFormFieldModule,
     RouterModule.forRoot(routes),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCcc41_Zu1s8GeOSTbIRbCxU8iZlCogz2c'
+      apiKey: 'AIzaSyBZ4zXanVSs4A1kSVIDCIzDqtMbk6Tv3bg'
       /* apiKey is required, unless you are a
       premium customer, in which case you can
       use clientId
@@ -293,6 +309,7 @@ const routes: Routes = [
     ChangeKarigarStatusComponent,
     ImportStatusModelComponent,
     KarigarBalanceModelComponent,
+    ManualGiftAddComponent,
     DeactiveStatusComponent,
     KarigarDetailModuleComponent,
     EditGiftComponent,
@@ -305,7 +322,8 @@ const routes: Routes = [
     CategoryModelComponent,
     ChangePriceModelComponent,
     ComplaintRemarkModalComponent,
-    AddCouponPointsComponent
+    AddCouponPointsComponent,
+    EditStatusComponent,
 
   ],
   

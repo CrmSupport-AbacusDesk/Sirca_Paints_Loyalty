@@ -104,10 +104,21 @@
                     </div>
                     <div class="col s3" style="margin:25px">
                       <div class="control-field">
+                          <mat-label>Date Of Packing</mat-label>
+                          <mat-checkbox matInput  [(ngModel)]="siteform.manufacturing_date" (change)="checkDateOfManufacturing($event)"   name="manufacturing_date"></mat-checkbox>
                         
-                          <mat-checkbox  [(ngModel)]="siteform.manufacturing_date" (change)="checkDateOfManufacturing($event)"   name="manufacturing_date"></mat-checkbox> Date Of Packing
+                          
                      
                       </div>
+                    </div>
+                    <div class="col s3" style="margin:25px">
+                      <div class="option-field">
+                        <div class="control-field">
+                          <mat-label>Address Label</mat-label>
+                            <mat-checkbox matInput name="address_label" (change)="checkAddressLabel($event)" [(ngModel)]="siteform.address_label" #address_label="ngModel"></mat-checkbox>
+                        </div>
+                      </div>
+                     
                     </div>
                     <!-- <div class="col s3">
                       <div class="control-field">

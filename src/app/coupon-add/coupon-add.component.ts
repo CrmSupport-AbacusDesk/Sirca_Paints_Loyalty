@@ -89,7 +89,7 @@ export class CouponAddComponent implements OnInit {
     this.loading_list=false;
       if(res['status']=='Success'){
         this.dialog.success('Coupon has been successfully Generated');
-        this.router.navigate(['/coupon-code-list'])
+        this.router.navigate(['/coupon-code-Detail/'+res['id']])
       }else{
         this.dialog.error('Something Went Wrong... Please Wait');
         
@@ -113,6 +113,18 @@ export class CouponAddComponent implements OnInit {
 
 
   }
+
+  checkAddressLabel(event){
+
+    if(event.checked==true){
+      this.siteform.address_label=1
+    }else{
+      this.siteform.address_label=0;
+    }
+
+
+  }
+
 
   searchProductList(product_name){
     console.log(product_name);

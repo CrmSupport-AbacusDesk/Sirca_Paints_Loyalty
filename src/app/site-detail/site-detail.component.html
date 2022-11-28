@@ -46,7 +46,7 @@
                         </div>
                       </figure>
                     </li>
-                    <li>
+                    <!-- <li>
 
                       <figure>
                         <div class="right-cont">
@@ -54,7 +54,7 @@
                           <span>{{getData.sales_zone}}</span>
                         </div>
                       </figure>
-                    </li>
+                    </li> -->
                   </ul>
 
 
@@ -76,7 +76,10 @@
                         </div>
                       </figure>
                     </li>
-
+                    <li>
+                      <p>Site Owner Name</p>
+                      <span>{{getData.site_owner_name | titlecase}} / {{getData.site_owner_contact}}</span>
+                    </li>
 
                     <li>
                       <figure>
@@ -86,19 +89,19 @@
                         </div>
                       </figure>
                     </li>
-                    <li>
+                    <!-- <li>
                       <figure>
                         <div class="right-cont">
                           <p>Site Type</p>
                           <span>{{getData.site_type | titlecase}}</span>
                         </div>
                       </figure>
-                    </li>
+                    </li> -->
 
                   </ul>
 
                   <ul style="padding:10px">
-                    <li>
+                    <!-- <li>
                       <figure>
                         <div class="right-cont">
                           <p>Brand Being Used</p>
@@ -114,12 +117,21 @@
                           <span>{{getData.site_potential}}</span>
                         </div>
                       </figure>
+                    </li> -->
+
+                    <li>
+                      <figure>
+                        <div class="right-cont">
+                          <p>Architect Detail</p>
+                          <span>{{getData.architect_name | titlecase }}</span>
+                        </div>
+                      </figure>
                     </li>
 
                     <li>
                       <figure>
                         <div class="right-cont">
-                          <p>Max Bahubali</p>
+                          <p>Contractor Detail</p>
                           <span>{{getData.pc_name | titlecase }} - {{getData.pc_contact}}</span>
                         </div>
                       </figure>
@@ -133,10 +145,10 @@
 
                   </ul>
                   <ul style="padding:10px">
-                    <li>
+                    <!-- <li>
                       <p>Site Owner Name</p>
                       <span>{{getData.site_owner_name | titlecase}} / {{getData.site_owner_contact}}</span>
-                    </li>
+                    </li> -->
                     <li>
                       <p>Dealer Details</p>
                       <span>{{getData.dealer_name | titlecase}} / {{getData.dealer_mobile}}</span>
@@ -203,7 +215,28 @@
         </div>
       </div>
 
-
+      <div class="col s4 mt30">
+        <div class="sprate-box">
+          <div class="full-offer">
+            <div class="top-heading no-justify">
+              <h2>Site Location</h2>
+            </div>
+          </div>
+          <div>
+            <agm-map [zoom]="zoom" center="[latitude, longitude]" [latitude]="latitude" [longitude]="longitude"
+              [mapTypeId]='mapType'>
+              <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+            </agm-map>
+            <!-- <div class="cs-btn padding10 border-top text-right">
+              <div class="in-btn sm-btn">
+                <button mat-raised-button color="accent"
+                  (click)="update_google_location('India',lead_detail.state,lead_detail.district,lead_detail.city,lead_detail.pincode,lead_detail.address,'updateGoogleLocation')">Update
+                  Location</button>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
 
 
     </div>

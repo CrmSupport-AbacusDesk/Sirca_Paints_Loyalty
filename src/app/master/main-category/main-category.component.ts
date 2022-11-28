@@ -32,10 +32,13 @@ export class MainCategoryComponent implements OnInit {
     toggle1: any;
     selected_image: any = [];
     save_button_disabled:boolean=false;
+    upload_url:any;
 
 
-
-    constructor(public db: DatabaseService, private route: ActivatedRoute, private router: Router, public ses: SessionStorage, public dialog: DialogComponent, public alrt: MatDialog) { }
+    constructor(public db: DatabaseService, private route: ActivatedRoute, private router: Router, public ses: SessionStorage, public dialog: DialogComponent, public alrt: MatDialog) {
+        this.upload_url=this.db.main_category_image_url;
+        console.log(this.upload_url)
+     }
 
     ngOnInit() {
         this.getCategoryList();
@@ -347,6 +350,7 @@ this.image=[]
                     .subscribe(d => {
                         console.log(d);
                         this.getCategoryList();
+                        this.getSubCategoryList();
                         this.dialog.successfully();
                     });
             }

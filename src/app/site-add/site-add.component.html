@@ -157,7 +157,7 @@
                     
                   </div>
                   <div class="row mb0">
-                    <div class="col s3">
+                    <div class="col s4">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
                           <input matInput placeholder="Project Size (Cons. Area) Sq. Ft" name="project_size" [(ngModel)] = "siteform.project_size" (keypress)="numeric_Number($event)" #project_size="ngModel" required>
@@ -167,7 +167,7 @@
                     
                     
                     
-                    <div class="col s3">
+                    <div class="col s4">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
                           <mat-select placeholder="Construction Type" name="construction_type" [(ngModel)] = "siteform.construction_type" #construction_type="ngModel" required>
@@ -180,7 +180,7 @@
                       </div>
                     </div>
                     
-                    <div class="col s3">
+                    <div class="col s4">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
                           <mat-select placeholder="Construction Stage" [(ngModel)]="siteform.stage" name="stage" #stage="ngModel">
@@ -190,7 +190,7 @@
                         </mat-form-field>   
                       </div>
                     </div>
-                    
+<!--                     
                     <div class="col s3">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
@@ -200,7 +200,7 @@
                           </mat-select>
                         </mat-form-field>   
                       </div>
-                    </div>
+                    </div> -->
                     
                   </div>
                   
@@ -274,7 +274,7 @@
                     <div class="col s4">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
-                          <mat-select placeholder="Architect Name" [(ngModel)]="siteform.acrchitect_id" name="acrchitect_id" #acrchitect_id="ngModel">
+                          <mat-select placeholder="Architect Name" [(ngModel)]="siteform.architect_id" name="acrchitect_id" #acrchitect_id="ngModel">
                             <mat-option>
                               <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="SearcharchitectList($event.target.value)"></ngx-mat-select-search>
                             </mat-option>
@@ -283,24 +283,24 @@
                         </mat-form-field>   
                       </div>
                     </div>
-                    <div class="col s4">
+                    <!-- <div class="col s4">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
-                          <input matInput placeholder="Sales Zone" name="sales_zone" [(ngModel)] = "siteform.sales_zone" #sales_zone="ngModel"  readonly>
+                          <input matInput placeholder="Sales Zone" name="sales_zone" [(ngModel)]="siteform.sales_zone" #sales_zone="ngModel"  readonly>
                           
-                          <!-- <mat-select placeholder="Sales Zone" [(ngModel)]="siteform.sales_zone" name="sales_zone" #sales_zone="ngModel" required>
+                          <mat-select placeholder="Sales Zone" [(ngModel)]="siteform.sales_zone" name="sales_zone" #sales_zone="ngModel" required>
                             <mat-option >
                               <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getZoneList($event.target.value)"></ngx-mat-select-search>
                             </mat-option>
                             <mat-option [value]="row.zone" *ngFor="let row of zoneData">{{row.zone}}</mat-option>
-                          </mat-select> -->
+                          </mat-select>
                         </mat-form-field>  
                       </div>
-                    </div>
+                    </div> -->
                     <div class="col s4">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
-                          <input matInput placeholder="Site Owner Contact No." name="site_owner_contact" [(ngModel)] = "siteform.site_owner_contact" maxlength="10" minlength="10" (keypress)="numeric_Number($event)" #site_owner_contact="ngModel" required>
+                          <input matInput placeholder="Site Owner Contact No." name="site_owner_contact" [(ngModel)]="siteform.site_owner_contact" maxlength="10" minlength="10" (keypress)="numeric_Number($event)" #site_owner_contact="ngModel" required>
                         </mat-form-field>   
                       </div>
                     </div> 
@@ -311,7 +311,7 @@
                     <div class="col s6">
                       <div class="control-field">
                         <mat-form-field class="cs-input">
-                          <textarea matInput placeholder="Remark" class="h100" name="remark" [(ngModel)] = "siteform.remark" #remark="ngModel"></textarea>
+                          <textarea matInput placeholder="Remark" class="h100" name="remark" [(ngModel)]="siteform.remark" #remark="ngModel"></textarea>
                         </mat-form-field> 
                       </div>
                     </div>
@@ -321,7 +321,7 @@
                           <div class="cs-heading">
                             <h2>Point Location</h2>
                           </div>
-                          <div style="margin:-10px;">
+                          <div>
                             <agm-map [zoom]="zoom" center="[latitude, longitude]" [latitude]="latitude" [longitude]="longitude"
                               [mapTypeId]='mapType'>
                               <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
@@ -369,7 +369,7 @@
                             <img src="{{row.id ? uploadurl+row.image : row.image}}">
                             
                             <span class="cancel-icon">
-                              <i class="material-icons check-icon"  (click)="ProductProfile(i,row.id)">done</i>
+                              <!-- <i class="material-icons check-icon"  (click)="ProductProfile(i,row.id)">done</i> -->
                               <i class="material-icons crose-icon" (click)="deleteProductImage(i,row.id)">clear</i>
                             </span>
                           </li>

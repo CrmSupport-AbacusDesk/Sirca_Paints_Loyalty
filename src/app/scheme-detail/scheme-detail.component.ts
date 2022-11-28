@@ -12,6 +12,7 @@ export class SchemeDetailComponent implements OnInit {
   getData:any={};
   id:any;
   loading_list:boolean=false;
+  tabChange:any='Contractor';
   constructor(public route:ActivatedRoute , public db:DatabaseService ,public router:Router ) { }
 
   ngOnInit() {

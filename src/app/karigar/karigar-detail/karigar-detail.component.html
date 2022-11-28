@@ -1,9 +1,9 @@
-<div class="loader" *ngIf = "loading_list">
+<div class="loader" *ngIf="loading_list">
     <div class="loding-logo">
         <mat-spinner></mat-spinner>
     </div>
 </div>
-<div class="main-container" *ngIf = "!loading_list" >
+<div class="main-container" *ngIf="!loading_list">
     <div class="offer-container">
         <div class="row">
             <div class="col s8">
@@ -13,12 +13,12 @@
                             <h2>{{getData.type}} DETAIL</h2>
                             <div class="review-se review-star">
                                 <ul>
-                                    <li>
+                                    <!-- <li>
                                         <button mat-raised-button color="warn" (click)="openAddCouponPoints()"  style="background: #3b8004;">
                                             <i class="material-icons" style="color:#fff;">add</i>
                                             Add Points
                                         </button>
-                                    </li>
+                                    </li> -->
                                     <!-- <li [ngClass]="{'rating':getData.rating>=1}"><i class="material-icons">
                                         star
                                     </i></li>
@@ -40,37 +40,40 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
                         <div class="detail-info">
                             <div class="img-box">
-                                
+
                                 <!-- (click)="balanceModel(getData.id)" -->
-                                <div class="name-box point-sec" >
+                                <div class="name-box point-sec">
                                     <div class="points ">
-                                        <a  >{{total_points }}</a>
+                                        <a>{{total_points }}</a>
                                         <h4>Balance Point</h4>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="basic-details">
                                 <div class="profile-info">
                                     <ul>
-                                        
+
                                         <li>
                                             <figure>
                                                 <div class="left-img border">
-                                                    <img  *ngIf="getData.profile" [src]="getData.profile" (click)="openDialog( getData.id,'test5')" >
-                                                    <img *ngIf="getData.profile == '' " class="lnr lnr-user"  src="assets/user.png" >
+                                                    <img *ngIf="getData.profile" [src]="getData.profile"
+                                                        (click)="openDialog( getData.id,'test5')">
+                                                    <img *ngIf="getData.profile == '' " class="lnr lnr-user"
+                                                        src="assets/user.png">
                                                 </div>
                                                 <div class="right-cont">
                                                     <p>Name</p>
-                                                    <span>{{getData.first_name | titlecase }} {{getData.last_name | titlecase }}</span>
+                                                    <span>{{getData.first_name | titlecase }} {{getData.last_name |
+                                                        titlecase }}</span>
                                                 </div>
                                             </figure>
                                         </li>
                                         <li>
-                                            
+
                                             <figure>
                                                 <div class="left-img">
                                                     <img src="assets/contact.svg">
@@ -80,9 +83,9 @@
                                                     <span>{{getData.mobile_no}}</span>
                                                 </div>
                                             </figure>
-                                            
+
                                         </li>
-                                        
+
                                         <li>
                                             <figure>
                                                 <div class="left-img">
@@ -90,20 +93,24 @@
                                                 </div>
                                                 <div class="right-cont">
                                                     <p>Date of Birth</p>
-                                                    <span><ng-container *ngIf="getData.dob  != '0000-00-00' "> {{getData.dob | date: 'dd MMM yyyy'}}</ng-container></span>
+                                                    <span>
+                                                        <ng-container *ngIf="getData.dob  != '0000-00-00' ">
+                                                            {{getData.dob | date: 'dd MMM yyyy'}}</ng-container>
+                                                    </span>
                                                 </div>
                                             </figure>
-                                            
+
                                         </li>
                                         <li>
                                             <p>Status</p>
                                             <div class="center">
-                                                <select class="{{getData.status}}" name="status" placeholder="Status" [(ngModel)]="getData.status" (change)="karigarsSatus() ">
-                                                    <option class="Verified"   value="Verified">Verified</option>
+                                                <select class="{{getData.status}}" name="status" placeholder="Status"
+                                                    [(ngModel)]="getData.status" (change)="karigarsSatus() ">
+                                                    <option class="Verified" value="Verified">Verified</option>
                                                     <option class="Reject" value="Reject">Reject</option>
                                                     <option class="Pending" value="Pending">Pending</option>
                                                     <option class="Suspect" value="Suspect">Suspect</option>
-                                                </select> 
+                                                </select>
                                                 <!-- <i class="material-icons deactive"  (click)="deleteProduct(val.id)" >delete_sweep</i>  -->
                                             </div>
                                         </li>
@@ -116,22 +123,22 @@
                                                 </select> 
                                             </div>
                                         </li> -->
-                                        
-                                        
-                                        
+
+
+
                                     </ul>
-                                    
-                                    
-                                    
+
+
+
                                 </div>
-                                
+
                             </div>
-                            
-                            
-                            
-                            
+
+
+
+
                         </div>
-                        
+
                         <div class="profile-info profile-info pl15 pr15 pb15">
                             <ul>
                                 <li>
@@ -141,11 +148,13 @@
                                         </div>
                                         <div class="right-cont">
                                             <p>Working Address</p>
-                                            <span>{{getData.address | titlecase }}   {{getData.city | titlecase }} {{getData.district | titlecase }} {{getData.state | titlecase }} {{getData.pincode}}</span>
+                                            <span>{{getData.address | titlecase }} {{getData.city | titlecase }}
+                                                {{getData.district | titlecase }} {{getData.state | titlecase }}
+                                                {{getData.pincode}}</span>
                                         </div>
                                     </figure>
                                 </li>
-                                
+
                                 <li *ngIf="getData.permanent_address">
                                     <figure>
                                         <div class="left-img">
@@ -153,12 +162,15 @@
                                         </div>
                                         <div class="right-cont">
                                             <p>Permanent Address</p>
-                                            <span>{{getData.permanent_address | titlecase }}   {{getData.permanent_city | titlecase }} {{getData.parmanent_district | titlecase }} {{getData.permanent_state | titlecase }} {{getData.permanent_pincode}}</span>
+                                            <span>{{getData.permanent_address | titlecase }} {{getData.permanent_city |
+                                                titlecase }} {{getData.parmanent_district | titlecase }}
+                                                {{getData.permanent_state | titlecase }}
+                                                {{getData.permanent_pincode}}</span>
                                         </div>
                                     </figure>
                                 </li>
-                                
-                                
+
+
                                 <li *ngIf="getData.status == 'Reject' || getData.status == 'Suspect'">
                                     <figure>
                                         <div class="left-img">
@@ -167,12 +179,12 @@
                                         <div class="right-cont">
                                             <p>{{getData.status}} Reason</p>
                                             <span>{{getData.reason | titlecase }}</span>
-                                            
+
                                         </div>
                                     </figure>
                                 </li>
-                                
-                                <li *ngIf="getData.status == 'Verified' || getData.dr_id =='0'">
+
+                                <!-- <li *ngIf="getData.status == 'Verified' || getData.dr_id =='0'">
                                     <figure>
                                         <div class="left-img">
                                             <img src="assets/reason.svg">
@@ -183,13 +195,13 @@
                                             
                                         </div>
                                     </figure>
-                                </li>
-                                
-                                
-                                
-                                
-                                
-                                
+                                </li> -->
+
+
+
+
+
+
                                 <li *ngIf="getData.referral_code">
                                     <figure>
                                         <div class="left-img">
@@ -201,17 +213,17 @@
                                         </div>
                                     </figure>
                                 </li>
-                                
-                                <li class="wp100">
+
+                                <!-- <li class="wp100">
                                     <div class="margin">
                                         <p> Channel Partner</p>
                                         <span>{{getData.distributor_name}}</span>
                                     </div>
-                                </li>
-                                
+                                </li> -->
+
                             </ul>
                         </div>
-                    </div> 
+                    </div>
                 </div>
 
                 <div class="row mt10">
@@ -296,13 +308,18 @@
                                     <div class="basic-details">
                                         <div class="profile-info">
                                             <div class="img-box">
-                                                <div class="name-box point-sec doc-file" >
-                                                    <img *ngIf="db.uploadUrl+getData.adhar_image"  [src]="db.uploadUrl+getData.adhar_image"  (click)="openDialog( getData.id,'test6')">
-                                                  
-                                                    
-                                                    <img *ngIf="db.uploadUrl+getData.adhar_image == '' " src="assets/aadhar-card.png" >
-                                                    
-                                                    
+                                                <div class="name-box point-sec doc-file">
+                                                    <!-- <img *ngIf="db.karigar_detail+getData.adhar_image"
+                                                        [src]="db.karigar_detail+getData.adhar_image"
+                                                        (click)="openDialog( getData.id,'test6')"> -->
+                                                        <img *ngIf="db.karigar_detail+getData.adhar_image"
+                                                        [src]="db.karigar_detail+getData.adhar_image"
+                                                        >
+
+                                                    <img *ngIf="db.karigar_detail+getData.adhar_image == '' "
+                                                        src="assets/aadhar-card.png">
+
+
                                                 </div>
                                             </div>
                                             <ul>
@@ -324,7 +341,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
                     <div class="col s6">
                         <div class="sprate-box">
@@ -336,14 +353,18 @@
                                     <div class="basic-details">
                                         <div class="profile-info">
                                             <div class="img-box">
-                                                <div class="name-box point-sec doc-file" >
-                                                    <img *ngIf="db.uploadUrl+getData.pan_card_image"  [src]="db.uploadUrl+getData.pan_card_image"  (click)="openDialog( getData.id,'test6')">
+                                                <div class="name-box point-sec doc-file">
+                                                    <!-- <img *ngIf="db.karigar_detail+getData.pan_card_image"  [src]="db.karigar_detail+getData.pan_card_image"  (click)="openDialog(getData.id,'test6')"> -->
+                                                    <img *ngIf="db.karigar_detail+getData.pan_card_image"
+                                                        [src]="db.karigar_detail+getData.pan_card_image"
+                                                        >
                                                     <!-- <img *ngIf="getData.document_image == '' "  [src]="assets/abacus-icon.png" > -->
                                                     <!--  -->
-                                                    
-                                                    <img *ngIf="db.uploadUrl+getData.pan_card_image == '' " src="assets/aadhar-card.png" >
-                                                    
-                                                    
+
+                                                    <img *ngIf="db.karigar_detail+getData.pan_card_image == '' "
+                                                        src="assets/aadhar-card.png">
+
+
                                                 </div>
                                             </div>
                                             <ul>
@@ -365,7 +386,7 @@
                                 </div>
                             </div>
                         </div>
-                     
+
                     </div>
                     <div class="col s6">
                         <div class="sprate-box">
@@ -377,14 +398,20 @@
                                     <div class="basic-details">
                                         <div class="profile-info">
                                             <div class="img-box">
-                                                <div class="name-box point-sec doc-file" >
-                                                    <img *ngIf="db.uploadUrl+getData.cancel_check_image"  [src]="db.uploadUrl+getData.cancel_check_image"  (click)="openDialog( getData.id,'test6')">
+                                                <div class="name-box point-sec doc-file">
+                                                    <!-- <img *ngIf="db.karigar_detail+getData.cancel_check_image"
+                                                        [src]="db.karigar_detail+getData.cancel_check_image"
+                                                        (click)="openDialog( getData.id,'test6')"> -->
+                                                        <img *ngIf="db.karigar_detail+getData.cancel_check_image"
+                                                        [src]="db.karigar_detail+getData.cancel_check_image"
+                                                        >
                                                     <!-- <img *ngIf="getData.document_image == '' "  [src]="assets/abacus-icon.png" > -->
                                                     <!--  -->
-                                                    
-                                                    <img *ngIf="db.uploadUrl+getData.cancel_check_image == '' " src="assets/aadhar-card.png" >
-                                                    
-                                                    
+
+                                                    <img *ngIf="db.karigar_detail+getData.cancel_check_image == '' "
+                                                        src="assets/aadhar-card.png">
+
+
                                                 </div>
                                             </div>
                                             <ul>
@@ -412,7 +439,7 @@
                                     <h2>Dealer Detail</h2>
                                 </div>
                                 <div class="detail-info defult-css">
-                        
+
                                     <div class="basic-details">
                                         <div class="profile-info">
                                             <ul>
@@ -420,21 +447,24 @@
                                                     <a><i class="material-icons"> account_circle</i></a>
                                                     <div class="margin">
                                                         <p>Name</p>
-                                                        <span>{{(getData.dealer_contact_person != '') ? (getData.dealer_contact_person| titlecase ): ('----')}}</span>
+                                                        <span>{{(getData.dealer_contact_person != '') ?
+                                                            (getData.dealer_contact_person| titlecase ):
+                                                            ('----')}}</span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <a><i class="material-icons">local_phone</i></a>
                                                     <div class="margin">
                                                         <p>Mobile No.</p>
-                                                        <span>{{(getData.dealer_mobile != '') ? (getData.dealer_mobile) : ('----') }}</span>
+                                                        <span>{{(getData.dealer_mobile != '') ? (getData.dealer_mobile)
+                                                            : ('----') }}</span>
                                                     </div>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                 </div>
                             </div>
                         </div>
@@ -457,207 +487,207 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col s4">
                 <div class="sprate-box">
                     <div class="full-offer">
                         <div class="top-heading">
                             <h2>My Points</h2>
                         </div>
-                        
+
                         <div class="detail-info">
                             <div class="basic-details">
                                 <div class="profile-info">
                                     <ul>
                                         <li class="amber pointer"
-                                        (click)="mode='1'; getScannedList(); scrollTarget('earnbyscan');"
-                                        [ngClass]="{'active': mode == '1'}">
-                                        <figure>
-                                            <!-- <div class="left-img border">
+                                            (click)="mode='1'; getScannedList(); scrollTarget('earnbyscan');"
+                                            [ngClass]="{'active': mode == '1'}">
+                                            <figure>
+                                                <!-- <div class="left-img border">
                                                 <img *ngIf="getData.profile" [src]="getData.profile"
                                                 (click)="openDialog( getData.id,'test5')">
                                                 <img *ngIf="getData.profile == '' " class="lnr lnr-user"
                                                 src="assets/user.png">
                                             </div> -->
-                                            <div class="right-cont col s10">
-                                                <p>Earn By Scan</p>
-                                                <span>{{getData.earn_by_scan}}</span>
-                                            </div>
-                                            <div class="col s2">
-                                                <i class="material-icons">chevron_right</i>
-                                            </div>
-                                        </figure>
-                                    </li>
-                                    <li class="amber pointer" (click)="mode='3'; getReferal()"
-                                    [ngClass]="{'active': mode == '3'}">
-                                    <figure>
-                                        <!-- <div class="left-img border">
+                                                <div class="right-cont col s10">
+                                                    <p>Earn By Scan</p>
+                                                    <span>{{getData.earn_by_scan}}</span>
+                                                </div>
+                                                <div class="col s2">
+                                                    <i class="material-icons">chevron_right</i>
+                                                </div>
+                                            </figure>
+                                        </li>
+                                        <li class="amber pointer" (click)="mode='3'; getReferal()"
+                                            [ngClass]="{'active': mode == '3'}">
+                                            <figure>
+                                                <!-- <div class="left-img border">
                                             <img *ngIf="getData.profile" [src]="getData.profile"
                                             (click)="openDialog( getData.id,'test5')">
                                             <img *ngIf="getData.profile == '' " class="lnr lnr-user"
                                             src="assets/user.png">
                                         </div> -->
-                                        <div class="right-cont col s10">
-                                            <p>Earn By Referral</p>
-                                            <span>{{getData.earn_by_referal}}</span>
-                                        </div>
-                                        <div class="col s2">
-                                            <i class="material-icons">chevron_right</i>
-                                        </div>
-                                    </figure>
-                                </li>
-                            </ul>
+                                                <div class="right-cont col s10">
+                                                    <p>Earn By Referral</p>
+                                                    <span>{{getData.earn_by_referal}}</span>
+                                                </div>
+                                                <div class="col s2">
+                                                    <i class="material-icons">chevron_right</i>
+                                                </div>
+                                            </figure>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
                         </div>
-                        
-                    </div>
-                </div>
-                <div class="detail-info">
-                    <div class="basic-details">
-                        <div class="profile-info">
-                            <ul>
-                                <li class="deep-orange pointer" (click)="mode='2'; getComplaintsList()"
-                                [ngClass]="{'active': mode == '2'}">
-                                <figure>
-                                    <!-- <div class="left-img border">
+                        <div class="detail-info">
+                            <div class="basic-details">
+                                <div class="profile-info">
+                                    <ul>
+                                        <!-- <li class="deep-orange pointer" (click)="mode='2'; getComplaintsList()"
+                                            [ngClass]="{'active': mode == '2'}">
+                                            <figure> -->
+                                                <!-- <div class="left-img border">
                                         <img *ngIf="getData.profile" [src]="getData.profile"
                                         (click)="openDialog( getData.id,'test5')">
                                         <img *ngIf="getData.profile == '' " class="lnr lnr-user"
                                         src="assets/user.png">
                                     </div> -->
-                                    <div class="right-cont col s10">
+                                                <!-- <div class="right-cont col s10">
                                         <p>Earn By Service</p>
                                         <span>{{getData.earn_by_service}}</span>
                                     </div>
-                                    <div class="col s2">
-                                        <i class="material-icons">chevron_right</i>
-                                    </div>
-                                </figure>
-                            </li>
-                            <li class="deep-orange pointer" (click)="mode='4'; getRedeemList()"
-                            [ngClass]="{'active': mode == '4'}">
-                            <figure>
-                                <div class="right-cont col s10">
-                                    <p>Total Redeem</p>
-                                    <span>{{getData.total_redeem}}</span>
+                                                <div class="col s2">
+                                                    <i class="material-icons">chevron_right</i>
+                                                </div>
+                                            </figure>
+                                        </li> -->
+                                        <li class="deep-orange pointer" (click)="mode='4'; getRedeemList()"
+                                            [ngClass]="{'active': mode == '4'}">
+                                            <figure>
+                                                <div class="right-cont col s10">
+                                                    <p>Total Redeem</p>
+                                                    <span>{{getData.total_redeem}}</span>
+                                                </div>
+                                                <div class="col s2">
+                                                    <i class="material-icons">chevron_right</i>
+                                                </div>
+                                            </figure>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="col s2">
-                                    <i class="material-icons">chevron_right</i>
-                                </div>
-                            </figure>
-                        </li>
-                    </ul>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="detail-info">
-            <div class="basic-details">
-                <div class="profile-info">
-                    <ul>
-                        <li class="deep-green">
-                            <figure>
-                                <!-- <div class="left-img border">
+
+                            </div>
+                        </div>
+
+                        <div class="detail-info">
+                            <div class="basic-details">
+                                <div class="profile-info">
+                                    <ul>
+                                        <li class="deep-green">
+                                            <figure>
+                                                <!-- <div class="left-img border">
                                     <img *ngIf="getData.profile" [src]="getData.profile"
                                     (click)="openDialog( getData.id,'test5')">
                                     <img *ngIf="getData.profile == '' " class="lnr lnr-user"
                                     src="assets/user.png">
                                 </div> -->
-                                <div class="right-cont">
-                                    <p><strong>Total Earnings</strong></p>
-                                    <span style="font-weight: bold;">{{getData.total_earn}}</span>
+                                                <div class="right-cont">
+                                                    <p><strong>Total Earnings</strong></p>
+                                                    <span style="font-weight: bold;">{{getData.total_earn}}</span>
+                                                </div>
+                                            </figure>
+                                        </li>
+                                        <li class="deep-green">
+                                            <figure>
+                                                <div class="right-cont">
+                                                    <p><strong>Total Balance</strong></p>
+                                                    <span style="font-weight:bold">{{getData.total_balance}}</span>
+                                                </div>
+                                            </figure>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </figure>
-                        </li>
-                        <li class="deep-green">
-                            <figure>
-                                <div class="right-cont">
-                                    <p><strong>Total Balance</strong></p>
-                                    <span style="font-weight:bold">{{getData.total_balance}}</span>
-                                </div>
-                            </figure>
-                        </li>
-                    </ul>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
             </div>
+
         </div>
-    </div>
-</div>
-</div>
 
-</div>
+        <div class="row">
+            <div class="used-code">
+                <div class="tab-header">
+                    <div class="tab-header no-sticky gift-tab-list ">
+                        <div class="tabs-list gift-tab-list ">
+                            <ul>
+                                <li (click)="mode='1'; resetCurrentPage('scanned')" [ngClass]="{'active': mode == '1'}">
+                                    <a>
+                                        <p>Earn By Scan</p>
+                                        <span>{{totalEarnPoint}}</span>
+                                    </a>
+                                </li>
+                                <!-- <li (click)="mode='2'; resetCurrentPage('complaint')"
+                                    [ngClass]="{'active': mode == '2'}">
+                                    <a>
+                                        <p>Earn By Service</p>
+                                        <span>{{complaint_total}}</span>
+                                    </a>
+                                </li> -->
 
-<div class="row">
-    <div class="used-code">
-        <div class="tab-header">
-            <div class="tab-header no-sticky gift-tab-list ">
-                <div class="tabs-list gift-tab-list ">
-                    <ul>
-                        <li (click)="mode='1'; resetCurrentPage('scanned')" [ngClass]="{'active': mode == '1'}">
-                            <a>
-                                <p>Earn By Scan</p>
-                                <span>{{totalEarnPoint}}</span>
-                            </a>
-                        </li>
-                        <li (click)="mode='2'; resetCurrentPage('complaint')"
-                            [ngClass]="{'active': mode == '2'}">
-                            <a>
-                                <p>Earn By Service</p>
-                                <span>{{complaint_total}}</span>
-                            </a>
-                        </li>
+                                <li (click)="mode='3'; resetCurrentPage('referal')" [ngClass]="{'active': mode == '3'}">
+                                    <a>
+                                        <p>Earn By Referral</p>
+                                        <span>{{totalReferal}}</span>
+                                    </a>
+                                </li>
 
-                        <li (click)="mode='3'; resetCurrentPage('referal')" [ngClass]="{'active': mode == '3'}">
-                            <a>
-                                <p>Earn By Referral</p>
-                                <span>{{totalReferal}}</span>
-                            </a>
-                        </li>
+                                <li (click)="mode='4'; resetCurrentPage('redeem')" [ngClass]="{'active': mode == '4'}">
+                                    <a>
+                                        <p>Total Redeem</p>
+                                        <span>{{total_reedam}}</span>
+                                    </a>
+                                </li>
 
-                        <li (click)="mode='4'; resetCurrentPage('redeem')" [ngClass]="{'active': mode == '4'}">
-                            <a>
-                                <p>Total Redeem</p>
-                                <span>{{total_reedam}}</span>
-                            </a>
-                        </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dobale" *ngIf="mode == '1'">
+                        <div class="top-pagination">
+                            <ul>
+                                <li>
+                                    <p>Pages {{ current_page }} of {{ last_page }}</p>
+                                </li>
+                                <li><button mat-button class="left-btn" (click)='redirect_previous1()'><i
+                                            class="material-icons">keyboard_arrow_left</i></button></li>
+                                <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
+                                        (keyup.enter)="getScannedList()"></li>
+                                <li><button mat-button class="right-btn" (click)='redirect_next1()'><i
+                                            class="material-icons">keyboard_arrow_right</i></button></li>
+                            </ul>
+                        </div>
+                    </div>
 
-                    </ul>
-                </div>
-            </div>
-            <div class="dobale" *ngIf="mode == '1'">
-                <div class="top-pagination">
-                    <ul>
-                        <li>
-                            <p>Pages {{ current_page }} of {{ last_page }}</p>
-                        </li>
-                        <li><button mat-button class="left-btn" (click)='redirect_previous1()'><i
-                                    class="material-icons">keyboard_arrow_left</i></button></li>
-                        <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
-                                (keyup.enter)="getScannedList()"></li>
-                        <li><button mat-button class="right-btn" (click)='redirect_next1()'><i
-                                    class="material-icons">keyboard_arrow_right</i></button></li>
-                    </ul>
-                </div>
-            </div>
+                    <div class="dobale" *ngIf="mode == '2'">
+                        <div class="top-pagination">
+                            <ul>
+                                <li>
+                                    <p>Pages {{ current_page }} of {{ last_page }}</p>
+                                </li>
+                                <li><button mat-button class="left-btn" (click)='redirect_previous2()'><i
+                                            class="material-icons">keyboard_arrow_left</i></button></li>
+                                <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
+                                        (keyup.enter)="getComplaintsList()"></li>
+                                <li><button mat-button class="right-btn" (click)='redirect_next2()'><i
+                                            class="material-icons">keyboard_arrow_right</i></button></li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div class="dobale" *ngIf="mode == '2'">
-                <div class="top-pagination">
-                    <ul>
-                        <li>
-                            <p>Pages {{ current_page }} of {{ last_page }}</p>
-                        </li>
-                        <li><button mat-button class="left-btn" (click)='redirect_previous2()'><i
-                                    class="material-icons">keyboard_arrow_left</i></button></li>
-                        <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
-                                (keyup.enter)="getComplaintsList()"></li>
-                        <li><button mat-button class="right-btn" (click)='redirect_next2()'><i
-                                    class="material-icons">keyboard_arrow_right</i></button></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- <div class="dobale" *ngIf="mode == '3'">
+                    <!-- <div class="dobale" *ngIf="mode == '3'">
                 <div class="top-pagination">
                     <ul>
                         <li>
@@ -673,338 +703,338 @@
                 </div>
             </div> -->
 
-            <div class="dobale" *ngIf="mode == '4'">
-                <div class="top-pagination">
-                    <ul>
-                        <li>
-                            <p>Pages {{ current_page }} of {{ last_page }}</p>
-                        </li>
-                        <li><button mat-button class="left-btn" (click)='redirect_previous3()'><i
-                                    class="material-icons">keyboard_arrow_left</i></button></li>
-                        <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
-                                (keyup.enter)="getRedeemList()"></li>
-                        <li><button mat-button class="right-btn" (click)='redirect_next3()'><i
-                                    class="material-icons">keyboard_arrow_right</i></button></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="sprate-box no-box">
-        <div class="css-table left-right-15 " *ngIf="mode == '1' && scanned_coupon.length > 0" #earnbyscan>
-            <div class="sticky-header bo-non">
-                <div class="header">
-                    <table>
-                        <tr>
-                            <th class="w50"></th>
-                            <th class="w200">Date Created</th>
-                            <th class="w150">Scan Date</th>
-                            <th>Coupon Code</th>
-                            <th class="w135">Points</th>
-                        </tr>
-                    </table>
-                </div>
-                <div class="header">
-                    <table>
-                        <tr>
-                            <th class="w50"></th>
-                            <th class="w200">
-                                <div class="date-form">
-                                    <i *ngIf="filter.date" class="material-icons"
-                                        (click)="filter.date = '';getScannedList() ">clear</i>
-
-                                    <mat-form-field>
-                                        <input matInput placeholder=" Date" [(ngModel)]="filter.date"
-                                            (click)="openDatePicker(picker3)" name="date" matInput
-                                            (dateChange)="getScannedList()" [matDatepicker]="picker3" readonly>
-                                        <mat-datepicker-toggle matSuffix [for]="picker3">
-                                        </mat-datepicker-toggle>
-                                        <mat-datepicker #picker3></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                            </th>
-                            <th class="w150">
-                                <div class="date-form">
-                                    <i *ngIf="filter.used_date" class="material-icons"
-                                        (click)="filter.used_date = '';getScannedList() ">clear</i>
-
-                                    <mat-form-field>
-                                        <input matInput placeholder=" Search" [(ngModel)]="filter.used_date"
-                                            (click)="openDatePicker(picker5)" name="used_date" matInput
-                                            (dateChange)="getScannedList()" [matDatepicker]="picker5" readonly>
-                                        <mat-datepicker-toggle matSuffix [for]="picker5">
-                                        </mat-datepicker-toggle>
-                                        <mat-datepicker #picker5></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="search-form">
-                                    <input type="text" placeholder="Search" [(ngModel)]="filter.coupon_code"
-                                        (keyup.enter)="current_page = 1;getScannedList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
-
-                            <th class="w135">
-                                <div class="search-form">
-                                    <input type="text" placeholder="Search" [(ngModel)]="filter.points"
-                                        (keyup.enter)="current_page = 1;getScannedList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-
-
-                            </th>
-                        </tr>
-                    </table>
+                    <div class="dobale" *ngIf="mode == '4'">
+                        <div class="top-pagination">
+                            <ul>
+                                <li>
+                                    <p>Pages {{ current_page }} of {{ last_page }}</p>
+                                </li>
+                                <li><button mat-button class="left-btn" (click)='redirect_previous3()'><i
+                                            class="material-icons">keyboard_arrow_left</i></button></li>
+                                <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
+                                        (keyup.enter)="getRedeemList()"></li>
+                                <li><button mat-button class="right-btn" (click)='redirect_next3()'><i
+                                            class="material-icons">keyboard_arrow_right</i></button></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="table-container">
-                <div class="table-body no-shadow">
-                    <table>
-                        <tr *ngFor="let val of scanned_coupon; let i = index">
-                            <td class="w50">{{ i + 1 }}</td>
-                            <td class="w200">
-                                <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
-                                    {{val.date_created | date: 'dd MMM yyyy'}} </ng-container>
-                            </td>
-                            <td class="w150">{{val.scan_date | date : 'MMM d y h:mm a'}} </td>
-                            <td>{{val.coupon_code}} </td>
-                            <td class=" w135">{{val.coupon_value}}</td>
-                        </tr>
+            <div class="sprate-box no-box">
+                <div class="css-table left-right-15 " *ngIf="mode == '1' && scanned_coupon.length > 0" #earnbyscan>
+                    <div class="sticky-header bo-non">
+                        <div class="header">
+                            <table>
+                                <tr>
+                                    <th class="w50"></th>
+                                    <th class="w200">Date Created</th>
+                                    <th class="w150">Scan Date</th>
+                                    <th>Coupon Code</th>
+                                    <th class="w135">Points</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="header">
+                            <table>
+                                <tr>
+                                    <th class="w50"></th>
+                                    <th class="w200">
+                                        <div class="date-form">
+                                            <i *ngIf="filter.date" class="material-icons"
+                                                (click)="filter.date = '';getScannedList() ">clear</i>
+
+                                            <mat-form-field>
+                                                <input matInput placeholder=" Date" [(ngModel)]="filter.date"
+                                                    (click)="openDatePicker(picker3)" name="date" matInput
+                                                    (dateChange)="getScannedList()" [matDatepicker]="picker3" readonly>
+                                                <mat-datepicker-toggle matSuffix [for]="picker3">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker3></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </th>
+                                    <th class="w150">
+                                        <div class="date-form">
+                                            <i *ngIf="filter.used_date" class="material-icons"
+                                                (click)="filter.used_date = '';getScannedList() ">clear</i>
+
+                                            <mat-form-field>
+                                                <input matInput placeholder=" Search" [(ngModel)]="filter.used_date"
+                                                    (click)="openDatePicker(picker5)" name="used_date" matInput
+                                                    (dateChange)="getScannedList()" [matDatepicker]="picker5" readonly>
+                                                <mat-datepicker-toggle matSuffix [for]="picker5">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker5></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Search" [(ngModel)]="filter.coupon_code"
+                                                (keyup.enter)="current_page = 1;getScannedList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+
+                                    <th class="w135">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Search" [(ngModel)]="filter.points"
+                                                (keyup.enter)="current_page = 1;getScannedList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
 
 
-                    </table>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <div class="table-body no-shadow">
+                            <table>
+                                <tr *ngFor="let val of scanned_coupon; let i = index">
+                                    <td class="w50">{{ i + 1 }}</td>
+                                    <td class="w200">
+                                        <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
+                                            {{val.date_created | date: 'dd MMM yyyy'}} </ng-container>
+                                    </td>
+                                    <td class="w150">{{val.scan_date | date : 'MMM d y h:mm a'}} </td>
+                                    <td>{{val.coupon_code}} </td>
+                                    <td class=" w135">{{val.coupon_value}}</td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="css-table left-right-15 " *ngIf="mode == '2' && complaint.length > 0">
-            <div class="sticky-header">
-                <div class="header">
-                    <table>
-                        <tr>
-                            <th class="w100">CMP No.</th>
-                            <th class="w150">Date / Created By </th>
-                            <th class="w150">Complaint Type </th>
-                            <th class="w200">Customer Name</th>
-                            <th class="w130">Mobile</th>
-                            <th>Address</th>
-                            <th class="w100">Days</th>
-                            <th>Nature Problem</th>
-                            <th class="w100">Service Points</th>
-                            <th class="w100">Status</th>
-                        </tr>
+                <div class="css-table left-right-15 " *ngIf="mode == '2' && complaint.length > 0">
+                    <div class="sticky-header">
+                        <div class="header">
+                            <table>
+                                <tr>
+                                    <th class="w100">CMP No.</th>
+                                    <th class="w150">Date / Created By </th>
+                                    <th class="w150">Complaint Type </th>
+                                    <th class="w200">Customer Name</th>
+                                    <th class="w130">Mobile</th>
+                                    <th>Address</th>
+                                    <th class="w100">Days</th>
+                                    <th>Nature Problem</th>
+                                    <th class="w100">Service Points</th>
+                                    <th class="w100">Status</th>
+                                </tr>
 
-                    </table>
-                </div>
+                            </table>
+                        </div>
 
-                <div class="header border-bott">
-                    <table>
-                        <tr>
-                            <th class="w100"></th>
-                            <th class="w150">
-                                <div class="date-form">
-                                    <i *ngIf="filter.date" class="material-icons"
-                                        (click)="filter.date = '';getComplaintsList() ">clear</i>
-                                    <mat-form-field>
-                                        <input placeholder="Search" [(ngModel)]="filter.date" name="date"
-                                            (click)="openDatePicker(picker)" matInput
-                                            (dateChange)="getComplaintsList()" [matDatepicker]="picker"
-                                            readonly>
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                            </th>
-                            <th class="w150">
-                                <div class="search-form">
-                                    <input type="text" placeholder="Search" [(ngModel)]="filter.complaint_type"
-                                        (keyup.enter)="current_page = 1;getComplaintsList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
-                            <th class="w200">
-                                <div class="search-form">
-                                    <input type="text" placeholder="Search" [(ngModel)]="filter.customer_name"
-                                        (keyup.enter)="current_page = 1;getComplaintsList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
+                        <div class="header border-bott">
+                            <table>
+                                <tr>
+                                    <th class="w100"></th>
+                                    <th class="w150">
+                                        <div class="date-form">
+                                            <i *ngIf="filter.date" class="material-icons"
+                                                (click)="filter.date = '';getComplaintsList() ">clear</i>
+                                            <mat-form-field>
+                                                <input placeholder="Search" [(ngModel)]="filter.date" name="date"
+                                                    (click)="openDatePicker(picker)" matInput
+                                                    (dateChange)="getComplaintsList()" [matDatepicker]="picker"
+                                                    readonly>
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </th>
+                                    <th class="w150">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Search" [(ngModel)]="filter.complaint_type"
+                                                (keyup.enter)="current_page = 1;getComplaintsList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+                                    <th class="w200">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Search" [(ngModel)]="filter.customer_name"
+                                                (keyup.enter)="current_page = 1;getComplaintsList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
 
-                            <th class="w130">
-                                <div class="search-form">
-                                    <input type="text" placeholder="Search" [(ngModel)]="filter.mobile"
-                                        (keyup.enter)="current_page = 1;getComplaintsList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
+                                    <th class="w130">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Search" [(ngModel)]="filter.mobile"
+                                                (keyup.enter)="current_page = 1;getComplaintsList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
 
-                            <th>
-                                <div class="search-form">
-                                    <input type="text" placeholder="Search" [(ngModel)]="filter.address"
-                                        (keyup.enter)="current_page = 1;getComplaintsList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
-                            <th class="w100">
-                                <div class="search-form">
-                                    <input type="text" placeholder="Search" [(ngModel)]="filter.days"
-                                        (keyup.enter)="current_page = 1;getComplaintsList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="search-form">
-                                    <input type="text" placeholder="Search" [(ngModel)]="filter.nature_problem"
-                                        (keyup.enter)="current_page = 1;getComplaintsList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
-                            <th class="w100">
-                                <!-- <div class="search-form">
+                                    <th>
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Search" [(ngModel)]="filter.address"
+                                                (keyup.enter)="current_page = 1;getComplaintsList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+                                    <th class="w100">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Search" [(ngModel)]="filter.days"
+                                                (keyup.enter)="current_page = 1;getComplaintsList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Search" [(ngModel)]="filter.nature_problem"
+                                                (keyup.enter)="current_page = 1;getComplaintsList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+                                    <th class="w100">
+                                        <!-- <div class="search-form">
                                     <input type="text" placeholder="Search" [(ngModel)]="filter.otp"
                                         (keyup.enter)="current_page = 1;getComplaintsList()">
                                     <i class="material-icons">search</i>
                                 </div> -->
-                            </th>
-                            <th class="w100">
-                            </th>
-                        </tr>
-                    </table>
+                                    </th>
+                                    <th class="w100">
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="table-container" *ngIf="complaint.length">
+                        <div class="table-body no-shadow">
+                            <table>
+                                <tr *ngFor="let val of complaint; let i = index">
+                                    <td class="w100"><a class="blue" routerLink="/complaints-detail/{{val.id}}"
+                                            routerLinkActive="active">Com#{{val.id}}</a></td>
+                                    <td class="w150">
+                                        <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
+                                            {{val.date_created | date: 'dd MMM yyyy'}} / {{val.created_name}}
+                                        </ng-container>
+                                    </td>
+                                    <td class="w150" style="font-weight:bold">{{val.complaint_type | titlecase }}</td>
+                                    <td class="w200"><a class="blue" routerLink="/customer-detail/{{val.customer_id}}"
+                                            routerLinkActive="active">{{val.customer_name | titlecase }}</a></td>
+                                    <td class="w130">{{val.mobile_no}}</td>
+                                    <td>{{val.address | titlecase }} {{val.city | titlecase }}
+                                        {{val.district | titlecase }} {{val.state | titlecase }} {{val.pincode }}</td>
+                                    <td class="w100">{{ toInt(val.days_count ) + 1}} Days</td>
+                                    <td>{{val.nature_problem}}</td>
+                                    <td class="w100">{{val.plumber_payment}}</td>
+                                    <td class="w100 {{val.status}} ">
+                                        <a *ngIf="val.status == 'Pending'"
+                                            (click)="changeStatus(i, val.id, val.status )">{{val.status}}</a>
+                                        <a *ngIf="val.status ==  'Cancel' || val.status == 'Closed' ">{{val.status}}</a>
+                                        <div class="over-sec lar-h12" *ngIf="val.status == 'Pending'">
+                                            <i class="material-icons" routerLink="/complaints-add/{{val.id}}"
+                                                routerLinkActive="active">edit</i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="table-container" *ngIf="complaint.length">
-                <div class="table-body no-shadow">
-                    <table>
-                        <tr *ngFor="let val of complaint; let i = index">
-                            <td class="w100"><a class="blue" routerLink="/complaints-detail/{{val.id}}"
-                                    routerLinkActive="active">Com#{{val.id}}</a></td>
-                            <td class="w150">
-                                <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
-                                    {{val.date_created | date: 'dd MMM yyyy'}} / {{val.created_name}}
-                                </ng-container>
-                            </td>
-                            <td class="w150" style="font-weight:bold">{{val.complaint_type | titlecase }}</td>
-                            <td class="w200"><a class="blue" routerLink="/customer-detail/{{val.customer_id}}"
-                                    routerLinkActive="active">{{val.customer_name | titlecase }}</a></td>
-                            <td class="w130">{{val.mobile_no}}</td>
-                            <td>{{val.address | titlecase }} {{val.city | titlecase }}
-                                {{val.district | titlecase }} {{val.state | titlecase }} {{val.pincode }}</td>
-                            <td class="w100">{{ toInt(val.days_count ) + 1}} Days</td>
-                            <td>{{val.nature_problem}}</td>
-                            <td class="w100">{{val.plumber_payment}}</td>
-                            <td class="w100 {{val.status}} ">
-                                <a *ngIf="val.status == 'Pending'"
-                                    (click)="changeStatus(i, val.id, val.status )">{{val.status}}</a>
-                                <a *ngIf="val.status ==  'Cancel' || val.status == 'Closed' ">{{val.status}}</a>
-                                <div class="over-sec lar-h12" *ngIf="val.status == 'Pending'">
-                                    <i class="material-icons" routerLink="/complaints-add/{{val.id}}"
-                                        routerLinkActive="active">edit</i>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
+                <div class="css-table left-right-15" *ngIf="mode == '4' && reedam.length > 0">
+                    <div class="sticky-header">
+                        <div class="header">
+                            <table>
+                                <tr>
+                                    <th class="w30">&nbsp;</th>
+                                    <th class="w200">Date / Plumber Name</th>
+                                    <th class="w100">Req. ID</th>
+                                    <th class="w80">Point</th>
+                                    <th class="w100">Mobile No.</th>
+                                    <th class="w100">A/C Status</th>
+                                    <th class="w130">Gift</th>
+                                    <th>Offer-valid Upto</th>
+                                    <th class="w85">Redeem Status</th>
+                                    <th class="w150">Gift Status</th>
+                                    <!-- <th class="w110">Action</th> -->
+                                </tr>
 
-        <div class="css-table left-right-15" *ngIf="mode == '4' && reedam.length > 0">
-            <div class="sticky-header">
-                <div class="header">
-                    <table>
-                        <tr>
-                            <th class="w30">&nbsp;</th>
-                            <th class="w200">Date / Plumber Name</th>
-                            <th class="w100">Req. ID</th>
-                            <th class="w80">Point</th>
-                            <th class="w100">Mobile No.</th>
-                            <th class="w100">A/C Status</th>
-                            <th class="w130">Gift</th>
-                            <th>Offer-valid Upto</th>
-                            <th class="w85">Redeem Status</th>
-                            <th class="w150">Gift Status</th>
-                            <!-- <th class="w110">Action</th> -->
-                        </tr>
+                            </table>
+                        </div>
+                        <div class="header border-bott">
+                            <table>
+                                <tr>
+                                    <th class="w30">&nbsp;</th>
+                                    <th class="w200">
+                                        <div class="vaild-into">
+                                            <div class="date-form">
+                                                <mat-form-field>
+                                                    <i *ngIf="filter.date" class="material-icons"
+                                                        (click)="filter.date = '';getRedeemList()">clear</i>
 
-                    </table>
-                </div>
-                <div class="header border-bott">
-                    <table>
-                        <tr>
-                            <th class="w30">&nbsp;</th>
-                            <th class="w200">
-                                <div class="vaild-into">
-                                    <div class="date-form">
-                                        <mat-form-field>
-                                            <i *ngIf="filter.date" class="material-icons"
-                                                (click)="filter.date = '';getRedeemList()">clear</i>
+                                                    <input placeholder="Date" [(ngModel)]="filter.date" name="date"
+                                                        (click)="openDatePicker(picker1)" matInput
+                                                        (dateChange)="getRedeemList()" [matDatepicker]="picker1"
+                                                        readonly>
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="form-area wp-21 ml10">
+                                                <div class="search-form">
+                                                    <input type="text" placeholder="Plumber Name"
+                                                        [(ngModel)]="filter.name"
+                                                        (keyup.enter)="current_page = 1;getRedeemList()">
+                                                    <i class="material-icons">search</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
 
-                                            <input placeholder="Date" [(ngModel)]="filter.date" name="date"
-                                                (click)="openDatePicker(picker1)" matInput
-                                                (dateChange)="getRedeemList()" [matDatepicker]="picker1"
-                                                readonly>
-                                            <mat-datepicker-toggle matSuffix [for]="picker1">
-                                            </mat-datepicker-toggle>
-                                            <mat-datepicker #picker1></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="form-area wp-21 ml10">
+                                    <th class="w100">
                                         <div class="search-form">
-                                            <input type="text" placeholder="Plumber Name"
-                                                [(ngModel)]="filter.name"
+                                            <input type="text" placeholder="Req. ID" [(ngModel)]="filter.id"
                                                 (keyup.enter)="current_page = 1;getRedeemList()">
                                             <i class="material-icons">search</i>
                                         </div>
-                                    </div>
-                                </div>
-                            </th>
-
-                            <th class="w100">
-                                <div class="search-form">
-                                    <input type="text" placeholder="Req. ID" [(ngModel)]="filter.id"
-                                        (keyup.enter)="current_page = 1;getRedeemList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
-                            <th class="w80">
-                                <!-- <div class="search-form">
+                                    </th>
+                                    <th class="w80">
+                                        <!-- <div class="search-form">
                                     <input type="text"  [(ngModel)]="filter.id"  (keyup.enter)="current_page = 1;getReedamList()">
                                     <i class="material-icons">search</i>
                                 </div> -->
-                            </th>
+                                    </th>
 
-                            <th class="w100">
-                                <div class="search-form">
-                                    <input type="text" placeholder="Mobile No." [(ngModel)]="filter.mobile"
-                                        (keyup.enter)="current_page = 1;getRedeemList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
+                                    <th class="w100">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Mobile No." [(ngModel)]="filter.mobile"
+                                                (keyup.enter)="current_page = 1;getRedeemList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
 
-                            <th class="w100">
-                                <div class="form-area">
-                                    <div class="slect">
-                                        <mat-form-field>
-                                            <mat-label>Search</mat-label>
-                                            <mat-select [(ngModel)]="filter.account_status"
-                                                name="account_status" #account_status="ngModel"
-                                                (selectionChange)="getRedeemList()">
-                                                <mat-option value="">All</mat-option>
-                                                <mat-option value="Verified">Verified</mat-option>
-                                                <mat-option value="Pending">Pending</mat-option>
-                                                <mat-option value="Reject">Reject</mat-option>
-                                                <mat-option value="Suspect">Suspect</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                            </th>
+                                    <th class="w100">
+                                        <div class="form-area">
+                                            <div class="slect">
+                                                <mat-form-field>
+                                                    <mat-label>Search</mat-label>
+                                                    <mat-select [(ngModel)]="filter.account_status"
+                                                        name="account_status" #account_status="ngModel"
+                                                        (selectionChange)="getRedeemList()">
+                                                        <mat-option value="">All</mat-option>
+                                                        <mat-option value="Verified">Verified</mat-option>
+                                                        <mat-option value="Pending">Pending</mat-option>
+                                                        <mat-option value="Reject">Reject</mat-option>
+                                                        <!-- <mat-option value="Suspect">Suspect</mat-option> -->
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </th>
 
-                            <!-- <th class="w130">
+                                    <!-- <th class="w130">
                                 <div class="slect">
                                     <mat-form-field>
                                         <mat-label>Search</mat-label>
@@ -1016,100 +1046,101 @@
                                 </div>
                             </th> -->
 
-                            <th class="w130">
-                                <div class="search-form">
-                                    <input type="text" placeholder="Gift" [(ngModel)]="filter.gift"
-                                        (keyup.enter)="current_page = 1;getRedeemList()">
-                                    <i class="material-icons">search</i>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="date-form">
-                                    <i *ngIf="filter.end_date" class="material-icons"
-                                        (click)="filter.end_date = '';getRedeemList() ">clear</i>
+                                    <th class="w130">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Gift" [(ngModel)]="filter.gift"
+                                                (keyup.enter)="current_page = 1;getRedeemList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="date-form">
+                                            <i *ngIf="filter.end_date" class="material-icons"
+                                                (click)="filter.end_date = '';getRedeemList() ">clear</i>
 
-                                    <mat-form-field>
-                                        <input placeholder="Offer Date" [(ngModel)]="filter.end_date"
-                                            (click)="openDatePicker(picker2)" name="end_date" matInput
-                                            (dateChange)="getRedeemList()" [matDatepicker]="picker2">
-                                        <mat-datepicker-toggle matSuffix [for]="picker2">
-                                        </mat-datepicker-toggle>
-                                        <mat-datepicker #picker2></mat-datepicker>
-                                    </mat-form-field>
+                                            <mat-form-field>
+                                                <input placeholder="Offer Date" [(ngModel)]="filter.end_date"
+                                                    (click)="openDatePicker(picker2)" name="end_date" matInput
+                                                    (dateChange)="getRedeemList()" [matDatepicker]="picker2">
+                                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker2></mat-datepicker>
+                                            </mat-form-field>
 
-                                </div>
-                            </th>
+                                        </div>
+                                    </th>
 
-                            <th class="w85">
-                                <div class="form-area">
-                                    <div class="slect">
-                                        <mat-form-field>
-                                            <mat-label>Search</mat-label>
-                                            <mat-select [(ngModel)]="filter.gift_status" name="gift_status"
-                                                #gift_status="ngModel" (selectionChange)="getRedeemList()">
-                                                <mat-option value="">All</mat-option>
-                                                <mat-option value="Pending">Pending</mat-option>
-                                                <mat-option value="Approved">Approved</mat-option>
-                                                <mat-option value="Reject">Reject</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                            </th>
+                                    <th class="w85">
+                                        <div class="form-area">
+                                            <div class="slect">
+                                                <mat-form-field>
+                                                    <mat-label>Search</mat-label>
+                                                    <mat-select [(ngModel)]="filter.gift_status" name="gift_status"
+                                                        #gift_status="ngModel" (selectionChange)="getRedeemList()">
+                                                        <mat-option value="">All</mat-option>
+                                                        <mat-option value="Pending">Pending</mat-option>
+                                                        <mat-option value="Approved">Approved</mat-option>
+                                                        <mat-option value="Reject">Reject</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </th>
 
-                            <th class="w150">
-                                <div class="form-area">
-                                    <div class="slect">
-                                        <mat-form-field>
-                                            <mat-label>Search</mat-label>
-                                            <mat-select [(ngModel)]="filter.received_status"
-                                                name="received_status" #received_status="ngModel"
-                                                (selectionChange)="getRedeemList()">
-                                                <mat-option value="">All</mat-option>
-                                                <mat-option value="Received">Received</mat-option>
-                                                <mat-option value="Shipped">Shipped</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                            </th>
-                            <!-- <th class="w110">
+                                    <th class="w150">
+                                        <div class="form-area">
+                                            <div class="slect">
+                                                <mat-form-field>
+                                                    <mat-label>Search</mat-label>
+                                                    <mat-select [(ngModel)]="filter.received_status"
+                                                        name="received_status" #received_status="ngModel"
+                                                        (selectionChange)="getRedeemList()">
+                                                        <mat-option value="">All</mat-option>
+                                                        <mat-option value="Received">Received</mat-option>
+                                                        <mat-option value="Shipped">Shipped</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <!-- <th class="w110">
                                 <div class="form-area">
                                     <button mat-button class="go" (click)="getRedeemList()">Go</button>
                                 </div>
                             </th> -->
 
 
-                        </tr>
-                    </table>
-                </div>
+                                </tr>
+                            </table>
+                        </div>
 
-            </div>
-            <div class="table-container">
-                <div class="table-body">
-                    <table>
-                        <tr *ngFor="let val of reedam; let i = index">
-                            <td class="w30">{{ ( (current_page - 1 ) * 20 ) + ( i+1 ) }}</td>
-                            <td class="w200">
-                                <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
-                                    {{val.date_created | date: 'dd MMM yyyy'}}/ </ng-container><a class="blue"
-                                    routerLink="/karigar-detail/{{val.karigar_id | crypt }}"
-                                    routerLinkActive="active">{{val.first_name}} {{val.last_name}}</a>
-                            </td>
-                            <td class="w100"> REQ# {{val.id }}</td>
-                            <td class="w80">{{val.gift_points}}</td>
-                            <td class="w100">{{val.mobile_no}}</td>
-                            <td class="w100 bg-change {{val.karigar_status}}">{{val.karigar_status}}</td>
-                            <!-- <td class="w130 ">{{val.sales_name}}</td> -->
-                            <td class="w130 ">{{val.gift_title}}</td>
-                            <td><a routerLink="/offer-detail/{{val.offer_id | crypt}}"
-                                    class="blue">{{val.title}} #{{val.offer_code}}</a>
-                                -{{val.end_date | date: 'dd MMM yyyy'}}</td>
-                            <td class="w85  {{val.gift_status}}">{{val.gift_status}}</td>
-                            <td class="w150">
+                    </div>
+                    <div class="table-container">
+                        <div class="table-body">
+                            <table>
+                                <tr *ngFor="let val of reedam; let i = index">
+                                    <td class="w30">{{ ( (current_page - 1 ) * 20 ) + ( i+1 ) }}</td>
+                                    <td class="w200">
+                                        <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
+                                            {{val.date_created | date: 'dd MMM yyyy'}}/ </ng-container><a class="blue"
+                                            routerLink="/karigar-detail/{{val.karigar_id | crypt }}"
+                                            routerLinkActive="active">{{val.first_name}} {{val.last_name}}</a>
+                                    </td>
+                                    <td class="w100"> REQ# {{val.id }}</td>
+                                    <td class="w80">{{val.gift_points}}</td>
+                                    <td class="w100">{{val.mobile_no}}</td>
+                                    <td class="w100 bg-change {{val.karigar_status}}">{{val.karigar_status}}</td>
+                                    <!-- <td class="w130 ">{{val.sales_name}}</td> -->
+                                    <td class="w130 ">{{val.gift_title}}</td>
+                                    <td><a routerLink="/offer-detail/{{val.offer_id | crypt}}"
+                                            class="blue">{{val.title}} #{{val.offer_code}}</a>
+                                        -{{val.end_date | date: 'dd MMM yyyy'}}</td>
+                                    <td class="w85  {{val.gift_status}}">{{val.gift_status}}</td>
+                                    <td class="w150">
 
-                                <span class="{{val.receive_status}}">{{val.receive_status? val.receive_status :'N/A'}}</span>
-                                <!-- <div class="center"
+                                        <span class="{{val.receive_status}}">{{val.receive_status? val.receive_status
+                                            :'N/A'}}</span>
+                                        <!-- <div class="center"
                                     *ngIf="val.receive_status != 'Received' && val.gift_status == 'Approved'   ">
                                     <select class="{{val.receive_status}}" [name]="'receive_status'+i"
                                         placeholder="Status" [(ngModel)]="val.receive_status"
@@ -1127,30 +1158,30 @@
                                     {{val.receive_status}}
                                 </ng-container> -->
 
-                            </td>
-                            <!-- <td class="w110 blue">
+                                    </td>
+                                    <!-- <td class="w110 blue">
                                 <a (click)="changeStatus(i, val.id, val.gift_status )"
                                     *ngIf="val.receive_status == '' && val.gift_status != 'Reject'  ">Status</a>
                             </td> -->
-                        </tr>
-                    </table>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="css-table left-right-15 " *ngIf="mode == '3' && referal_logs.length > 0">
-            <div class="sticky-header">
-                <div class="header">
-                    <table>
+                <div class="css-table left-right-15 " *ngIf="mode == '3' && referal_logs.length > 0">
+                    <div class="sticky-header">
+                        <div class="header">
+                            <table>
 
-                        <tr>
-                            <th class="w100">Date</th>
-                            <th class="w200">Points</th>
-                            <th>Point Summary</th>
-                        </tr>
-                    </table>
-                </div>
-                <!-- <div class="header">
+                                <tr>
+                                    <th class="w100">Date</th>
+                                    <th class="w200">Points</th>
+                                    <th>Point Summary</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- <div class="header">
                     <table>
                         <tr>
                             <th class="w100">
@@ -1185,54 +1216,54 @@
                     </table>
                 </div> -->
 
-            </div>
+                    </div>
 
-            <div class="table-container">
-                <div class="table-body no-shadow">
-                    <table>
-                        <tr *ngFor="let val of referal_logs; let i = index">
-                            <td class="w100">
-                                <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
-                                    {{val.date_created | date: 'dd MMM yyyy'}}
-                                </ng-container>
-                            </td>
-                            <td class="w200">{{val.points}}</td>
-                            <td>{{val.point_description}}</td>
+                    <div class="table-container">
+                        <div class="table-body no-shadow">
+                            <table>
+                                <tr *ngFor="let val of referal_logs; let i = index">
+                                    <td class="w100">
+                                        <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
+                                            {{val.date_created | date: 'dd MMM yyyy'}}
+                                        </ng-container>
+                                    </td>
+                                    <td class="w200">{{val.points}}</td>
+                                    <td>{{val.point_description}}</td>
 
-                        </tr>
-                    </table>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="no-data" *ngIf="mode == '1' && scanned_coupon.length == 0">
+            <div class="not-found">
+                <img src="assets/result-not-found.png" class="h150">
+            </div>
+        </div>
+
+        <div class="no-data" *ngIf="mode == '2' && complaint.length == 0">
+            <div class="not-found">
+                <img src="assets/result-not-found.png" class="h150">
+            </div>
+        </div>
+
+        <div class="no-data" *ngIf="mode == '3' && referal_logs.length == 0">
+            <div class="not-found">
+                <img src="assets/result-not-found.png" class="h150">
+            </div>
+        </div>
+
+        <div class="no-data" *ngIf="mode == '4' && reedam.length == 0">
+            <div class="not-found">
+                <img src="assets/result-not-found.png" class="h150">
             </div>
         </div>
     </div>
 </div>
 
-<div class="no-data" *ngIf="mode == '1' && scanned_coupon.length == 0">
-    <div class="not-found">
-        <img src="assets/result-not-found.png" class="h150">
-    </div>
-</div>
-
-<div class="no-data" *ngIf="mode == '2' && complaint.length == 0">
-    <div class="not-found">
-        <img src="assets/result-not-found.png" class="h150">
-    </div>
-</div>
-
-<div class="no-data" *ngIf="mode == '3' && referal_logs.length == 0">
-    <div class="not-found">
-        <img src="assets/result-not-found.png" class="h150">
-    </div>
-</div>
-
-<div class="no-data" *ngIf="mode == '4' && reedam.length == 0">
-    <div class="not-found">
-        <img src="assets/result-not-found.png" class="h150">
-    </div>
-</div>
-</div>
-</div>
-
-<div class="add-button">
-<button mat-button (click)="edit()"><i class="material-icons">edit</i></button>
+<div class="add-button" *ngIf="getData.status=='Pending'" >
+    <button mat-button (click)="edit()"><i class="material-icons">edit</i></button>
 </div>

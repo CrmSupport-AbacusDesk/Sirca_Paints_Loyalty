@@ -40,14 +40,18 @@ export class KarigarAddComponent implements OnInit {
                 console.log( this.karigarform.registrationType);
 
                 this.karigar_id = this.db.crypto(params['karigar_id'],false);
-                //console.log(this.karigar_id );
+                console.log(this.karigar_id );
                 
-                if (this.karigar_id) {
+                if (this.karigar_id && this.karigarform.registrationType!='Architect') {
                     this.getKarigarDetails();
                     this.getStateList();
                 this.getContractorList();
 
                 }
+                if(this.karigar_id && this.karigarform.registrationType=='Architect'){
+                    this.getArchitectDetails();
+                }
+
                 this.getStateList();
                 this.AssignSaleUser();
                 this.getContractorList();
@@ -69,12 +73,35 @@ export class KarigarAddComponent implements OnInit {
                 //console.log(d);
                 this.karigarform = d.karigar;
                 this.karigarform.registrationType=this.karigarform.type
+                this.media.push(this.db.karigar_detail+this.karigarform.adhar_image)
+                console.log( this.media);
+                this.media2.push(this.db.karigar_detail+this.karigarform.pan_card_image);
+                console.log( this.media2);
+
+                this.media3.push(this.db.karigar_detail+this.karigarform.cancel_check_image);
+                console.log( this.media3);
+
                 //console.log( this.karigarform);
                 this. getStateList();
                 this.getDistrictList(1);
                 this.getCityList(1);
             });
         }
+
+        getArchitectDetails() {
+            this.loading_list = true;
+            this.db.post_rqst(  {'id':this.karigar_id}, 'karigar/architectDetail')
+            .subscribe(d => {
+              this.loading_list = false;
+              //console.log(d);
+              this.karigarform  = d.karigars;
+              this.karigarform.registrationType=this.karigarform.type;
+              this.getDistrictList(1);
+
+            });
+          }
+
+
         getStateList(){
             this.loading_list = false;
             this.db.get_rqst('', 'app_master/getStates')

@@ -3,6 +3,7 @@ import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatabaseService } from 'src/app/_services/DatabaseService';
 import { Component, OnInit } from '@angular/core';
+import { EditStatusComponent } from '../edit-status/edit-status.component';
 
 @Component({
   selector: 'app-site-list',
@@ -11,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SiteListComponent implements OnInit {
 
-  loading_list = true;
+  loading_list:boolean = false;
   site_locations: any = [];
   total_dealers = 0;
   dealer_all:any =0;
@@ -98,7 +99,7 @@ export class SiteListComponent implements OnInit {
       this.current_page = 1;
     }
     
-    this.db.post_rqst(  {'filter': this.filter , 'login':this.db.datauser,user_type:"3"}, 'master/siteLocationList?page=' + this.current_page)
+    this.db.post_rqst(  {'filter': this.filter , 'login':this.db.datauser,user_type:"3"}, 'master/siteLocationList?page='+this.current_page)
     .subscribe( d => {
       this.loading_list = false;
       console.log(d);            
@@ -154,7 +155,21 @@ export class SiteListComponent implements OnInit {
   //   });
   // }
 
- 
+  
+  edit(id,status){
+    const dialogRef=this.alrt.open(EditStatusComponent,{
+      width:'400px',
+      data:{
+        id,
+        status
+      }
+    });
+    dialogRef.afterClosed().subscribe(result=>{
+      this.getUserList('');
+    })
+
+  }
+
   salesUsertatus(id, status)
   {
     this.dialog.comanAlert('Do you want to change status')

@@ -33,9 +33,10 @@ export class CustomerDetailComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.customer_id = this.db.crypto(params['customer_id'],false);
         if (this.customer_id) {
-          this.getCustomerDetails();
+          // this.getCustomerDetails();
+          this.getArchitectDetails();
           this.data.type = 'Service'
-          this.getComplaintsList(this.data.type);
+          // this.getComplaintsList(this.data.type);
         }
       });
     }
@@ -50,6 +51,10 @@ export class CustomerDetailComponent implements OnInit {
     edit(){
       this.router.navigate(['/customer-edit/' +this.db.crypto(this.customer_id)]);
     }
+    edit2(){
+      this.router.navigate(['/karigar-add/' + this.db.crypto(this.customer_id),{'registration_type':'Architect'}]);
+
+    }
     getData:any = {};
     getCustomerDetails() {
       this.loading_list = true;
@@ -58,6 +63,16 @@ export class CustomerDetailComponent implements OnInit {
         this.loading_list = false;
         //console.log(d);
         this.getData = d.customer;
+      });
+    }
+
+    getArchitectDetails() {
+      this.loading_list = true;
+      this.db.post_rqst(  {'id':this.customer_id}, 'karigar/architectDetail')
+      .subscribe(d => {
+        this.loading_list = false;
+        //console.log(d);
+        this.getData = d.karigars;
       });
     }
     karigarsSatus() {

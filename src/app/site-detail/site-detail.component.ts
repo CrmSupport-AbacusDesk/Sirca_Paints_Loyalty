@@ -19,6 +19,10 @@ export class SiteDetailComponent implements OnInit {
   status:any='';
   loading_list = true;
   executive:any=[];
+  latitude=20.5937;
+  longitude=78.9629;
+  mapType = 'roadmap';
+  zoom=3;
   filtering : any = false;
   filter:any = {};
   last_page: number ;
@@ -199,6 +203,8 @@ export class SiteDetailComponent implements OnInit {
       this.getData = d.site_locations;
       this.executive = d.site_locations.assign_executive;
       this.siteImages = d.site_locations.image;
+      this.latitude=parseFloat(d['site_locations']['latitude']);
+      this.longitude=parseFloat(d['site_locations']['longitude']);
       console.log(this.site_visit);
     });
   }

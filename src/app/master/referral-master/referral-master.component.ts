@@ -22,6 +22,7 @@ export class ReferralMasterComponent implements OnInit {
         .subscribe(resp=>{
             console.log(resp);
             this.refer.referral_point = resp['points']['referral_point'];
+            this.refer.site_point = resp['points']['site_point'];
             this.loading_list = false;
         })
     }
