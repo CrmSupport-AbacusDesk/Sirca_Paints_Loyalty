@@ -17,7 +17,10 @@ export class SchemeAddComponent implements OnInit {
   loading_list: boolean = false;
   loginId: any;
   pc: any = [];
+  pc2: any = [];
+  tempSearch:any;
   categoryList: any = [];
+  categoryList2: any = [];
   id: any;
   constructor(public db: DatabaseService, public session: SessionStorage, public route: ActivatedRoute, public dialog: DialogComponent, public router: Router) {
     this.date1 = new Date();
@@ -105,6 +108,7 @@ export class SchemeAddComponent implements OnInit {
       .subscribe(d => {
         console.log(d);
         this.pc = d.contractorData['data'];
+        this.pc2 = d.contractorData['data'];
       }, error => {
         this.loading_list = false;
       });
@@ -116,6 +120,7 @@ export class SchemeAddComponent implements OnInit {
       .subscribe(d => {
         console.log(d);
         this.categoryList = d.category;
+        this.categoryList2 = d.category;
       }, error => {
         this.loading_list = false;
       });
@@ -173,6 +178,33 @@ export class SchemeAddComponent implements OnInit {
     }, 2000);
 
 
+  }
+
+
+  searchCategory(category_name){
+    console.log(category_name);
+    this.tempSearch='';
+    this.categoryList=[];
+    category_name=category_name.toLowerCase();
+    for(let i=0; i<this.categoryList2.length;i++){
+      this.tempSearch=this.categoryList2[i].category_name.toLowerCase();
+      if(this.tempSearch.includes(category_name)){
+        this.categoryList.push(this.categoryList2[i]);
+      }
+    }
+
+  }
+  SearchPc(pc_name){
+    console.log(pc_name);
+    this.tempSearch='';
+    this.pc=[];
+    pc_name=pc_name.toLowerCase();
+    for(let i=0; i<this.pc2.length;i++){
+      this.tempSearch=this.pc2[i].first_name.toLowerCase();
+      if(this.tempSearch.includes(pc_name)){
+        this.pc.push(this.pc2[i]);
+      }
+    }
   }
 
 }

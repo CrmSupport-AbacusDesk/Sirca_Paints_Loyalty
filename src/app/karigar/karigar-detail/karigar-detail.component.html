@@ -630,13 +630,13 @@
                                         <span>{{totalEarnPoint}}</span>
                                     </a>
                                 </li>
-                                <li (click)="mode='2'; resetCurrentPage('complaint')"
+                                <!-- <li (click)="mode='2'; resetCurrentPage('complaint')"
                                     [ngClass]="{'active': mode == '2'}">
                                     <a>
                                         <p>Earn By Service</p>
                                         <span>{{complaint_total}}</span>
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <li (click)="mode='3'; resetCurrentPage('referal')" [ngClass]="{'active': mode == '3'}">
                                     <a>
@@ -1264,6 +1264,6 @@
     </div>
 </div>
 
-<div class="add-button">
+<div class="add-button" *ngIf="getData.status=='Pending'" >
     <button mat-button (click)="edit()"><i class="material-icons">edit</i></button>
 </div>

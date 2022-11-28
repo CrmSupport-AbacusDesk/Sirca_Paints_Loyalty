@@ -37,7 +37,7 @@
                           <mat-select placeholder="Select Category" multiple [(ngModel)]="siteform.category_id"
                             name="category_id" #category_id="ngModel" required>
                             <mat-option>
-                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getCategoryList($event.target.value)"></ngx-mat-select-search>
+                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="searchCategory($event.target.value)"></ngx-mat-select-search>
                             </mat-option>
                             <mat-checkbox class="ml20" [(ngModel)]="siteform.allCategory_id" (change)="selectAll('allCategory_id')"  name="allCategory_id"  value="true">Select All</mat-checkbox>
                             <mat-option [value]="row.id" *ngFor="let row of categoryList">{{row.category_name}}</mat-option>
@@ -52,7 +52,7 @@
                         <mat-form-field class="cs-input">
                           <mat-select placeholder="Contractor Name" multiple [(ngModel)]="siteform.contractor_id" name="contractor_id" #contractor_id="ngModel">
                             <mat-option>
-                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="getPc($event.target.value)"></ngx-mat-select-search>
+                              <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="SearchPc($event.target.value)"></ngx-mat-select-search>
                             </mat-option>
                             <mat-checkbox class="ml20" [(ngModel)]="siteform.allpc_id" (change)="selectAll('allpc_id')"  name="allpc_id"  value="true">Select All</mat-checkbox>
 
