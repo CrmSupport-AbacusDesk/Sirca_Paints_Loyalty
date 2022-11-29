@@ -16,7 +16,7 @@
         </li>
         <li *ngIf="getData.total_master!='0'">
           <div class="master-btn pr30" >
-            <!-- <button mat-button routerLink="/karigar-add" routerLinkActive="active">ADD NEW</button> -->
+            <button mat-button (click)="printPdf('MyDIv')" >ADD NEW</button>
             <button mat-button title="Share As PDF" (click)="exportPDF('MyDIv');">Print</button>
         </div>
         </li>

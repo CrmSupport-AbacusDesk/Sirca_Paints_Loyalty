@@ -11,73 +11,72 @@ import { DatabaseService } from '../_services/DatabaseService';
   styleUrls: ['./manual-gift-list.component.scss']
 })
 export class ManualGiftListComponent implements OnInit {
-  loading_list:boolean=false;
-  schemeList:any=[];
-  filter:any={};
+  loading_list: boolean = false;
+  masterGiftList: any = [];
+  filter: any = {};
   current_page = 1;
-  last_page: number ;
+  last_page: number;
   total_karigars = 0;
-  karigar_all:any =0;
+  karigar_all: any = 0;
 
- 
-  constructor(public router:Router, public db:DatabaseService,public modal:MatDialog ) {
-    this.getSchemeList();
-   }
+
+  constructor(public router: Router, public db: DatabaseService, public modal: MatDialog) {
+    this.getmasterGiftKarigarsList();
+  }
 
   ngOnInit() {
   }
-  openDatePicker(picker : MatDatepicker<Date>)
-  {
+  openDatePicker(picker: MatDatepicker<Date>) {
     picker.open();
   }
 
   redirect_previous() {
     this.current_page--;
-    this.getSchemeList();
+    this.getmasterGiftKarigarsList();
   }
   redirect_next() {
     if (this.current_page < this.last_page) { this.current_page++; }
     else { this.current_page = 1; }
-    this.getSchemeList();
+    this.getmasterGiftKarigarsList();
   }
 
-  getSchemeList(){
-    this.loading_list=true;
-    this.db.post_rqst({'filter':this.filter},'offer/schemeList?page='+this.current_page).subscribe((res)=>{
+  getmasterGiftKarigarsList() {
+    this.loading_list = true;
+    this.db.post_rqst({ 'filter': this.filter }, 'offer/masterGiftKarigarsList?page=' + this.current_page).subscribe((res) => {
       console.log(res);
-      this.loading_list=false;
+      this.loading_list = false;
 
-      this.current_page = res['schemeList'].current_page;
-      this.last_page = res['schemeList'].last_page;
-      this.total_karigars =res['schemeList'].total;
-      this.schemeList = res['schemeList']['data'];
-      
+      this.current_page = res['gift_karigars'].current_page;
+      this.last_page = res['gift_karigars'].last_page;
+      this.total_karigars = res['gift_karigars'].total;
+      this.masterGiftList = res['gift_karigars']['data'];
+
       this.karigar_all = res.karigar_all;
-    },err=>{
-      this.loading_list=false;
+    }, err => {
+      this.loading_list = false;
 
     })
 
   }
 
-  changeDate(event:any){
+  changeDate(event: any) {
     console.log(event.target.value);
-    this.filter.valid_from=moment(this.filter.valid_from).format('YYYY-MM-DD');
+    this.filter.valid_from = moment(this.filter.valid_from).format('YYYY-MM-DD');
   }
 
-  changeDate2(event:any){
+  changeDate2(event: any) {
     console.log(event.target.value);
 
-    this.filter.valid_to=moment(this.filter.valid_to).format('YYYY-MM-DD');
+    this.filter.valid_to = moment(this.filter.valid_to).format('YYYY-MM-DD');
 
   }
 
-  schemeAdd(){
-    const dialogRef=this.modal.open(ManualGiftAddComponent,
+  schemeAdd() {
+    const dialogRef = this.modal.open(ManualGiftAddComponent,
       {
-        width:'500px'
+        width: '500px'
       }
-      );
+    );
 
     dialogRef.afterClosed().subscribe();
 

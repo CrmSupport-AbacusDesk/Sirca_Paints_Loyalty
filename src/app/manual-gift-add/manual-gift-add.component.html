@@ -1,7 +1,7 @@
 <div class="gift-box ng-star-inserted">
   <div class="zift-hadding">
     <p>
-      Remark update
+      Add Manual Gift
     </p>
     
     <div class="close-icon">
@@ -10,16 +10,48 @@
   </div>
 
   <div class="trans pt15 pl30">
-    <form name="remark" (ngSubmit)="f.form.valid  " #f="ngForm" novalidate autocomplete="off">
+    <form name="remark" (ngSubmit)="f.form.valid && manual_gift_save()" #f="ngForm" novalidate autocomplete="off">
       <div class="form-area">
-        <div class="control-field">
-          <mat-form-field class="cs-input textremark">
-            <textarea  matInput placeholder="Remarks" class="h106" name="remark_text" [(ngModel)]="remark_text"></textarea>
+        <div class="slect none-bo mr0">
+          <mat-form-field>
+            <mat-label>Contractor List</mat-label>
+            <mat-select class="offer.gift_status" placeholder="Contractor" [(ngModel)]="item.karigar_id" #karigar_id="ngModel" name="karigar_id" required>
+              <mat-option>
+                <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="searchPc($event.target.value)"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option [value]="row.id" *ngFor="let row of pc">{{row.first_name | titlecase}} <strong>{{row.mobile_no}}</strong></mat-option>
+              </mat-select>
           </mat-form-field>
         </div>
       </div>
+
+      <div class="form-area mt20">
+        <div class="slect none-bo mr0">
+          <mat-form-field>
+            <mat-label>Gift List</mat-label>
+            <mat-select class="offer.gift_status" placeholder="Gift List" [(ngModel)]="item.gift_id" #gift_id="ngModel" name="gift_id" required>
+              <mat-option>
+                <ngx-mat-select-search noEntriesFoundLabel="'no data found'" placeholderLabel="Search.." (keyup)="searchGiftArray($event.target.value)"></ngx-mat-select-search>
+              </mat-option>
+              <mat-option [value]="row.id" *ngFor="let row of giftArray">{{row.gift_name | titlecase}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+            <div class="option-field">
+                <div class="control-field">
+                    <mat-form-field  class="cs-input">
+                        <textarea matInput placeholder="Remarks" class="h150" name="remark"  [(ngModel)]="item.remark" required ></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div> 
       <div class="save mt10">
-        <button mat-button class="mb0 mr10" (click)="remark_save()">save</button>
+        <button mat-button class="mb0 mr10">save</button>
       </div>
     </form>
   </div>
