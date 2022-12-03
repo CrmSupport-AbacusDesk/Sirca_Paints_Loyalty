@@ -16,14 +16,14 @@
         </li>
         <li *ngIf="getData.total_master!='0'">
           <div class="master-btn pr30" >
-            <!-- <button mat-button routerLink="/karigar-add" routerLinkActive="active">ADD NEW</button> -->
-            <button mat-button title="Share As PDF" (click)="exportPDF('MyDIv');">Print</button>
+            <button mat-button (click)="printPdf('MyDIv')">Print</button>
+            <!-- <button mat-button title="Share As PDF" (click)="exportPDF('MyDIv');">Print</button> -->
         </div>
         </li>
         <li *ngIf="getData.total_master=='0'">
           <div class="master-btn pr30" >
-            <!-- <button mat-button routerLink="/karigar-add" routerLinkActive="active">ADD NEW</button> -->
-            <button mat-button title="Share As PDF" (click)="exportAsPDF2('MyDIvPdf');">Print</button>
+            <!-- <button mat-button title="Share As PDF" (click)="exportAsPDF2('MyDIvPdf');">Print</button> -->
+            <button mat-button title="Share As PDF" (click)="printPdf('MyDIvPdf');">Print</button>
         </div>
         </li>
       </ul>
@@ -141,9 +141,9 @@
                     <div>
                       <h1><Strong>{{d.product_name}}</Strong> </h1><span></span>
                       <hr class="mb10 mt10" />
-                      <h2><Strong>MRP &#8377; {{d.price}} (Inclusive of all Taxes)</Strong> </h2>
+                      <h2><Strong>MRP &#8377; {{getData.box_price}} (Inclusive of all Taxes)</Strong> </h2>
                       <hr class="mb10 mt10" />
-                      <h3><Strong>Net Content {{d.net_content}} ltr.</Strong> </h3>
+                      <h3><Strong>Net Content {{getData.box_qty}} ltr.</Strong> </h3>
       
                       <p>Batch No. <span>{{d.batch_number}}</span> </p>
                       <p>Item Code: <span>{{d.sku_number}}</span> </p>
@@ -195,9 +195,9 @@
       
                   </div>
                   <div class="col s4">
-                    <ngx-qrcode [value]="r.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L">
-                      <span class="ml20">{{d.sku_number}}</span>
-                    </ngx-qrcode>
+                    <ngx-qrcode [value]="r.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L"></ngx-qrcode>
+                    <span class="ml20">{{r.secondary_qr_code}}</span>
+
                   </div>
                 </div>
       
@@ -219,9 +219,9 @@
                     <div>
                       <h1><Strong>{{data.product_name}}</Strong> </h1><span></span>
                       <hr class="mb10 mt10" />
-                      <h2><Strong>MRP &#8377; {{data.price}} (Inclusive of all Taxes)</Strong> </h2>
+                      <h2><Strong>MRP &#8377; {{getData.box_price}} (Inclusive of all Taxes)</Strong> </h2>
                       <hr class="mb10 mt10" />
-                      <h3><Strong>Net Content {{data.net_content}} ltr.</Strong> </h3>
+                      <h3><Strong>Net Content {{getData.box_qty}} ltr.</Strong> </h3>
           
                       <p>Batch No. <span>{{data.batch_number}}</span> </p>
                       <p>Item Code: <span>{{data.sku_number}}</span> </p>
@@ -243,7 +243,7 @@
                 </div>
                 <div class="col s4">
                   <ngx-qrcode [value]="data.secondary_qr_code" cssClass="aclass" errorCorrectionLevel="L"></ngx-qrcode>
-                  <span class="ml10">{{data.sku_number}}</span>
+                  <span class="ml10">{{data.secondary_qr_code}}</span>
 
                 </div>
           

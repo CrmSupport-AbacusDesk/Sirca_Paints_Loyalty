@@ -651,6 +651,12 @@
                                         <span>{{total_reedam}}</span>
                                     </a>
                                 </li>
+                                <li (click)="mode='5'; resetCurrentPage('contractor_logs')" [ngClass]="{'active': mode == '5'}">
+                                    <a>
+                                        <p>Contractor Logs</p>
+                                        <span>{{total_Contractor}}</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </div>
@@ -713,6 +719,21 @@
                                             class="material-icons">keyboard_arrow_left</i></button></li>
                                 <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
                                         (keyup.enter)="getRedeemList()"></li>
+                                <li><button mat-button class="right-btn" (click)='redirect_next3()'><i
+                                            class="material-icons">keyboard_arrow_right</i></button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dobale" *ngIf="mode == '5'">
+                        <div class="top-pagination">
+                            <ul>
+                                <li>
+                                    <p>Pages {{ current_page }} of {{ last_page }}</p>
+                                </li>
+                                <li><button mat-button class="left-btn" (click)='redirect_previous3()'><i
+                                            class="material-icons">keyboard_arrow_left</i></button></li>
+                                <li><input type="text" placeholder="GO TO" [(ngModel)]="current_page"
+                                        (keyup.enter)="getContractorLogList()"></li>
                                 <li><button mat-button class="right-btn" (click)='redirect_next3()'><i
                                             class="material-icons">keyboard_arrow_right</i></button></li>
                             </ul>
@@ -948,7 +969,7 @@
                             <table>
                                 <tr>
                                     <th class="w30">&nbsp;</th>
-                                    <th class="w200">Date / Plumber Name</th>
+                                    <th class="w200">Date / Created Name</th>
                                     <th class="w100">Req. ID</th>
                                     <th class="w80">Point</th>
                                     <th class="w100">Mobile No.</th>
@@ -1168,6 +1189,191 @@
                         </div>
                     </div>
                 </div>
+                <div class="css-table left-right-15" *ngIf="mode == '5' && contractorLogList.length > 0">
+                    <div class="sticky-header">
+                        <div class="header">
+                            <table>
+                                <tr>
+                                    <th class="w30">&nbsp;</th>
+                                    <th class="w200">Date / Created Name</th>
+                                    <!-- <th class="w100">Req. ID</th>
+                                    <th class="w80">Point</th>
+                                    <th class="w100">Mobile No.</th>
+                                    <th class="w100">A/C Status</th>
+                                    <th class="w130">Gift</th>
+                                    <th>Offer-valid Upto</th>
+                                    <th class="w85">Redeem Status</th> -->
+                                    <th class="w150">Gift Log</th>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <!-- <div class="header border-bott">
+                            <table>
+                                <tr>
+                                    <th class="w30">&nbsp;</th>
+                                    <th class="w200">
+                                        <div class="vaild-into">
+                                            <div class="date-form">
+                                                <mat-form-field>
+                                                    <i *ngIf="filter.date" class="material-icons"
+                                                        (click)="filter.date = '';getRedeemList()">clear</i>
+
+                                                    <input placeholder="Date" [(ngModel)]="filter.date" name="date"
+                                                        (click)="openDatePicker(picker1)" matInput
+                                                        (dateChange)="getRedeemList()" [matDatepicker]="picker1"
+                                                        readonly>
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="form-area wp-21 ml10">
+                                                <div class="search-form">
+                                                    <input type="text" placeholder="Plumber Name"
+                                                        [(ngModel)]="filter.name"
+                                                        (keyup.enter)="current_page = 1;getRedeemList()">
+                                                    <i class="material-icons">search</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+
+                                    <th class="w100">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Req. ID" [(ngModel)]="filter.id"
+                                                (keyup.enter)="current_page = 1;getRedeemList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+                                    <th class="w80">
+                                     
+                                    </th>
+
+                                    <th class="w100">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Mobile No." [(ngModel)]="filter.mobile"
+                                                (keyup.enter)="current_page = 1;getRedeemList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+
+                                    <th class="w100">
+                                        <div class="form-area">
+                                            <div class="slect">
+                                                <mat-form-field>
+                                                    <mat-label>Search</mat-label>
+                                                    <mat-select [(ngModel)]="filter.account_status"
+                                                        name="account_status" #account_status="ngModel"
+                                                        (selectionChange)="getRedeemList()">
+                                                        <mat-option value="">All</mat-option>
+                                                        <mat-option value="Verified">Verified</mat-option>
+                                                        <mat-option value="Pending">Pending</mat-option>
+                                                        <mat-option value="Reject">Reject</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </th>
+
+                               
+
+                                    <th class="w130">
+                                        <div class="search-form">
+                                            <input type="text" placeholder="Gift" [(ngModel)]="filter.gift"
+                                                (keyup.enter)="current_page = 1;getRedeemList()">
+                                            <i class="material-icons">search</i>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="date-form">
+                                            <i *ngIf="filter.end_date" class="material-icons"
+                                                (click)="filter.end_date = '';getRedeemList() ">clear</i>
+
+                                            <mat-form-field>
+                                                <input placeholder="Offer Date" [(ngModel)]="filter.end_date"
+                                                    (click)="openDatePicker(picker2)" name="end_date" matInput
+                                                    (dateChange)="getRedeemList()" [matDatepicker]="picker2">
+                                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker2></mat-datepicker>
+                                            </mat-form-field>
+
+                                        </div>
+                                    </th>
+
+                                    <th class="w85">
+                                        <div class="form-area">
+                                            <div class="slect">
+                                                <mat-form-field>
+                                                    <mat-label>Search</mat-label>
+                                                    <mat-select [(ngModel)]="filter.gift_status" name="gift_status"
+                                                        #gift_status="ngModel" (selectionChange)="getRedeemList()">
+                                                        <mat-option value="">All</mat-option>
+                                                        <mat-option value="Pending">Pending</mat-option>
+                                                        <mat-option value="Approved">Approved</mat-option>
+                                                        <mat-option value="Reject">Reject</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </th>
+
+                                    <th class="w150">
+                                        <div class="form-area">
+                                            <div class="slect">
+                                                <mat-form-field>
+                                                    <mat-label>Search</mat-label>
+                                                    <mat-select [(ngModel)]="filter.received_status"
+                                                        name="received_status" #received_status="ngModel"
+                                                        (selectionChange)="getRedeemList()">
+                                                        <mat-option value="">All</mat-option>
+                                                        <mat-option value="Received">Received</mat-option>
+                                                        <mat-option value="Shipped">Shipped</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </th>
+                                   
+
+                                </tr>
+                            </table>
+                        </div> -->
+
+                    </div>
+                    <div class="table-container">
+                        <div class="table-body">
+                            <table>
+                                <tr *ngFor="let val of contractorLogList; let i = index">
+                                    <td class="w30">{{ ( (current_page - 1 ) * 20 ) + ( i+1 ) }}</td>
+                                    <td class="w200">
+                                        <!-- <ng-container *ngIf="val.date_created  != '0000-00-00 00:00:00' ">
+                                            {{val.date_created | date: 'dd MMM yyyy'}}/ </ng-container><a class="blue"
+                                            routerLink="/karigar-detail/{{val.karigar_id | crypt }}"
+                                            routerLinkActive="active">{{val.first_name}} {{val.last_name}}</a> -->
+                                            {{val.date_created | date:'dd-MMM-yyyy' }} / {{val.created_name}}
+                                    </td>
+                                    <!-- <td class="w100"> REQ# {{val.id }}</td>
+                                    <td class="w80">{{val.gift_points}}</td>
+                                    <td class="w100">{{val.mobile_no}}</td>
+                                    <td class="w100 bg-change {{val.karigar_status}}">{{val.karigar_status}}</td>
+                                    <td class="w130 ">{{val.gift_title}}</td>
+                                    <td><a routerLink="/offer-detail/{{val.offer_id | crypt}}"
+                                            class="blue">{{val.title}} #{{val.offer_code}}</a>
+                                        -{{val.end_date | date: 'dd MMM yyyy'}}</td>
+                                    <td class="w85  {{val.gift_status}}">{{val.gift_status}}</td> -->
+                                    <td class="w150">
+
+                                        {{val.log}}
+                                    </td>
+                                   
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
 
                 <div class="css-table left-right-15 " *ngIf="mode == '3' && referal_logs.length > 0">
                     <div class="sticky-header">

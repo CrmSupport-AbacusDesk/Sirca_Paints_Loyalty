@@ -24,7 +24,10 @@ export class KarigarDetailComponent implements OnInit {
         karigar_id;
         loading_list = false;
         total_reedam = 0;
+        total_Contractor=0;
+        total_contractorLog = 0;
         reedam: any = [];
+        contractorLogList: any = [];
         reedam_all: any = 0;
         reedam_pending: any = 0;
         reedam_approved: any = 0;
@@ -210,8 +213,35 @@ export class KarigarDetailComponent implements OnInit {
             } else if (type == "redeem") {
                 this.getRedeemList();
             }
+            else if (type == "contractor_logs") {
+                this.getContractorLogList();
+            }
         };
         
+        getContractorLogList() {
+            this.loading_list = true;
+            // this.filter.date = this.filter.date ? this.db.pickerFormat(this.filter.date): "";
+            // this.filter.start_date = this.filter.start_date? this.db.pickerFormat(this.filter.start_date): "";
+            // this.filter.end_date = this.filter.end_date? this.db.pickerFormat(this.filter.end_date): "";
+            // this.filter.karigar_id = this.karigar_id;
+        
+            // if (this.filter.date) this.filtering = true;
+            // this.filter.mode = 0;
+            this.db.post_rqst({'karigar_id':this.karigar_id },
+                "offer/contractorLog?page=" + this.current_page
+              )
+              .subscribe((d) => {
+                this.loading_list = false;
+                this.current_page = d.karigar_logs.current_page;
+                this.last_page = d.karigar_logs.last_page;
+                this.total_Contractor = d.karigar_logs.total;
+                this.contractorLogList = d.karigar_logs.data;
+                // this.reedam_all = d.redeem_all;
+                // this.reedam_pending = d.redeem_pending;
+                // this.reedam_approved = d.redeem_approved;
+                // this.reedam_reject = d.redeem_reject;
+              });
+          };
 
         getRedeemList() {
             this.loading_list = true;
